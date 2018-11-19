@@ -60,6 +60,7 @@ const mapStateToProps = (state) => {
   return {
     user: state.user,
     loginMode: state.loginMode,
+    list: state.list,
   }
 }
 
