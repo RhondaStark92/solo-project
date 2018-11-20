@@ -22,16 +22,14 @@ class ShoppingListItem extends Component {
   // will need to update the found flag 
   // in the database and then refresh the list
   handleToggle = item => () => {
-    console.log('item clicked', item.found);
-    if (item.found) {
-      // Do I want to do anything here? Should I reset??
-    } else {
+    console.log('item clicked', item);
+    // if (item.found) {
+    //   // Do I want to do anything here? Should I reset??
+    // } else {
       // Set found to true in the database and then refresh the list
       // Dispatch to the saga to mark the item as found
-      this.props.dispatch({ type: 'FOUND_ITEM', payload: item.id})
-    }
+      this.props.dispatch({ type: 'FOUND_ITEM', payload: item})
 
-    
     // const { checked } = this.state;
     // const currentIndex = checked.indexOf(item);
     // const newChecked = [...checked];

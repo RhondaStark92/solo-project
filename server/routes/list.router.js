@@ -19,10 +19,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });
 
 router.put('/found', rejectUnauthenticated, (req, res) => {
-    // console.log('in database update call', req.user, req.body);
-    
-    const queryText = 'UPDATE shopping_list SET found=true WHERE id=$1';
-    pool.query(queryText, [req.body.id])
+    const queryText = 'UPDATE shopping_list SET found=$2 WHERE id=$1';
+    pool.query(queryText, [req.body.id, req.body.found])
       .then((result) => { res.send(result.rows); })
       .catch((err) => {
         console.log('Error completing UPDATE shopping_list query', err);

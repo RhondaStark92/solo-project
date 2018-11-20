@@ -34,7 +34,8 @@ function* foundItem(action) {
       withCredentials: true,
     };
     // axios asynch call to add plant to server
-    yield call(axios.put, '/api/list/found', {id: action.payload});
+    yield call(axios.put, '/api/list/found', 
+              {id: action.payload.id, found: !action.payload.found});
     yield put( { type: 'FETCH_LIST' } );
   } 
   catch (error) {
