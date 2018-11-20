@@ -5,6 +5,13 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 import styled from 'styled-components';
+import { isNull } from 'util';
+import Typography from '@material-ui/core/Typography';
+
+
+const FoundItem = styled.p`
+  font-style: oblique
+`;
 
 class ShoppingListItem extends Component {
 
@@ -12,41 +19,63 @@ class ShoppingListItem extends Component {
     checked: [0],
   };
 
+  // will need to update the found flag 
+  // in the database and then refresh the list
   handleToggle = item => () => {
-    const { checked } = this.state;
-    const currentIndex = checked.indexOf(item);
-    const newChecked = [...checked];
-
-    if (currentIndex === -1) {
-      newChecked.push(item);
+    console.log('item clicked', item.found);
+    if (item.found) {
+      // Do I want to do anything here? Should I reset??
     } else {
-      newChecked.splice(currentIndex, 1);
+      // Set found to true in the database and then refresh the list
+      // Dispatch to the saga to mark the item as found
+      this.props.dispatch({ type: 'FOUND_ITEM', payload: item.id})
     }
 
-    this.setState({
-      checked: newChecked,
-    });
+    
+    // const { checked } = this.state;
+    // const currentIndex = checked.indexOf(item);
+    // const newChecked = [...checked];
+
+    // if (currentIndex === -1) {
+    //   newChecked.push(item);
+    // } else {
+    //   newChecked.splice(currentIndex, 1);
+    // }
+
+    // this.setState({
+    //   checked: newChecked,
+    // });
   };
 
   render() {
     let item = this.props.item;
+    let itemText = '';
+    if (isNull(item.brand_name)) {
+      itemText = `(${item.quantity}) ${item.item}`;
+    } else {
+      itemText = `(${item.quantity}) ${item.item} - ${item.brand_name}`;
+    }
+    if (item.found) {
+      itemText = <Typography variant='body1' style={{ textDecoration: 'line-through' }}>{itemText}</Typography>;
+    } else {
+      itemText = <Typography variant='body1'>{itemText}</Typography>;
+    }
+
+    
     return (
       <ListItem key={item.id} divider={true} 
                 role={undefined} button onClick={this.handleToggle(item)}>
-        <Checkbox
-          checked={this.state.checked.indexOf(item) !== -1}
-          tabIndex={-1}
-          disableRipple
-        />
-        <ListItemText primary={item.item} 
-                      secondary={item.brand_name}
-        />
-        <ListItemSecondaryAction>
-          {item.quantity}
-          {/* <IconButton aria-label="Comments">
-            <CommentIcon />
-          </IconButton> */}
-        </ListItemSecondaryAction>
+          <ListItemText>
+            {itemText}
+          </ListItemText>
+          <ListItemSecondaryAction>
+            <Checkbox
+              // checked={this.state.checked.indexOf(item) !== -1}
+              checked={item.found}
+              tabIndex={-1}
+              disableRipple
+            />
+          </ListItemSecondaryAction>
       </ListItem>
     )}
 }

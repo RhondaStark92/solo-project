@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, call, takeLatest } from 'redux-saga/effects';
 
 // worker Saga: will be fired on "FETCH_LIST" actions
 function* fetchList() {
@@ -25,8 +25,26 @@ function* fetchList() {
   }
 }
 
+// worker Saga: will be fired on "FOUND_ITEM" actions
+function* foundItem(action) {
+  console.log('in foundItem', action.payload);
+  try {
+    const config = {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
+    };
+    // axios asynch call to add plant to server
+    yield call(axios.put, '/api/list/found', {id: action.payload});
+    yield put( { type: 'FETCH_LIST' } );
+  } 
+  catch (error) {
+    console.log('User put request failed', error);
+  }
+}
+
 function* listSaga() {
   yield takeLatest('FETCH_LIST', fetchList);
+  yield takeLatest('FOUND_ITEM', foundItem);
 }
 
 export default listSaga;
