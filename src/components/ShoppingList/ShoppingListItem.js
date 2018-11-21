@@ -15,34 +15,10 @@ const FoundItem = styled.p`
 
 class ShoppingListItem extends Component {
 
-  state = {
-    checked: [0],
-  };
-
   // will need to update the found flag 
   // in the database and then refresh the list
   handleToggle = item => () => {
-    console.log('item clicked', item);
-    // if (item.found) {
-    //   // Do I want to do anything here? Should I reset??
-    // } else {
-      // Set found to true in the database and then refresh the list
-      // Dispatch to the saga to mark the item as found
-      this.props.dispatch({ type: 'FOUND_ITEM', payload: item})
-
-    // const { checked } = this.state;
-    // const currentIndex = checked.indexOf(item);
-    // const newChecked = [...checked];
-
-    // if (currentIndex === -1) {
-    //   newChecked.push(item);
-    // } else {
-    //   newChecked.splice(currentIndex, 1);
-    // }
-
-    // this.setState({
-    //   checked: newChecked,
-    // });
+      this.props.dispatch({ type: 'FOUND_ITEM', payload: {item: item, store_id: this.props.store_id}})
   };
 
   render() {
@@ -59,7 +35,6 @@ class ShoppingListItem extends Component {
       itemText = <Typography variant='body1'>{itemText}</Typography>;
     }
 
-    
     return (
       <ListItem key={item.id} divider={true} 
                 role={undefined} button onClick={this.handleToggle(item)}>
@@ -68,7 +43,6 @@ class ShoppingListItem extends Component {
           </ListItemText>
           <ListItemSecondaryAction>
             <Checkbox
-              // checked={this.state.checked.indexOf(item) !== -1}
               checked={item.found}
               tabIndex={-1}
               disableRipple

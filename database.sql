@@ -40,7 +40,6 @@ CREATE TABLE "shopping_list" (
 	"person_id" int REFERENCES person
 );
 
-
 -- select shopping_list.*, item.name as item, item.brand_name from shopping_list
 -- join item on shopping_list.item_id = item.id
 -- join store_category on item.category_id = store_category.category_id
