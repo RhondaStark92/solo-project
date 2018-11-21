@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { put, call, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest } from 'redux-saga/effects';
 
 // worker Saga: will be fired on "FETCH_STORES" actions
 function* fetchStores(action) {

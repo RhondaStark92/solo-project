@@ -6,10 +6,10 @@ function* fetchList(action) {
   console.log('in fetchSaga', action.payload);
   
   try {
-    const config = {
-      headers: { 'Content-Type': 'application/json' },
-      withCredentials: true,
-    };
+    // const config = {
+    //   headers: { 'Content-Type': 'application/json' },
+    //   withCredentials: true,
+    // };
 
     // the config includes credentials which
     // allow the server session to recognize the user
@@ -31,10 +31,10 @@ function* fetchList(action) {
 function* foundItem(action) {
   console.log('in foundItem', action.payload);
   try {
-    const config = {
-      headers: { 'Content-Type': 'application/json' },
-      withCredentials: true,
-    };
+    // const config = {
+    //   headers: { 'Content-Type': 'application/json' },
+    //   withCredentials: true,
+    // };
     // axios asynch call to add plant to server
     yield call(axios.put, '/api/list/found', 
               {id: action.payload.item.id, found: !action.payload.item.found});

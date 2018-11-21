@@ -4,14 +4,14 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import { isNull } from 'util';
 import Typography from '@material-ui/core/Typography';
 
 
-const FoundItem = styled.p`
-  font-style: oblique
-`;
+// const FoundItem = styled.p`
+//   font-style: oblique
+// `;
 
 class ShoppingListItem extends Component {
 
