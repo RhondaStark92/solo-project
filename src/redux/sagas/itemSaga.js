@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { put, call, takeLatest } from 'redux-saga/effects';
 
-// worker Saga: will be fired on "FETCH_CATEGORY" actions
-function* fetchCategory(action) {
-  console.log('in fetch category Saga', action.payload);
+// worker Saga: will be fired on "FETCH_ITEM" actions
+function* fetchItemsForList(action) {
+  console.log('in fetchItemsForList', action.payload);
   
   try {
     // const config = {
@@ -15,19 +15,19 @@ function* fetchCategory(action) {
     // allow the server session to recognize the user
     // If a user is logged in, this will return the 
     // list of items in the shopping_list on the DB
-    const response = yield axios.get('api/category');
-    console.log('response from list:', response);
+    const response = yield axios.get('api/item', {params: {id: action.payload}});
+    console.log('response from item:', response);
     
     // now that the session has given us a user object
     // with an id and username set the client-side user object to let
     // the client-side code know the user is logged in
-    yield put({ type: 'SET_CATEGORY', payload: response.data });
+    yield put({ type: 'SET_ITEMS_FOR_LIST', payload: response.data });
   } catch (error) {
-    console.log('Category get request failed', error);
+    console.log('Items get request failed', error);
   }
 }
 
-// worker Saga: will be fired on "FOUND_ITEM" actions
+// // worker Saga: will be fired on "FOUND_ITEM" actions
 // function* foundItem(action) {
 //   console.log('in foundItem', action.payload);
 //   try {
@@ -45,9 +45,9 @@ function* fetchCategory(action) {
 //   }
 // }
 
-function* categorySaga() {
-  yield takeLatest('FETCH_CATEGORY', fetchCategory);
+function* itemSaga() {
+  yield takeLatest('FETCH_ITEMS_Fitem', fetchItemsForList);
   // yield takeLatest('FOUND_ITEM', foundItem);
 }
 
-export default categorySaga;
+export default itemSaga;
