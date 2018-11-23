@@ -22,27 +22,21 @@ const Title = styled.h1`
   text-align: center;
 `;
 
-// const Selector = styled.div`
-//   margin-left:15%;
-//   margin-right:15%;
-//   padding-bottom: 50px;
-// `;
-
 class CreateListPage extends Component {
-
-  state = {id: 0};
-
+// 
   componentDidMount () {
-    this.props.dispatch({type: 'FETCH_ITEMS_FOR_LIST'})
+    this.props.dispatch({type: 'FETCH_CATEGORY'});
+    this.props.dispatch({type: 'FETCH_ITEMS_FOR_LIST'});
   }
 
   render() {
+    // const listForCat = this.props.item.filter(cat => cat.category_id === this.props.category.category_id);
     return (
       <Wrapper>
         <Paper>
           <Title>Create Shopping List</Title>
           <div>
-            {this.props.item.map(cat => (
+            {this.props.category.map(cat => (
               <CategoryList category={cat}/>
             ))}
           </div>
@@ -56,6 +50,7 @@ class CreateListPage extends Component {
 // const mapStateToProps = ({user}) => ({ user });
 const mapStateToProps = state => ({
   item: state.item,
+  category: state.category,
 });
 
 // this allows us to use <App /> in index.js

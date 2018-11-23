@@ -25,13 +25,12 @@ class CategoryList extends Component {
 
   render() {
 
-
-    const listForCat = this.props.item.filter(cat => cat.category_id === this.props.category.category_id);
+    const listForCat = this.props.item.filter(cat => cat.category_id === this.props.category.id);
     
     return (
       <ExpansionPanel>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography>{this.props.category.category}</Typography>
+            <Typography>{this.props.category.name}</Typography>
           </ExpansionPanelSummary>
           <ItemListForCategory itemsForCategory={listForCat} />
         </ExpansionPanel>
