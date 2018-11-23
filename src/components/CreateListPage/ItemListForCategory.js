@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import CategoryList from './CategoryList';
-// import ItemListForCategory from './ItemListForCategory';
 import List from '@material-ui/core/List';
 import styled from 'styled-components';
 import Paper from '@material-ui/core/Paper';
@@ -11,43 +9,31 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-const Wrapper = styled.section`
-  // padding: 4em;
-  margin-left: 25%;
-  margin-right: 25%;
-`;
+class ItemListForCategory extends Component {
 
-const Title = styled.h1`
-  padding: 15px;
-  text-align: center;
-`;
+  // state = {id: 0};
 
-// const Selector = styled.div`
-//   margin-left:15%;
-//   margin-right:15%;
-//   padding-bottom: 50px;
-// `;
-
-class CreateListPage extends Component {
-
-  state = {id: 0};
-
-  componentDidMount () {
-    this.props.dispatch({type: 'FETCH_ITEMS_FOR_LIST'})
-  }
-
+  // componentDidMount () {
+  //   this.props.dispatch({type: 'FETCH_ITEMS_FOR_LIST'})
+  // }
+  
+  // function isCategory(this.cat) {
+  //   return this.cat.category_id === 1;
+  // }
+   
+  // let listForCat = this.cat.filter(isCategory);
+  
   render() {
     return (
-      <Wrapper>
-        <Paper>
-          <Title>Create Shopping List</Title>
-          <div>
-            {this.props.item.map(cat => (
-              <CategoryList category={cat}/>
+      <ExpansionPanelDetails>
+        <Typography>
+            {this.props.itemsForCategory.map(itemForCat => (
+              <li key={itemForCat.item_id}>{itemForCat.item}</li>
+              // <ShoppingListItem key={cat.id} item={item} store_id={this.state.id} />
             ))}
-          </div>
-        </Paper>
-      </Wrapper>
+        </Typography>
+      </ExpansionPanelDetails>
+              // <ShoppingListItem key={cat.id} item={item} store_id={this.state.id} />
     )}
 }
 
@@ -59,5 +45,5 @@ const mapStateToProps = state => ({
 });
 
 // this allows us to use <App /> in index.js
-export default connect(mapStateToProps)(CreateListPage);
+export default connect(mapStateToProps)(ItemListForCategory);
 // 

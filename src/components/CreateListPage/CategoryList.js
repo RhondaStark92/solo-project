@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import CategoryList from './CategoryList';
-// import ItemListForCategory from './ItemListForCategory';
+import ItemListForCategory from './ItemListForCategory';
 import List from '@material-ui/core/List';
 import styled from 'styled-components';
 import Paper from '@material-ui/core/Paper';
@@ -22,32 +21,20 @@ const Title = styled.h1`
   text-align: center;
 `;
 
-// const Selector = styled.div`
-//   margin-left:15%;
-//   margin-right:15%;
-//   padding-bottom: 50px;
-// `;
-
-class CreateListPage extends Component {
-
-  state = {id: 0};
-
-  componentDidMount () {
-    this.props.dispatch({type: 'FETCH_ITEMS_FOR_LIST'})
-  }
+class CategoryList extends Component {
 
   render() {
+
+
+    const listForCat = this.props.item.filter(cat => cat.category_id === this.props.category.category_id);
+    
     return (
-      <Wrapper>
-        <Paper>
-          <Title>Create Shopping List</Title>
-          <div>
-            {this.props.item.map(cat => (
-              <CategoryList category={cat}/>
-            ))}
-          </div>
-        </Paper>
-      </Wrapper>
+      <ExpansionPanel>
+          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+            <Typography>{this.props.category.category}</Typography>
+          </ExpansionPanelSummary>
+          <ItemListForCategory itemsForCategory={listForCat} />
+        </ExpansionPanel>
     )}
 }
 
@@ -59,5 +46,5 @@ const mapStateToProps = state => ({
 });
 
 // this allows us to use <App /> in index.js
-export default connect(mapStateToProps)(CreateListPage);
+export default connect(mapStateToProps)(CategoryList);
 // 

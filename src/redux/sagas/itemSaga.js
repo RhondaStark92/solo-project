@@ -46,7 +46,7 @@ function* fetchItemsForList(action) {
 // }
 
 function* itemSaga() {
-  yield takeLatest('FETCH_ITEMS_Fitem', fetchItemsForList);
+  yield takeLatest('FETCH_ITEMS_FOR_LIST', fetchItemsForList);
   // yield takeLatest('FOUND_ITEM', foundItem);
 }
 

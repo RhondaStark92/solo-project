@@ -8,7 +8,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     console.log('query.id', req.query.id);
 
     pool.query(`SELECT category.id, category.name as category,
-                item.id as item_id, item.name as item 
+                item.id as item_id, item.name as item, item.category_id 
                 FROM item JOIN category ON item.category_id = category.id
                 WHERE category.person_id = ${req.user.id}
                 ORDER BY category.name, item`)
