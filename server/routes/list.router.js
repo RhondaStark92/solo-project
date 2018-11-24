@@ -4,29 +4,28 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 
 const router = express.Router();
 
+// GET ROUTER FOR SHOPPING LIST ITEMS
 router.get('/', rejectUnauthenticated, (req, res) => {
+
     let sqlText = '';
-    console.log('query.id', req.query.id);
-    
     // if no store is selected just base the query
     // off of the shopping list and ordered by the found flag
+    // and category id
     if (req.query.id == 0) {
         sqlText = `SELECT shopping_list.*, item.name as item, item.brand_name 
         FROM "shopping_list" JOIN "item" ON shopping_list.item_id = item.id
         WHERE shopping_list.person_id = ${req.user.id}
-        ORDER BY shopping_list.found`
+        ORDER BY shopping_list.found, item.category_id`
+    } else {
     // store is selected so base the query off the store
     // category and ordered by the category order for the store
-    } else {
-        sqlText = `SELECT shopping_list.*, item.name as item, item.brand_name 
+    sqlText = `SELECT shopping_list.*, item.name as item, item.brand_name 
         FROM "shopping_list" JOIN "item" ON shopping_list.item_id = item.id
         JOIN "store_category" ON item.category_id = store_category.category_id
         WHERE shopping_list.person_id = ${req.user.id}
         AND store_category.store_id = ${req.query.id}
         ORDER BY shopping_list.found, store_category.order`
     }
-    
-    console.log('sqlText', sqlText);
     
     pool.query(sqlText)
         .then(results => res.send(results.rows))
@@ -36,12 +35,56 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         });
 });
 
+// POST ROUTER FOR NEW SHOPPING LIST ITEM
+router.post('/', (req, res) => {
+    const newListItem = req.body;
+    const queryText = `INSERT INTO shopping_list 
+                      ("item_id", "quantity", "person_id")
+                      VALUES ($1, $2, $3)`;
+    const queryValues = [
+        newListItem.item_id,
+        newListItem.quantity,
+        req.user.id,
+    ];
+    pool.query(queryText, queryValues)
+      .then(() => { res.sendStatus(201); })
+      .catch((err) => {
+        console.log('Error completing INSERT shopping_list query', err);
+        res.sendStatus(500);
+      });
+});
+
+// PUT ROUTER TO UPDATE FOUND FLAG ON SHOPPING LIST ITEM
 router.put('/found', rejectUnauthenticated, (req, res) => {
     const queryText = 'UPDATE shopping_list SET found=$2 WHERE id=$1';
     pool.query(queryText, [req.body.id, req.body.found])
       .then((result) => { res.send(result.rows); })
       .catch((err) => {
         console.log('Error completing UPDATE shopping_list query', err);
+        res.sendStatus(500);
+      });
+});
+
+// PUT ROUTER TO UPDATE QUANTITY ON SHOPPING LIST ITEM
+router.put('/', rejectUnauthenticated, (req, res) => {
+    const queryText = 'UPDATE shopping_list SET quantity=$2 WHERE id=$1';
+    console.log('update query', req.body.list_id, req.body.quantity);
+    pool.query(queryText, [req.body.list_id, req.body.quantity])
+      .then((result) => { res.send(result.rows); })
+      .catch((err) => {
+        console.log('Error completing UPDATE shopping_list quantity query', err);
+        res.sendStatus(500);
+      });
+});
+
+// DELETE ROUTER FOR SHOPPING LIST ITEM
+router.delete('/', (req, res) => {
+    console.log('in delete on server', req.query.id);
+    const queryText = 'DELETE FROM shopping_list WHERE id=$1';
+    pool.query(queryText, [req.query.id])
+      .then(() => { res.sendStatus(200); })
+      .catch((err) => {
+        console.log('Error completing DELETE shopping_list query', err);
         res.sendStatus(500);
       });
 });

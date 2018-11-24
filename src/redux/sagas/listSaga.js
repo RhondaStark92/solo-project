@@ -6,21 +6,9 @@ function* fetchList(action) {
   console.log('in fetchSaga', action.payload);
   
   try {
-    // const config = {
-    //   headers: { 'Content-Type': 'application/json' },
-    //   withCredentials: true,
-    // };
-
-    // the config includes credentials which
-    // allow the server session to recognize the user
-    // If a user is logged in, this will return the 
-    // list of items in the shopping_list on the DB
+    // axios asynch call to retrieve the shopping list items from the database
     const response = yield axios.get('api/list', {params: {id: action.payload}});
-    console.log('response from list:', response);
-    
-    // now that the session has given us a user object
-    // with an id and username set the client-side user object to let
-    // the client-side code know the user is logged in
+    // Set the list in the redux store
     yield put({ type: 'SET_LIST', payload: response.data });
   } catch (error) {
     console.log('User get request failed', error);
@@ -31,13 +19,10 @@ function* fetchList(action) {
 function* foundItem(action) {
   console.log('in foundItem', action.payload);
   try {
-    // const config = {
-    //   headers: { 'Content-Type': 'application/json' },
-    //   withCredentials: true,
-    // };
-    // axios asynch call to add plant to server
+    // axios asynch call to update found flag on database
     yield call(axios.put, '/api/list/found', 
               {id: action.payload.item.id, found: !action.payload.item.found});
+    // will need to make a call to update the list 
     yield put( { type: 'FETCH_LIST', payload: action.payload.store_id } );
   } 
   catch (error) {
@@ -45,9 +30,53 @@ function* foundItem(action) {
   }
 }
 
+// worker SAGA: will be fired on 'UPDATE_QUANTITY' actions
+function* updateQuantity(action) {
+  console.log('in updateQuantity', action.payload);
+  try {
+    // axios asynch call to update quantity on database
+    yield call(axios.put, '/api/list', action.payload);
+    // will need to make a call to update the list of items
+    yield put( { type: 'FETCH_ITEMS_FOR_LIST' } );
+  } 
+  catch (error) {
+    console.log('Quantity put request failed', error);
+  }
+}
+
+// worker SAGA: will be fired on 'DELETE_LIST_ITEM' actions
+function* deleteListItem(action) {
+  try {
+    //axios call to remove selected item from shopping list
+    yield call(axios.delete, '/api/list', {params: {id: action.payload}});
+    // will need to make a call to update the list of items
+    yield put( { type: 'FETCH_ITEMS_FOR_LIST' } );
+  }
+  catch (error) {
+    console.log('error with delete request to /api/list');
+    
+  } 
+}
+
+// worker SAGA: will be fired on 'ADD_ITEM_TO_LIST' actions
+function* addItemToList(action) {
+  try {
+      // axios asynch call to add item to shopping list on database
+      yield call(axios.post, '/api/list', action.payload);
+      // will need to make a call to update the list of items
+      yield put( { type: 'FETCH_ITEMS_FOR_LIST' } );
+  }
+  catch (error) {
+      console.log('error with add list post request');
+  }
+}
+
 function* listSaga() {
   yield takeLatest('FETCH_LIST', fetchList);
   yield takeLatest('FOUND_ITEM', foundItem);
+  yield takeLatest('DELETE_LIST_ITEM', deleteListItem);
+  yield takeLatest('ADD_ITEM_TO_LIST', addItemToList);
+  yield takeLatest('UPDATE_QUANTITY', updateQuantity);
 }
 
 export default listSaga;
