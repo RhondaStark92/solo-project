@@ -1,39 +1,28 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import ItemListForCategory from './ItemListForCategory';
-import List from '@material-ui/core/List';
 import styled from 'styled-components';
-import Paper from '@material-ui/core/Paper';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-const Wrapper = styled.section`
-  // padding: 4em;
-  margin-left: 25%;
-  margin-right: 25%;
-`;
-
-const Title = styled.h1`
-  padding: 15px;
-  text-align: center;
+const CategoryTitle = styled.p`
 `;
 
 class CategoryList extends Component {
 
   render() {
 
+    // Filter the items for the current category
     const listForCat = this.props.item.filter(cat => cat.category_id === this.props.category.id);
     
     return (
-      <ExpansionPanel>
+      <ExpansionPanel key={this.props.category.id}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography>{this.props.category.name}</Typography>
+            <CategoryTitle>{this.props.category.name}</CategoryTitle>
           </ExpansionPanelSummary>
           <ItemListForCategory itemsForCategory={listForCat} />
-        </ExpansionPanel>
+      </ExpansionPanel>
     )}
 }
 

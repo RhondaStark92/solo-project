@@ -1,37 +1,29 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import List from '@material-ui/core/List';
 import styled from 'styled-components';
-import Paper from '@material-ui/core/Paper';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ItemForCategory from './ItemForCategory';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import ListItemText from '@material-ui/core/ListItemText';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Checkbox from '@material-ui/core/Checkbox';
+
+const listDiv = styled.div`
+  width: 100%;
+`;
 
 class ItemListForCategory extends Component {
 
-  // state = {id: 0};
-
-  // componentDidMount () {
-  //   this.props.dispatch({type: 'FETCH_ITEMS_FOR_LIST'})
-  // }
-  
-  // function isCategory(this.cat) {
-  //   return this.cat.category_id === 1;
-  // }
-   
-  // let listForCat = this.cat.filter(isCategory);
-  
   render() {
     return (
       <ExpansionPanelDetails>
-        <Typography>
+        <List>
             {this.props.itemsForCategory.map(itemForCat => (
-              <li key={itemForCat.item_id}>{itemForCat.item}</li>
-              // <ShoppingListItem key={cat.id} item={item} store_id={this.state.id} />
+              <ItemForCategory itemForCat={itemForCat} />
             ))}
-        </Typography>
+        </List>
       </ExpansionPanelDetails>
               // <ShoppingListItem key={cat.id} item={item} store_id={this.state.id} />
     )}

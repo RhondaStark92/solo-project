@@ -2,6 +2,12 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
 }
+ul {
+    width: 100%;
+}
+li {
+    list-style-type: none;
+}
 
 .alert {
     background-color: #ff4545;

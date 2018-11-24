@@ -8,8 +8,8 @@ import StoreSelector from './StoreSelector';
 
 const Wrapper = styled.section`
   // padding: 4em;
-  margin-left: 25%;
-  margin-right: 25%;
+  // margin-left: 25%;
+  // margin-right: 25%;
 `;
 
 const Title = styled.h1`
@@ -54,7 +54,7 @@ class ShoppingList extends Component {
   render() {
     return (
       <Wrapper>
-        <Paper>
+        {/* <Paper> */}
           <Title>Shopping List</Title>
           <Selector>
             <StoreSelector store_id={this.state.id} 
@@ -65,7 +65,7 @@ class ShoppingList extends Component {
               <ShoppingListItem key={item.id} item={item} store_id={this.state.id} />
             ))}
           </List>
-        </Paper>
+        {/* </Paper> */}
       </Wrapper>
     )}
 }
