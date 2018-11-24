@@ -20,13 +20,10 @@ function* fetchList(action) {
 function* foundItem(action) {
   console.log('in foundItem', action.payload);
   try {
-    // const config = {
-    //   headers: { 'Content-Type': 'application/json' },
-    //   withCredentials: true,
-    // };
-    // axios asynch call to add plant to server
+    // axios asynch call to update found flag on database
     yield call(axios.put, '/api/list/found', 
               {id: action.payload.item.id, found: !action.payload.item.found});
+    // will need to make a call to update the list 
     yield put( { type: 'FETCH_LIST', payload: action.payload.store_id } );
   } 
   catch (error) {
@@ -34,23 +31,26 @@ function* foundItem(action) {
   }
 }
 
+// worker SAGA: will be fired on 'UPDATE_QUANTITY' actions
 function* updateQuantity(action) {
   console.log('in updateQuantity', action.payload);
   try {
-    // axios asynch call to update quantity to server
+    // axios asynch call to update quantity on database
     yield call(axios.put, '/api/list', action.payload);
+    // will need to make a call to update the list of items
     yield put( { type: 'FETCH_ITEMS_FOR_LIST' } );
   } 
   catch (error) {
-    console.log('User put request failed', error);
+    console.log('Quantity put request failed', error);
   }
 }
 
+// worker SAGA: will be fired on 'DELETE_LIST_ITEM' actions
 function* deleteListItem(action) {
-  console.log('in delete saga', action.payload);
   try {
-    //axios call to remove project
+    //axios call to remove selected item from shopping list
     yield call(axios.delete, '/api/list', {params: {id: action.payload}});
+    // will need to make a call to update the list of items
     yield put( { type: 'FETCH_ITEMS_FOR_LIST' } );
   }
   catch (error) {
@@ -59,19 +59,16 @@ function* deleteListItem(action) {
   } 
 }
 
-// Saga to retrieve the projects from the server
-// this is the ASYNCH call to the server/DB
-// and then the dispatch to the reducer
+// worker SAGA: will be fired on 'ADD_ITEM_TO_LIST' actions
 function* addItemToList(action) {
-  console.log('in post saga for add item to list', action.payload);
   try {
-      // axios asynch call to add project to server
+      // axios asynch call to add item to shopping list on database
       yield call(axios.post, '/api/list', action.payload);
-      // will need to make a call to update the list
+      // will need to make a call to update the list of items
       yield put( { type: 'FETCH_ITEMS_FOR_LIST' } );
   }
   catch (error) {
-      console.log('error with add project post request');
+      console.log('error with add list post request');
   }
 }
 
