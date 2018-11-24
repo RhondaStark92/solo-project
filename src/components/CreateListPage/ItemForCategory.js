@@ -37,6 +37,7 @@ class ItemForCategory extends Component {
       this.props.dispatch({ type: 'ADD_ITEM_TO_LIST', payload: itemForCat});
     } else {
       itemForCat.quantity += 1;
+      this.props.dispatch({ type: 'UPDATE_QUANTITY', payload: itemForCat})
     }
     console.log('add item to list', itemForCat);
   };

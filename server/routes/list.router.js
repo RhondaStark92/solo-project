@@ -14,7 +14,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         sqlText = `SELECT shopping_list.*, item.name as item, item.brand_name 
         FROM "shopping_list" JOIN "item" ON shopping_list.item_id = item.id
         WHERE shopping_list.person_id = ${req.user.id}
-        ORDER BY shopping_list.found`
+        ORDER BY shopping_list.found, item.category_id`
     // store is selected so base the query off the store
     // category and ordered by the category order for the store
     } else {
@@ -70,7 +70,8 @@ router.put('/found', rejectUnauthenticated, (req, res) => {
 
 router.put('/', rejectUnauthenticated, (req, res) => {
     const queryText = 'UPDATE shopping_list SET quantity=$2 WHERE id=$1';
-    pool.query(queryText, [req.body.id, req.body.quantity])
+    console.log('update query', req.body.list_id, req.body.quantity);
+    pool.query(queryText, [req.body.list_id, req.body.quantity])
       .then((result) => { res.send(result.rows); })
       .catch((err) => {
         console.log('Error completing UPDATE shopping_list quantity query', err);

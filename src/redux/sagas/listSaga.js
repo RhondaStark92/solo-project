@@ -34,6 +34,18 @@ function* foundItem(action) {
   }
 }
 
+function* updateQuantity(action) {
+  console.log('in updateQuantity', action.payload);
+  try {
+    // axios asynch call to update quantity to server
+    yield call(axios.put, '/api/list', action.payload);
+    yield put( { type: 'FETCH_ITEMS_FOR_LIST' } );
+  } 
+  catch (error) {
+    console.log('User put request failed', error);
+  }
+}
+
 function* deleteListItem(action) {
   console.log('in delete saga', action.payload);
   try {
@@ -68,6 +80,7 @@ function* listSaga() {
   yield takeLatest('FOUND_ITEM', foundItem);
   yield takeLatest('DELETE_LIST_ITEM', deleteListItem);
   yield takeLatest('ADD_ITEM_TO_LIST', addItemToList);
+  yield takeLatest('UPDATE_QUANTITY', updateQuantity);
 }
 
 export default listSaga;
