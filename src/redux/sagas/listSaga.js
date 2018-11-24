@@ -6,8 +6,7 @@ function* fetchList(action) {
   console.log('in fetchSaga', action.payload);
   
   try {
-    // If a user is logged in, this will return the 
-    // list of items in the shopping_list on the DB
+    // axios asynch call to retrieve the shopping list items from the database
     const response = yield axios.get('api/list', {params: {id: action.payload}});
     // Set the list in the redux store
     yield put({ type: 'SET_LIST', payload: response.data });
