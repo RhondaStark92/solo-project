@@ -9,7 +9,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
     pool.query(`SELECT category.id, category.name as category,
                 item.id as item_id, item.name as item, item.category_id,
-                shopping_list.quantity 
+                shopping_list.quantity, shopping_list.id as list_id 
                 FROM item JOIN category ON item.category_id = category.id
                 FULL OUTER JOIN shopping_list ON shopping_list.item_id = item.id
                 WHERE category.person_id = ${req.user.id}

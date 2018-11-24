@@ -21,16 +21,31 @@ const styles = theme => ({
 
 });
 
+const emptyListItem = {
+  item_id: 0,
+  quantity: 0,
+  person_id: 0
+};
+
 class ItemForCategory extends Component {
   
-  handleItemClick = item => () => {
-    console.log('add item to list', item);
-    // this.props.dispatch({ type: 'FOUND_ITEM', payload: {item: item, store_id: this.props.store_id}})
+  state = { newListItem: emptyListItem };
+
+  handleItemClick = itemForCat => () => {
+    if (itemForCat.quantity === null) {
+      itemForCat.quantity = 1;
+      this.props.dispatch({ type: 'ADD_ITEM_TO_LIST', payload: itemForCat});
+    } else {
+      itemForCat.quantity += 1;
+    }
+    console.log('add item to list', itemForCat);
   };
 
   handleDeleteClick = item => () => {
-    console.log('delete item', item);
-    // this.props.dispatch({ type: 'FOUND_ITEM', payload: {item: item, store_id: this.props.store_id}})
+    if (item != null) {
+      console.log('delete item', item);
+      this.props.dispatch({ type: 'DELETE_LIST_ITEM', payload: item});
+    }
   };
 
   render() {
@@ -42,7 +57,7 @@ class ItemForCategory extends Component {
     
     return (
       <ListItem key={this.props.itemForCat.item_id} divider={true} dense={true}
-          button onClick={this.handleItemClick(this.props.itemForCat.item_id)} >
+          button onClick={this.handleItemClick(this.props.itemForCat)} >
           <Checkbox
               checked={itemOnList}
               tabIndex={-1}
@@ -60,7 +75,7 @@ class ItemForCategory extends Component {
             {/* <IconButton aria-label="Add">
               <AddCircleIcon />
             </IconButton> */}
-            <IconButton onClick={this.handleDeleteClick(this.props.itemForCat.item_id)} 
+            <IconButton onClick={this.handleDeleteClick(this.props.itemForCat.list_id)} 
               aria-label="Delete">
               <DeleteIcon />
             </IconButton>

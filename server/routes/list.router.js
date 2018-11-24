@@ -36,12 +36,56 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         });
 });
 
+// POST ROUTER FOR NEW SHOPPING LIST ITEM
+router.post('/', (req, res) => {
+    const newListItem = req.body;
+
+    const queryText = `INSERT INTO shopping_list 
+                      ("item_id", "quantity", "person_id")
+                      VALUES ($1, $2, $3)`;
+    const queryValues = [
+        newListItem.item_id,
+        newListItem.quantity,
+        req.user.id,
+    ];
+    console.log('add query', queryText, queryValues);
+    
+    pool.query(queryText, queryValues)
+      .then(() => { res.sendStatus(201); })
+      .catch((err) => {
+        console.log('Error completing INSERT shopping_list query', err);
+        res.sendStatus(500);
+      });
+});
+
 router.put('/found', rejectUnauthenticated, (req, res) => {
     const queryText = 'UPDATE shopping_list SET found=$2 WHERE id=$1';
     pool.query(queryText, [req.body.id, req.body.found])
       .then((result) => { res.send(result.rows); })
       .catch((err) => {
         console.log('Error completing UPDATE shopping_list query', err);
+        res.sendStatus(500);
+      });
+});
+
+router.put('/', rejectUnauthenticated, (req, res) => {
+    const queryText = 'UPDATE shopping_list SET quantity=$2 WHERE id=$1';
+    pool.query(queryText, [req.body.id, req.body.quantity])
+      .then((result) => { res.send(result.rows); })
+      .catch((err) => {
+        console.log('Error completing UPDATE shopping_list quantity query', err);
+        res.sendStatus(500);
+      });
+});
+
+// DELETE ROUTER FOR SHOPPING LIST ITEM
+router.delete('/', (req, res) => {
+    console.log('in delete on server', req.query.id);
+    const queryText = 'DELETE FROM shopping_list WHERE id=$1';
+    pool.query(queryText, [req.query.id])
+      .then(() => { res.sendStatus(200); })
+      .catch((err) => {
+        console.log('Error completing DELETE shopping_list query', err);
         res.sendStatus(500);
       });
 });
