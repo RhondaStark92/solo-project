@@ -26,11 +26,13 @@ const Selector = styled.div`
 class ShoppingList extends Component {
 
   state = {id: 0};
-  changeHandler(event) {
-    this.setState({ yourName: event.target.value }, () => 
-    console.log(this.state.yourName));
- }
-    // update state from inputs
+
+  // changeHandler(event) {
+  //   this.setState({ yourName: event.target.value }, () => 
+  //   console.log(this.state.yourName));
+  // }
+
+  // update state from inputs
   handleChange = event => {
     // change the list according to the store selected
     this.setState({id: event.target.value}, () => 

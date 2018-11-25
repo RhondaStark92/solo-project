@@ -27,8 +27,8 @@ CREATE TABLE "store" (
 
 CREATE TABLE "store_category" (
 	"id" SERIAL PRIMARY KEY,
-	"store_id" int REFERENCES store,
-	"category_id" int REFERENCES category,
+	"store_id" int REFERENCES store ON DELETE CASCADE,
+	"category_id" int REFERENCES category ON DELETE CASCADE,
 	"order" int
 );
 
@@ -36,7 +36,7 @@ CREATE TABLE "shopping_list" (
 	"id" SERIAL PRIMARY KEY,
 	"item_id" int REFERENCES item,
 	"quantity" int,
-	"found" boolean,
+	"found" boolean DEFAULT false,
 	"person_id" int REFERENCES person
 );
 
