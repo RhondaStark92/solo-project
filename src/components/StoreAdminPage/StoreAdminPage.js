@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import Paper from '@material-ui/core/Paper';
 
 const Wrapper = styled.section`
-  // padding: 4em;
+  padding: 4em;
   margin-left: 25%;
   margin-right: 25%;
 `;
@@ -14,12 +14,6 @@ const Wrapper = styled.section`
 const Title = styled.h1`
   padding: 15px;
   text-align: center;
-`;
-
-const Selector = styled.div`
-  margin-left:15%;
-  margin-right:15%;
-  padding-bottom: 50px;
 `;
 
 class StoreAdminPage extends Component {
@@ -44,12 +38,12 @@ class StoreAdminPage extends Component {
   render() {
     return (
       <Wrapper>
-        <Paper>
+        {/* <Paper> */}
           <Title>Store Admin</Title>
           {/* <pre>{JSON.stringify(this.props.store)}</pre> */}
           <StoreAdminForm />
           <StoreAdminList />
-        </Paper>
+        {/* </Paper> */}
       </Wrapper>
     )}
 }

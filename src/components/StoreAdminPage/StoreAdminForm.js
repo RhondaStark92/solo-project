@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 
 const emptyStoreObject = {
@@ -51,11 +51,11 @@ class StoreAdminForm extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div>
         <h3>Add Store</h3>
         {/* <pre>{JSON.stringify(this.state.newProject)}</pre> */}
-        <form onSubmit={this.addNewStore}>
-        <div>
+        {/* <form onSubmit={this.addNewStore}> */}
+        {/* <div> */}
           {/* Project name input */}
           <Input
           name="name"
@@ -68,11 +68,11 @@ class StoreAdminForm extends Component {
           placeholder="Store Location"
           onChange={this.handleChange}
           value={this.state.newStore.location}/>
-        </div>
-        <div>
-        <input type='submit' value='Add New Store' />
-        </div>
-        </form>
+        {/* </div> */}
+        {/* <div> */}
+        <Button onClick={this.addNewStore} type='submit' value='Add New Store'>Add</Button>
+        {/* </div> */}
+        {/* </form> */}
       </div>
     ); // end return
   } // end render
