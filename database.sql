@@ -4,12 +4,18 @@ CREATE TABLE "base_category" (
 );
 
 INSERT INTO "base_category" ("name")
-VALUES ('Dairy'), ('Produce'), ('Meat'), ('Seafood'), ('Deli'), ('Baking'),
+VALUES ('Dairy'), ('Refridgerated'), ('Produce'), ('Meat'), ('Seafood'), ('Deli'), ('Baking'),
 ('Frozen'), ('Snacks'), ('Condiments'), ('Rice/Grains'), ('Canned Goods'),
 ('Spices/Oils'), ('Breakfast'), ('Coffee/Tea'), ('Beverages'), ('Baked Goods'), 
-('Cheese'), ('Personal Care'), ('Cleaning Supplies'), ('Kitchen Supplies'),
-('Fresh Juice')
+('Cheese'), ('Personal Care'), ('Cleaning Supplies'), ('Kitchen Supplies'), ('Pet Care')
 
+CREATE TABLE "base_item" (
+	"id" SERIAL PRIMARY KEY,
+	"name" VARCHAR(80),
+	"category_id" INT REFERENCES base_category
+)
+
+-- import common-grocery-items.csv into base_item table
 
 CREATE TABLE "person" (
     "id" SERIAL PRIMARY KEY,

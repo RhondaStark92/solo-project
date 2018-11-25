@@ -9,6 +9,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     // console.log('req.user:', req.user);
     
     pool.query(`SELECT * FROM "store" 
+                WHERE person_id = ${req.user.id}
                 ORDER BY name`)
         .then(results => res.send(results.rows))
         .catch(error => {

@@ -16,12 +16,12 @@ router.post('/user', rejectUnauthenticated, (req, res) => {
                       FROM base_category`;
     console.log('sql query for new categories for new user', queryText);
     
-    // pool.query(queryText)
-    //   .then(() => { res.sendStatus(201); })
-    //   .catch((err) => {
-    //     console.log('Error completing INSERT store query', err);
-    //     res.sendStatus(500);
-    //   });
+    pool.query(queryText)
+      .then(() => { res.sendStatus(201); })
+      .catch((err) => {
+        console.log('Error completing INSERT category for user query', err);
+        res.sendStatus(500);
+      });
 });
 
 
