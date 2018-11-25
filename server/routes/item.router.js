@@ -4,6 +4,25 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 
 const router = express.Router();
 
+// POST ROUTER TO AUTOMATICALLY ADD BASE ITEMS 
+// TO NEW USER FOR NEWLY REGISTERED USERS
+router.post('/user', rejectUnauthenticated, (req, res) => {
+    console.log('user', req.user.id);
+    
+    const queryText = `INSERT INTO item 
+                      ("name", "category_id", "person_id") SELECT 
+                      ("name", "category_id", ${req.user.id})
+                      FROM base_item`;
+    console.log('sql query for new items for new user', queryText);
+    
+    // pool.query(queryText)
+    //   .then(() => { res.sendStatus(201); })
+    //   .catch((err) => {
+    //     console.log('Error completing INSERT store query', err);
+    //     res.sendStatus(500);
+    //   });
+});
+
 router.get('/', rejectUnauthenticated, (req, res) => {
     console.log('query.id', req.query.id);
 

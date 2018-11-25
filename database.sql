@@ -1,3 +1,16 @@
+CREATE TABLE "base_category" (
+	"id" SERIAL PRIMARY KEY,
+	"name" VARCHAR(80)
+);
+
+INSERT INTO "base_category" ("name")
+VALUES ('Dairy'), ('Produce'), ('Meat'), ('Seafood'), ('Deli'), ('Baking'),
+('Frozen'), ('Snacks'), ('Condiments'), ('Rice/Grains'), ('Canned Goods'),
+('Spices/Oils'), ('Breakfast'), ('Coffee/Tea'), ('Beverages'), ('Baked Goods'), 
+('Cheese'), ('Personal Care'), ('Cleaning Supplies'), ('Kitchen Supplies'),
+('Fresh Juice')
+
+
 CREATE TABLE "person" (
     "id" SERIAL PRIMARY KEY,
     "username" VARCHAR (80) UNIQUE NOT NULL,

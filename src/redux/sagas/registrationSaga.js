@@ -13,6 +13,12 @@ function* registerUser(action) {
     // automatically log a user in after registration
     yield put({ type: 'LOGIN', payload: action.payload });
     
+    // automatically add base categories to new user
+    yield axios.post('api/category/user');
+
+    // automatically add base items to new user
+    yield axios.post('api/item/user')
+
     // set to 'login' mode so they see the login screen
     // after registration or after they log out
     yield put({type: 'SET_TO_LOGIN_MODE'});

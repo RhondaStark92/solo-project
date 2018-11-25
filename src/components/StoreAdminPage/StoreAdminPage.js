@@ -38,12 +38,12 @@ class StoreAdminPage extends Component {
   render() {
     return (
       <Wrapper>
-        {/* <Paper> */}
+        <Paper>
           <Title>Store Admin</Title>
           {/* <pre>{JSON.stringify(this.props.store)}</pre> */}
           <StoreAdminForm />
           <StoreAdminList />
-        {/* </Paper> */}
+        </Paper>
       </Wrapper>
     )}
 }
