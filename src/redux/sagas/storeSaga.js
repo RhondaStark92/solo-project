@@ -45,7 +45,6 @@ function* deleteStore(action) {
 
 function* storeSaga() {
   yield takeLatest('FETCH_STORES', fetchStores);
-  yield takeLatest('FETCH_STORE_CATEGORY',fetchStoreCategory);
   yield takeLatest('ADD_STORE', addStore);
   yield takeLatest('DELETE_STORE', deleteStore);
 }

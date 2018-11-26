@@ -31,7 +31,7 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 app.use('/api/list', listRouter);
 app.use('/api/store', storeRouter);
-app.use('/api/store_category'), storeCategoryRouter);
+app.use('/api/store_category', storeCategoryRouter);
 app.use('/api/category', catgoryRouter);
 app.use('/api/item', itemRouter);
 

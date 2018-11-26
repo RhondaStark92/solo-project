@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import StoreAdminForm from './StoreAdminForm';
-import StoreAdminList from './StoreList';
+import StoreAdminList from './StoreAdminList';
 import styled from 'styled-components';
 import Paper from '@material-ui/core/Paper';
 
@@ -28,11 +28,13 @@ class StoreAdminPage extends Component {
     // change the list according to the store selected
     this.setState({id: event.target.value}, () => 
     console.log('select store event happened', event.target.value, this.state.id));
-    this.getListForStore();
+    // this.getListForStore();
   }
 
   componentDidMount () {
     this.props.dispatch({type: 'FETCH_STORES'})
+    console.log('after fetch stores in ');
+    
   }
 
   render() {
@@ -42,7 +44,11 @@ class StoreAdminPage extends Component {
           <Title>Store Admin</Title>
           {/* <pre>{JSON.stringify(this.props.store)}</pre> */}
           <StoreAdminForm />
-          <StoreAdminList />
+          {this.props.store.map(store => (
+            // <pre>{JSON.stringify(store)}</pre>
+                <StoreAdminList key={store.id} storeIn={store}/>
+          ))}
+          {/* <StoreAdminList /> */}
         </Paper>
       </Wrapper>
     )}

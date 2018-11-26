@@ -11,7 +11,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import '../../../node_modules/react-confirm-alert/src/react-confirm-alert.css'
 // import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 
-class StoreList extends Component {
+class StoreAdminCategories extends Component {
 
   // mounting GET response to the DOM, when rendered
   componentDidMount() {
@@ -20,7 +20,7 @@ class StoreList extends Component {
 
   // get all projects
   getStores = () => {
-    this.props.dispatch({ type: 'FETCH_STORES'})
+    this.props.dispatch({ type: 'FETCH_STORE_CATEGORY'})
   }
 
   handleItemClick = id => () => {
@@ -75,7 +75,7 @@ class StoreList extends Component {
 } // end StoreList class
 
 const mapStateToProps = state => ({
-  store: state.store,
+  store: state.storeCategory,
 });
 
-export default connect(mapStateToProps)(StoreList);
+export default connect(mapStateToProps)(StoreAdminCategories);

@@ -27,15 +27,6 @@ const SortableList = SortableContainer(({items}) => {
 
 class StoreCategoryList extends Component {
 
-    handleClick = (id) => {
-        this.props.dispatch({ type: 'DELETE_PLANT', payload: id})
-    }
-
-    componentDidMount() {
-        // use component did mount to dispatch an action to request the plantList from the API
-        this.props.dispatch({ type: 'GET_PLANTS'})
-    }
-
     onSortEnd = ({oldIndex, newIndex}) => {    
         this.props.dispatch({ type: 'REORDER_LIST', payload: {oldIndex, newIndex}})
         this.props.dispatch({ type: 'UPDATE_ORDER', payload: {oldIndex, newIndex}})
@@ -49,7 +40,7 @@ class StoreCategoryList extends Component {
         return (
             <div>
                 <h3>This is the plant list</h3>
-                <SortableList items={this.props.reduxState.plantList} 
+                <SortableList items={this.props.items} 
                                     onSortEnd={this.onSortEnd}/>
                 <button onClick={this.saveOrder}>Save Order</button>
             </div>

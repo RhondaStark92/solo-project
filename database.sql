@@ -86,16 +86,14 @@ CREATE TRIGGER ins_person_item
 
 -- stored procedure and trigger
 -- for store_category for new store
-CREATE SEQUENCE OrderSequence;
-
 CREATE OR REPLACE FUNCTION rec_insert_store_categories()
   RETURNS trigger AS
 $$
 BEGIN
-         INSERT INTO store_category(store_id, category_id, order)
-         SELECT NEW.id, category.id, nextval('OrderSequence')
+         INSERT INTO store_category(store_id, category_id, rank)
+         SELECT NEW.id, category.id, category.id
          FROM category 
-         WHERE category.person_id = NEW.id;
+         WHERE category.person_id = NEW.person_id;
  
     RETURN NEW;
 END;
@@ -107,6 +105,7 @@ CREATE TRIGGER ins_store_categories
   ON store
   FOR EACH ROW
   EXECUTE PROCEDURE rec_insert_store_categories();
+
 
 --
 

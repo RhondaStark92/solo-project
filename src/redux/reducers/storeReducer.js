@@ -1,6 +1,7 @@
 const storeReducer = (state = [], action) => {
   switch (action.type) {
     case 'SET_STORES':
+      console.log('in set store reducer', action.payload);
       return action.payload;
     default:
       return state;
