@@ -4,10 +4,6 @@ import {SortableContainer, SortableElement} from 'react-sortable-hoc';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 
-// const mapStateToProps = reduxState => ({
-//     reduxState,
-// });
-
 const SortableItem = SortableElement(({value}) =>
   <ListItem>{value.name}</ListItem>
 );
@@ -50,8 +46,6 @@ class StoreCategoryList extends Component {
     }
 
     render() {
-        // const {data} = this.props;
-        // const {list} = data;
         return (
             <div>
                 <h3>This is the plant list</h3>

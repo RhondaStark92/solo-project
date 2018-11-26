@@ -51,7 +51,7 @@ function* addCategory(action) {
 
 function* categorySaga() {
   yield takeLatest('FETCH_CATEGORY', fetchCategory);
-  yield takeLatest('ADD_BASE_CATEGORY', addBaseCategory);
+  yield takeLatest('ADD_CATEGORY', addCategory);
 }
 
 export default categorySaga;

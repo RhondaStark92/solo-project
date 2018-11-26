@@ -6,10 +6,23 @@ const router = express.Router();
 
 // GET ROUTER FOR STORES
 router.get('/', rejectUnauthenticated, (req, res) => {
-    // console.log('req.user:', req.user);
     
     pool.query(`SELECT * FROM "store" 
                 WHERE person_id = ${req.user.id}
+                ORDER BY name`)
+        .then(results => res.send(results.rows))
+        .catch(error => {
+            console.log('Error making SELECT for store:', error);
+            res.sendStatus(500);
+        });
+});
+
+// GET ROUTER FOR STORE CATEGORIES
+router.get('/', rejectUnauthenticated, (req, res) => {
+    
+    pool.query(`SELECT * FROM "store_category" 
+                WHERE person_id = ${req.user.id}
+                AND store_id = ${req.query.id}
                 ORDER BY name`)
         .then(results => res.send(results.rows))
         .catch(error => {
