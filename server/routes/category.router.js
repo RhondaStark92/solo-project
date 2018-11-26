@@ -5,7 +5,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 const router = express.Router();
 
 // POST ROUTER TO AUTOMATICALLY ADD BASE CATEGORIES 
-// TO NEW USER FOR NEWLY REGISTERED USERS
+// TO CATEGORY TABLE FOR NEWLY REGISTERED USERS
 router.post('/user', rejectUnauthenticated, (req, res) => {
     console.log('user', req.user.id);
     
@@ -24,10 +24,8 @@ router.post('/user', rejectUnauthenticated, (req, res) => {
       });
 });
 
-
-
 router.get('/', rejectUnauthenticated, (req, res) => {
-    console.log('query.id', req.query.id);
+    // console.log('query.id', req.query.id);
         
     pool.query(`SELECT * FROM category
                 WHERE category.person_id = ${req.user.id}`)

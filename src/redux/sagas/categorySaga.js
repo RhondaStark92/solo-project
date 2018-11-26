@@ -6,15 +6,6 @@ function* fetchCategory(action) {
   console.log('in fetch category Saga', action.payload);
   
   try {
-    // const config = {
-    //   headers: { 'Content-Type': 'application/json' },
-    //   withCredentials: true,
-    // };
-
-    // the config includes credentials which
-    // allow the server session to recognize the user
-    // If a user is logged in, this will return the 
-    // list of items in the shopping_list on the DB
     const response = yield axios.get('api/category');
     console.log('response from list:', response);
     
@@ -24,6 +15,19 @@ function* fetchCategory(action) {
     yield put({ type: 'SET_CATEGORY', payload: response.data });
   } catch (error) {
     console.log('Category get request failed', error);
+  }
+}
+
+// worker SAGA: will be fired on 'ADD_CATEGORY' actions
+function* addCategory(action) {
+  try {
+      // axios asynch call to add store on database
+      yield call(axios.post, '/api/category/user', action.payload);
+      // will need to make a call to update the list of stores
+      // yield put( { type: 'FETCH_CATEGORY' } );
+  }
+  catch (error) {
+      console.log('error with add category post request');
   }
 }
 
@@ -47,7 +51,7 @@ function* fetchCategory(action) {
 
 function* categorySaga() {
   yield takeLatest('FETCH_CATEGORY', fetchCategory);
-  // yield takeLatest('FOUND_ITEM', foundItem);
+  yield takeLatest('ADD_BASE_CATEGORY', addBaseCategory);
 }
 
 export default categorySaga;

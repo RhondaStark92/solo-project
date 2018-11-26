@@ -37,6 +37,54 @@ CREATE TABLE "item" (
 	"person_id" int REFERENCES person
 );
 
+-- stored procedure to insert the base category 
+-- rows into the category table for the new user
+CREATE OR REPLACE FUNCTION rec_insert_cat()
+  RETURNS trigger AS
+$$
+BEGIN
+         INSERT INTO category(name,person_id)
+         SELECT base_category.name, NEW.id
+         FROM base_category;
+ 
+    RETURN NEW;
+END;
+$$
+LANGUAGE 'plpgsql';
+
+-- trigger after new user created
+CREATE TRIGGER ins_person_cat
+  AFTER INSERT
+  ON person
+  FOR EACH ROW
+  EXECUTE PROCEDURE rec_insert_cat();
+
+-- stored procedure to insert the base item 
+-- rows into the item table for the new user
+CREATE OR REPLACE FUNCTION rec_insert_item()
+  RETURNS trigger AS
+$$
+BEGIN
+         INSERT INTO item(category_id, name, person_id)
+         SELECT category.id, base_item.name, NEW.id
+         FROM base_item JOIN base_category ON
+         base_item.category_id = base_category.id
+         JOIN category ON category.name = base_category.name
+         WHERE category.person_id = NEW.id;
+ 
+    RETURN NEW;
+END;
+$$
+LANGUAGE 'plpgsql';
+
+-- trigger after new user created
+CREATE TRIGGER ins_person_item
+  AFTER INSERT
+  ON person
+  FOR EACH ROW
+  EXECUTE PROCEDURE rec_insert_item();
+
+
 CREATE TABLE "store" (
 	"id" SERIAL PRIMARY KEY,
 	"name" VARCHAR (80) NOT NULL,
