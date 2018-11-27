@@ -21,15 +21,16 @@ function* fetchStoreCategory(action) {
 function* updateCategoryOrder(action) {
   let from=action.payload.oldIndex + 1;
   let to=action.payload.newIndex + 1;
-  console.log('in updateCategoryOrder,', from, to);
+  let store=action.payload.storeId;
+  console.log('in updateCategoryOrder,', from, to, store);
   
   try {
     //axios call to update category ordering
     console.log('in try of update');
-    yield call(axios.put, '/api/plant/order1', {params: {old: from, new: to}});
-    yield call(axios.put, '/api/plant/order2', {params: {old: from, new: to}});
-    yield call(axios.put, '/api/plant/order3', {params: {old: from, new: to}});
-    yield put( { type: 'SET_STORE_CATEGORY'} );
+    yield call(axios.put, '/api/store_category/order1', {params: {old: from, new: to, store: store}});
+    yield call(axios.put, '/api/store_category/order2', {params: {old: from, new: to, store: store}});
+    yield call(axios.put, '/api/store_category/order3', {params: {old: from, new: to, store: store}});
+    // yield put( { type: 'SET_STORE_CATEGORY'} );
   }
   catch (error) {
     console.log('error with update category order to /api/store_category');

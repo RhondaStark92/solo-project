@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import StoreCategoryList from './StoreCategoryList';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
@@ -22,11 +23,21 @@ const CategoryTitle = styled.p`
 
 class StoreAdminList extends Component {
 
+  // state = {
+  //   expanded: null,
+  // };
+
+  // handleChange = panel => (event, expanded) => {
+  //   console.log('in change', expanded, panel)
+  //   this.setState({
+  //     expanded: expanded ? panel : false,
+  //   });
+  // };
+
   // mounting GET response to the DOM, when rendered
   componentDidMount() {
     this.getStores();
     console.log('in store admin list', this.props.store);
-    
   };
 
   // get all projects
@@ -61,22 +72,25 @@ class StoreAdminList extends Component {
 
   render() {
 
-    const listForCat = this.props.storeCategory.filter(cat => cat.store_id === this.props.storeIn.id);
+    // const { expanded } = this.state;
+    // console.log ('expanded', expanded);
 
-    console.log('in map of store', this.props.store);
+    const listForCat = this.props.storeCategory.filter(cat => cat.store_id === this.props.storeIn.id);
+    console.log('on id', this.props.storeIn.id, this.props.expanded);
+    
     return (
 
-      <ExpansionPanel key={this.props.storeIn.id}>
+      <ExpansionPanel key={this.props.storeIn.id} expanded={this.props.expanded === `panel${this.props.storeIn.id}`} onChange={this.props.handleChange(`panel${this.props.storeIn.id}`)}>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <CategoryTitle>{this.props.storeIn.name}</CategoryTitle>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
         <List>
-            {listForCat.map(catForStore => (
-              <pre>{JSON.stringify(catForStore)}</pre>
-              // <StoreCategoryList items={listForCat} />
-              // <ItemForCategory itemForCat={itemForCat} />
-            ))}
+            {/* {listForCat.map(catForStore => ( */}
+              {/* // <pre>{JSON.stringify(catForStore)}</pre> */}
+              {/* <StoreCategoryList items={listForCat} store_id={this.props.storeIn.id}/> */}
+              {/* // <ItemForCategory itemForCat={itemForCat} /> */}
+            {/* ))} */}
         </List>
       </ExpansionPanelDetails>
       <ExpansionPanelActions>

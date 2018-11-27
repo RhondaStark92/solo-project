@@ -18,35 +18,35 @@ const Title = styled.h1`
 
 class StoreAdminPage extends Component {
 
-  state = {id: 0};
-  changeHandler(event) {
-    this.setState({ yourName: event.target.value }, () => 
-    console.log(this.state.yourName));
- }
-    // update state from inputs
-  handleChange = event => {
-    // change the list according to the store selected
-    this.setState({id: event.target.value}, () => 
-    console.log('select store event happened', event.target.value, this.state.id));
-    // this.getListForStore();
-  }
+  state = {
+    expanded: null,
+  };
+
+  handleChange = panel => (event, expanded) => {
+    console.log('in change', expanded, panel)
+    this.setState({
+      expanded: expanded ? panel : true,
+    });
+  };
 
   componentDidMount () {
     this.props.dispatch({type: 'FETCH_STORES'})
-    console.log('after fetch stores in ');
-    
+    console.log('after fetch stores in '); 
   }
 
   render() {
+
+    const { expanded } = this.state;
+    console.log ('expanded', expanded);
+
     return (
       <Wrapper>
         <Paper>
           <Title>Store Admin</Title>
-          {/* <pre>{JSON.stringify(this.props.store)}</pre> */}
           <StoreAdminForm />
           {this.props.store.map(store => (
-            // <pre>{JSON.stringify(store)}</pre>
-                <StoreAdminList key={store.id} storeIn={store}/>
+              <StoreAdminList key={store.id} storeIn={store} 
+                expanded={expanded} handleChange={this.handleChange}/>
           ))}
           {/* <StoreAdminList /> */}
         </Paper>
