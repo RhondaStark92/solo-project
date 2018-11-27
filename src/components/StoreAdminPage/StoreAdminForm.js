@@ -2,7 +2,35 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Input from '@material-ui/core/Input';
+import { withStyles } from '@material-ui/core/styles';
+import styled from 'styled-components';
+
+const styles = theme => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: 100,
+    marginRight: 10,
+    width: 200,
+  },
+  dense: {
+    marginTop: 19,
+  },
+  menu: {
+    width: 200,
+  },
+});
+
+const Wrapper = styled.section`
+  padding: 2em;
+  text-align: center;
+`;
+
+const Title = styled.h3`
+  text-align: center;
+`;
 
 const emptyStoreObject = {
   name: '',
@@ -16,7 +44,7 @@ class StoreAdminForm extends Component {
 
   // update state from inputs
   handleChange = event => {
-      console.log('event happened', event, this.state);
+      // console.log('event happened', event, this.state);
       this.setState({
         newStore: {
             ...this.state.newStore,
@@ -40,7 +68,7 @@ class StoreAdminForm extends Component {
   addNewStore = event => {
       event.preventDefault();
       if (this.validStoreData()) {
-        console.log('store data', this.state.newStore);
+        // console.log('store data', this.state.newStore);
         
         this.props.dispatch({ type: 'ADD_STORE', payload: this.state.newStore });
         this.setState({
@@ -51,29 +79,30 @@ class StoreAdminForm extends Component {
 
   render() {
     return (
-      <div>
-        <h3>Add Store</h3>
-        {/* <pre>{JSON.stringify(this.state.newProject)}</pre> */}
-        {/* <form onSubmit={this.addNewStore}> */}
-        {/* <div> */}
-          {/* Project name input */}
-          <Input
+      <Wrapper>
+        <Title>Add Store</Title>
+        <TextField
           name="name"
+          id="outlined-name"
           placeholder="Store Name"
+          value={this.state.newStore.name}
+          margin="normal"
+          variant="outlined"
           onChange={this.handleChange}
-          value={this.state.newStore.name}/>
-          {/* Project date completed date selector */}
-          <Input
+        />
+        <TextField
           name="location"
+          id="outlined-location"
           placeholder="Store Location"
+          value={this.state.newStore.location}
+          margin="normal"
+          variant="outlined"
           onChange={this.handleChange}
-          value={this.state.newStore.location}/>
-        {/* </div> */}
-        {/* <div> */}
-        <Button onClick={this.addNewStore} type='submit' value='Add New Store'>Add</Button>
-        {/* </div> */}
-        {/* </form> */}
-      </div>
+        />
+        <div>
+          <Button onClick={this.addNewStore} type='submit' value='Add New Store'>Add</Button>
+        </div>
+      </Wrapper>
     ); // end return
   } // end render
 } // end AdminForm class
@@ -82,4 +111,4 @@ const mapStateToProps = state => ({
   store: state.store,
 });
 
-export default connect(mapStateToProps)(StoreAdminForm);
+export default connect(mapStateToProps) (withStyles(styles)(StoreAdminForm));

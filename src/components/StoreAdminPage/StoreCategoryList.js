@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {SortableContainer, SortableElement} from 'react-sortable-hoc';
 import List from '@material-ui/core/List';
+import Button from '@material-ui/core/Button';
 import ListItem from '@material-ui/core/ListItem';
 import {arrayMove} from 'react-sortable-hoc';
 
@@ -18,17 +19,25 @@ const SortableList = SortableContainer(({items}) => {
       </List>
     );
   });
-  
+
+
 class StoreCategoryList extends Component {
 
-    // state = this.props.items;
+    // categoryList = this.props.items;
+    // state = {categoryItems: this.props.items};
     
+
+    componentDidMount () {
+        // console.log('category list', this.state);
+        // this.props.dispatch({type: 'CATEGORIES_FOR_STORE', payload: this.props.store_id})
+    }
+
     onSortEnd = ({oldIndex, newIndex}) => {    
-        console.log('in sort category list', oldIndex, newIndex, this.props.store_id);
+        // console.log('in sort category list', oldIndex, newIndex, this.props.store_id);
         // let storeId = this.props.store_id;
         // this.props.dispatch({ type: 'REORDER_LIST', payload: {oldIndex, newIndex}})
         // this.props.dispatch({ type: 'UPDATE_CATEGORY_ORDER', payload: {oldIndex, newIndex, storeId}})
-        // this.state = arrayMove(this.props.items, oldIndex, newIndex);
+        arrayMove(this.props.items, oldIndex, newIndex);
         // this.props.dispatch({ type: 'UPDATE_ORDER', payload: {oldIndex, newIndex}})
         // this.props.dispatch({ type: 'UPDATE_ORDER', payload: {oldIndex, newIndex}})
     };
@@ -38,20 +47,20 @@ class StoreCategoryList extends Component {
     }
 
     render() {
-        console.log('testing', this.props.items);
-        
+        // console.log('testing', this.props.storeCategory);
+        console.log('state after setting', this.props.items);
         return (
             <div>
-                <SortableList items={this.state} 
+                <SortableList items={this.props.items} 
                                     onSortEnd={this.onSortEnd}/>
-                {/* <button onClick={this.saveOrder}>Save Order</button> */}
+                <Button onClick={this.saveOrder}>Save Order</Button>
             </div>
         );
     }
 }
 
-// const mapStateToProps = state => ({
-//   store: state.store,
-// });
+const mapStateToProps = state => ({
+    // storeCategory: state.storeCategory.filter(cat => cat.store_id === this.props.storeIn.id),
+});
 
-export default (StoreCategoryList);
+export default connect(mapStateToProps)(StoreCategoryList);

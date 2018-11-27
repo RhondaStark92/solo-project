@@ -1,18 +1,18 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import ItemForCategory from './ItemForCategory';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
+// import ListItem from '@material-ui/core/ListItem';
+// import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+// import ListItemText from '@material-ui/core/ListItemText';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import Typography from '@material-ui/core/Typography';
-import Checkbox from '@material-ui/core/Checkbox';
+// import Typography from '@material-ui/core/Typography';
+// import Checkbox from '@material-ui/core/Checkbox';
 
-const listDiv = styled.div`
-  width: 100%;
-`;
+// const listDiv = styled.div`
+//   width: 100%;
+// `;
 
 class ItemListForCategory extends Component {
 

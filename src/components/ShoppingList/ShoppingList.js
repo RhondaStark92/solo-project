@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import List from '@material-ui/core/List';
 import styled from 'styled-components';
-import Paper from '@material-ui/core/Paper';
+// import Paper from '@material-ui/core/Paper';
 import ShoppingListItem from './ShoppingListItem';
 import StoreSelector from './StoreSelector';
 

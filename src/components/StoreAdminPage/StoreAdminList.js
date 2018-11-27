@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import StoreCategoryList from './StoreCategoryList';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
-import Typography from '@material-ui/core/Typography';
+// import ListItem from '@material-ui/core/ListItem';
+// import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+// import ListItemText from '@material-ui/core/ListItemText';
+// import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import styled from 'styled-components';
@@ -36,18 +36,18 @@ class StoreAdminList extends Component {
 
   // mounting GET response to the DOM, when rendered
   componentDidMount() {
+    
     this.getStores();
-    console.log('in store admin list', this.props.store);
+    // console.log('in store panel list', this.props.storeCategory);
   };
 
-  // get all projects
+  // get all categories for all stores
   getStores = () => {
-    // this.props.dispatch({ type: 'FETCH_STORES' });
-    this.props.dispatch({ type: 'FETCH_STORE_CATEGORY' });
+    // this.props.dispatch({ type: 'FETCH_STORE_CATEGORY' });
   }
 
   handleItemClick = id => () => {
-    console.log('select item for ordering', id);
+    // console.log('select item for ordering', id);
   };
 
   // handle Delete click
@@ -76,7 +76,7 @@ class StoreAdminList extends Component {
     // console.log ('expanded', expanded);
 
     const listForCat = this.props.storeCategory.filter(cat => cat.store_id === this.props.storeIn.id);
-    console.log('on id', this.props.storeIn.id, this.props.expanded);
+    // console.log('the full list of categories in state', this.props.storeCategory);
     
     return (
 
@@ -86,11 +86,7 @@ class StoreAdminList extends Component {
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
         <List>
-            {/* {listForCat.map(catForStore => ( */}
-              {/* // <pre>{JSON.stringify(catForStore)}</pre> */}
-              {/* <StoreCategoryList items={listForCat} store_id={this.props.storeIn.id}/> */}
-              {/* // <ItemForCategory itemForCat={itemForCat} /> */}
-            {/* ))} */}
+            <StoreCategoryList items={listForCat} store_id={this.props.storeIn.id}/>
         </List>
       </ExpansionPanelDetails>
       <ExpansionPanelActions>

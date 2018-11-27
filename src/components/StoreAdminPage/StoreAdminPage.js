@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import Paper from '@material-ui/core/Paper';
 
 const Wrapper = styled.section`
-  padding: 4em;
+  padding: 2em;
   margin-left: 25%;
   margin-right: 25%;
 `;
@@ -23,26 +23,27 @@ class StoreAdminPage extends Component {
   };
 
   handleChange = panel => (event, expanded) => {
-    console.log('in change', expanded, panel)
+    // console.log('in change', expanded, panel)
     this.setState({
-      expanded: expanded ? panel : true,
+      expanded: expanded ? panel : false,
     });
   };
 
   componentDidMount () {
     this.props.dispatch({type: 'FETCH_STORES'})
-    console.log('after fetch stores in '); 
+    this.props.dispatch({ type: 'FETCH_STORE_CATEGORY' });
+    console.log('DID MOUNT IN THE STORE ADMIN PAGE!!!! '); 
   }
 
   render() {
 
     const { expanded } = this.state;
-    console.log ('expanded', expanded);
+    // console.log ('expanded', expanded);
 
     return (
       <Wrapper>
+        <Title>Store Admin</Title>
         <Paper>
-          <Title>Store Admin</Title>
           <StoreAdminForm />
           {this.props.store.map(store => (
               <StoreAdminList key={store.id} storeIn={store} 

@@ -4,14 +4,18 @@ import { put, call, takeLatest } from 'redux-saga/effects';
 // worker Saga: will be fired on "FETCH_STORE_CATEGORY" actions
 function* fetchStoreCategory(action) {
   try {
-    const config = {
-      headers: { 'Content-Type': 'application/json' },
-      withCredentials: true,
-    };
+    // const config = {
+    //   headers: { 'Content-Type': 'application/json' },
+    //   withCredentials: true,
+    // };
     // axios asynch call to retrieve the stores from the database
     const response = yield axios.get('api/store_category', {params: {id: action.payload}});
     // send response to the redux store
+
+        // filter here????? to get the array for each store?????
+        
     yield put({ type: 'SET_STORE_CATEGORY', payload: response.data });
+
   } catch (error) {
     console.log('User get store categories request failed', error);
   }
