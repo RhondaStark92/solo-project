@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
-// import { connect } from 'react-redux';
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
 import {SortableContainer, SortableElement} from 'react-sortable-hoc';
 import List from '@material-ui/core/List';
-import Button from '@material-ui/core/Button';
 import ListItem from '@material-ui/core/ListItem';
-// import {arrayMove} from 'react-sortable-hoc';
 
 const SortableItem = SortableElement(({value}) =>
   <ListItem divider={true}>{value.name}</ListItem>
@@ -23,46 +21,30 @@ const SortableList = SortableContainer(({items}) => {
 
 class StoreCategoryList extends Component {
 
-    // categoryList = this.props.items;
-    // state = {myState: this.props.items};
-    
-
     componentDidMount () {
-        // console.log('category list', this.state);
-        // this.props.dispatch({type: 'CATEGORIES_FOR_STORE', payload: this.props.store_id})
+        this.props.dispatch({type: 'FETCH_STORE_CATEGORY', payload: this.props.store_id});
     }
 
-    // onSortEnd = ({oldIndex, newIndex}) => {    
-    //     // console.log('in sort category list', oldIndex, newIndex, this.props.store_id);
-    //     // let storeId = this.props.store_id;
-    //     // this.props.dispatch({ type: 'REORDER_LIST', payload: {oldIndex, newIndex}})
-    //     // this.props.dispatch({ type: 'UPDATE_CATEGORY_ORDER', payload: {oldIndex, newIndex, storeId}})
-        
-    //     // arrayMove(this.props.items, oldIndex, newIndex);
-        
-    //     // this.props.dispatch({ type: 'UPDATE_ORDER', payload: {oldIndex, newIndex}})
-    //     // this.props.dispatch({ type: 'UPDATE_ORDER', payload: {oldIndex, newIndex}})
-    // };
-
-    saveOrder = () => {
-        // this will call the saga for refreshing the database?
-    }
+    onSortEnd = ({oldIndex, newIndex}) => {
+        let storeId = this.props.store_id;
+        // call to saga to reorder the list in redux
+        this.props.dispatch({ type: 'REORDER_LIST', payload: {oldIndex, newIndex}});
+        // call to saga to update the list in the database
+        this.props.dispatch({ type: 'UPDATE_CATEGORY_ORDER', payload: {oldIndex, newIndex, storeId}});
+    };
 
     render() {
-        // console.log('testing', this.props.storeCategory);
-        // console.log('state after setting', this.state.myState);
         return (
-            <div>
-                <SortableList items={this.props.items} 
+            <Fragment>
+                <SortableList items={this.props.storeCategory} 
                                     onSortEnd={this.onSortEnd}/>
-                <Button onClick={this.saveOrder}>Save Order</Button>
-            </div>
+            </Fragment>
         );
     }
 }
 
-// const mapStateToProps = state => ({
-//     // storeCategory: state.storeCategory.filter(cat => cat.store_id === this.props.storeIn.id),
-// });
+const mapStateToProps = state => ({
+    storeCategory: state.storeCategory
+});
 
-export default (StoreCategoryList);
+export default connect(mapStateToProps)(StoreCategoryList);

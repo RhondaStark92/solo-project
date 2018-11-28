@@ -18,37 +18,17 @@ const Title = styled.h1`
 
 class StoreAdminPage extends Component {
 
-  state = {
-    expanded: null,
-  };
-
-  handleChange = panel => (event, expanded) => {
-    // console.log('in change', expanded, panel)
-    this.setState({
-      expanded: expanded ? panel : false,
-    });
-  };
-
   componentDidMount () {
     this.props.dispatch({type: 'FETCH_STORES'})
-    // this.props.dispatch({ type: 'FETCH_STORE_CATEGORY' });
-    // console.log('DID MOUNT IN THE STORE ADMIN PAGE!!!! '); 
   }
 
   render() {
-
-    const { expanded } = this.state;
-    // console.log ('expanded', expanded);
 
     return (
       <Wrapper>
         <Title>Store Admin</Title>
         <Paper>
           <StoreAdminForm />
-          {/* {this.props.store.map(store => (
-              <StoreAdminList key={store.id} storeIn={store} 
-                expanded={expanded} handleChange={this.handleChange}/>
-          ))} */}
           <StoreList />
         </Paper>
       </Wrapper>

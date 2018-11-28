@@ -6,23 +6,25 @@ const router = express.Router();
 
 // GET ROUTER FOR STORE CATEGORIES
 router.get('/', rejectUnauthenticated, (req, res) => {
+    
+    let queryText = `SELECT * FROM "store_category" 
+                    JOIN "store" ON store_category.store_id = store.id
+                    JOIN "category" ON store_category.category_id = category.id
+                    WHERE store.person_id = $1
+                    AND store_category.store_id = $2
+                    ORDER BY store_category.store_id, store_category.rank`;
+    let queryValues = [req.user.id, req.query.id];
 
-    pool.query(`SELECT * FROM "store_category" 
-                JOIN "store" ON store_category.store_id = store.id
-                JOIN "category" ON store_category.category_id = category.id
-                WHERE store.person_id = ${req.user.id}
-                ORDER BY store_category.store_id, store_category.rank`)
-        .then(results => res.send(results.rows))
-        .catch(error => {
-            console.log('Error making SELECT for store category:', error);
-            res.sendStatus(500);
-        });
+    pool.query(queryText, queryValues)
+    .then(results => res.send(results.rows))
+    .catch(error => {
+        console.log('Error making SELECT for store category:', error);
+        res.sendStatus(500);
+    });
 });
 
 // PUT ROUTER FOR STORE CATEGORIES
-router.put('/order1', (req, res) => {
-
-  console.log('in router put order 1', req.body.params);
+router.put('/order1', rejectUnauthenticated, (req, res) => {
   
   // First update current to 0
   let queryText = `UPDATE store_category 
@@ -42,9 +44,8 @@ router.put('/order1', (req, res) => {
   
 });
 
-router.put('/order2', (req, res) => {
+router.put('/order2', rejectUnauthenticated, (req, res) => {
 
-  console.log('in router put order 2', req.body.params);
   let queryText = '';
   let queryValues = [];
   // Determine if moving down or up
@@ -71,9 +72,7 @@ router.put('/order2', (req, res) => {
   });  
 });
 
-router.put('/order3', (req, res) => {
-
-  console.log('in router put order 3', req.body);
+router.put('/order3', rejectUnauthenticated, (req, res) => {
   
   // First update current to 0
   let queryText = `UPDATE store_category SET rank = $1 WHERE rank=0
