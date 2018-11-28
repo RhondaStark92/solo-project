@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import StoreAdminForm from './StoreAdminForm';
-import StoreAdminList from './StoreAdminList';
+import StoreList from './StoreList';
 import styled from 'styled-components';
 import Paper from '@material-ui/core/Paper';
 
@@ -31,8 +31,8 @@ class StoreAdminPage extends Component {
 
   componentDidMount () {
     this.props.dispatch({type: 'FETCH_STORES'})
-    this.props.dispatch({ type: 'FETCH_STORE_CATEGORY' });
-    console.log('DID MOUNT IN THE STORE ADMIN PAGE!!!! '); 
+    // this.props.dispatch({ type: 'FETCH_STORE_CATEGORY' });
+    // console.log('DID MOUNT IN THE STORE ADMIN PAGE!!!! '); 
   }
 
   render() {
@@ -45,11 +45,11 @@ class StoreAdminPage extends Component {
         <Title>Store Admin</Title>
         <Paper>
           <StoreAdminForm />
-          {this.props.store.map(store => (
+          {/* {this.props.store.map(store => (
               <StoreAdminList key={store.id} storeIn={store} 
                 expanded={expanded} handleChange={this.handleChange}/>
-          ))}
-          {/* <StoreAdminList /> */}
+          ))} */}
+          <StoreList />
         </Paper>
       </Wrapper>
     )}
