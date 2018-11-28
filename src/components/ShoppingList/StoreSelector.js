@@ -6,9 +6,13 @@ import FormControl from '@material-ui/core/FormControl';
 
 class StoreSelector extends Component {
 
+  componentDidMount() {
+    this.props.dispatch({ type: 'FETCH_STORES'})
+  }
+
   renderStoreOptions() {
     // 
-    return this.props.reduxState.store.map((Store, index) => {
+    return this.props.store.map((Store, index) => {
       return (
         <MenuItem
           key={index}
@@ -21,10 +25,10 @@ class StoreSelector extends Component {
 
   render(){
     return (
-      <FormControl fullWidth="true">
+      <FormControl>
         <Select autowidth="true"
           value={this.props.store_id}
-          // displayEmpty
+          displayEmpty
           placeholder="Select Store"
           name="store_id"
           onChange={this.props.handleChange}
@@ -36,8 +40,12 @@ class StoreSelector extends Component {
   } // end return
 } // end class StoreSelector
 
-const mapReduxStateToProps = (reduxState) => ({
-  reduxState
+// const mapReduxStateToProps = (reduxState) => ({
+//   reduxState
+// });
+
+const mapStateToProps = state => ({
+  store: state.store,
 });
 
-export default connect(mapReduxStateToProps)(StoreSelector);
+export default connect(mapStateToProps)(StoreSelector);

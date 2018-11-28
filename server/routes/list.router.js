@@ -24,7 +24,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         JOIN "store_category" ON item.category_id = store_category.category_id
         WHERE shopping_list.person_id = ${req.user.id}
         AND store_category.store_id = ${req.query.id}
-        ORDER BY shopping_list.found, store_category.order`
+        ORDER BY shopping_list.found, store_category.rank`
     }
     
     pool.query(sqlText)

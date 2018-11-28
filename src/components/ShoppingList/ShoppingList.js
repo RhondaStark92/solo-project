@@ -25,7 +25,7 @@ const Selector = styled.div`
 
 class ShoppingList extends Component {
 
-  state = {id: 0};
+  state = {id: 1};
 
   // changeHandler(event) {
   //   this.setState({ yourName: event.target.value }, () => 
@@ -33,12 +33,19 @@ class ShoppingList extends Component {
   // }
 
   // update state from inputs
-  handleChange = event => {
-    // change the list according to the store selected
-    this.setState({id: event.target.value}, () => 
-    console.log('select store event happened', event.target.value, this.state.id));
-    this.getListForStore();
-  }
+  // handleChange = event => {
+  //   // change the list according to the store selected
+  //   this.setState({id: event.target.value}, () => 
+  //   console.log('select store event happened', event.target.value, this.state.id));
+  //   this.getListForStore();
+  // }
+
+  handleChange = (event) => {
+    this.setState({id: event.target.value});
+    this.props.dispatch({type: 'FETCH_LIST', payload: event.target.value})
+    // this.getListForStore();
+  };
+
 
   componentDidMount () {
     this.getListForStore();
@@ -49,7 +56,7 @@ class ShoppingList extends Component {
     
     this.props.dispatch({type: 'FETCH_LIST', payload: this.state.id})
     // console.log('in shopping list did mount', this.props.list);    
-    this.props.dispatch({ type: 'FETCH_STORES'})
+    // this.props.dispatch({ type: 'FETCH_STORES'})
     console.log('AFTER the store list', this.state.id);
   }
 

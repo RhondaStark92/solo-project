@@ -21,7 +21,6 @@ class CreateListPage extends Component {
   }
 
   render() {
-    // const listForCat = this.props.item.filter(cat => cat.category_id === this.props.category.category_id);
     return (
       <Wrapper>
           <Title>Create Shopping List</Title>

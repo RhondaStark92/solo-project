@@ -6,7 +6,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import Checkbox from '@material-ui/core/Checkbox';
 import DeleteIcon from '@material-ui/icons/Delete';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
 import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
 import { withStyles } from '@material-ui/core/styles';
@@ -72,16 +71,10 @@ class ItemForCategory extends Component {
           </Badge>
         </Typography>
         <ListItemSecondaryAction>
-          <div>
-            {/* <IconButton aria-label="Add">
-              <AddCircleIcon />
-            </IconButton> */}
             <IconButton onClick={this.handleDeleteClick(this.props.itemForCat.list_id)} 
               aria-label="Delete">
               <DeleteIcon />
             </IconButton>
-
-          </div>
         </ListItemSecondaryAction>
       </ListItem>
     )}
