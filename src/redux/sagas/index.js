@@ -4,6 +4,7 @@ import registrationSaga from './registrationSaga';
 import userSaga from './userSaga';
 import listSaga from './listSaga';
 import storeSaga from './storeSaga';
+import storeCategorySaga from './storeCategorySaga';
 import categorySaga from './categorySaga';
 import itemSaga from './itemSaga';
 
@@ -21,6 +22,7 @@ export default function* rootSaga() {
     userSaga(),
     listSaga(),
     storeSaga(),
+    storeCategorySaga(),
     categorySaga(),
     itemSaga(),
   ]);

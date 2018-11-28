@@ -36,7 +36,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });
 
 // POST ROUTER FOR NEW SHOPPING LIST ITEM
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
     const newListItem = req.body;
     const queryText = `INSERT INTO shopping_list 
                       ("item_id", "quantity", "person_id")
@@ -78,7 +78,7 @@ router.put('/', rejectUnauthenticated, (req, res) => {
 });
 
 // DELETE ROUTER FOR SHOPPING LIST ITEM
-router.delete('/', (req, res) => {
+router.delete('/', rejectUnauthenticated, (req, res) => {
     console.log('in delete on server', req.query.id);
     const queryText = 'DELETE FROM shopping_list WHERE id=$1';
     pool.query(queryText, [req.query.id])

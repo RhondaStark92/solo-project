@@ -12,6 +12,7 @@ const passport = require('./strategies/user.strategy');
 const userRouter = require('./routes/user.router');
 const listRouter = require('./routes/list.router');
 const storeRouter = require('./routes/store.router');
+const storeCategoryRouter = require('./routes/store.category.router');
 const catgoryRouter = require('./routes/category.router');
 const itemRouter = require('./routes/item.router');
 
@@ -30,6 +31,7 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 app.use('/api/list', listRouter);
 app.use('/api/store', storeRouter);
+app.use('/api/store_category', storeCategoryRouter);
 app.use('/api/category', catgoryRouter);
 app.use('/api/item', itemRouter);
 

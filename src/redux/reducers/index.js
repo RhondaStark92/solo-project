@@ -4,6 +4,7 @@ import loginMode from './loginModeReducer';
 import user from './userReducer';
 import list from './listReducer';
 import store from './storeReducer';
+import storeCategory from './storeCategoryReducer';
 import category from './categoryReducer';
 import item from './itemReducer';
 
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   list, // contains array of items in the shopping_list table
   store, // contains the array of stores in the store table
+  storeCategory, // contains the array of categories for the selected store and person
   category, // contains the arry of categories
   item, // contains the array of items
 });
