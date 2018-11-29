@@ -5,8 +5,8 @@ import styled from 'styled-components';
 
 const Wrapper = styled.section`
   // padding: 4em;
-  margin-left: 25%;
-  margin-right: 25%;
+  // margin-left: 25%;
+  // margin-right: 25%;
 `;
 
 const Title = styled.h1`

@@ -6,9 +6,9 @@ import styled from 'styled-components';
 import Paper from '@material-ui/core/Paper';
 
 const Wrapper = styled.section`
-  padding: 2em;
-  margin-left: 25%;
-  margin-right: 25%;
+  // padding: 2em;
+  // margin-left: 25%;
+  // margin-right: 25%;
 `;
 
 const Title = styled.h1`
@@ -26,11 +26,8 @@ class StoreAdminPage extends Component {
 
     return (
       <Wrapper>
-        <Title>Store Admin</Title>
-        <Paper>
           <StoreAdminForm />
           <StoreList />
-        </Paper>
       </Wrapper>
     )}
 }
