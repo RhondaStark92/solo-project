@@ -8,8 +8,8 @@ import StoreSelector from './StoreSelector';
 
 const Wrapper = styled.section`
   // padding: 4em;
-  margin-left: 25%;
-  margin-right: 25%;
+  // margin-left: 25%;
+  // margin-right: 25%;
 `;
 
 const Title = styled.h1`
@@ -18,8 +18,8 @@ const Title = styled.h1`
 `;
 
 const Selector = styled.div`
-  margin-left:15%;
-  margin-right:15%;
+  // margin-left:15%;
+  // margin-right:15%;
   padding-bottom: 50px;
 `;
 

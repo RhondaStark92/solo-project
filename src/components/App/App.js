@@ -18,7 +18,7 @@ import AboutPage from '../AboutPage/AboutPage';
 import InfoPage from '../InfoPage/InfoPage';
 import ShoppingList from '../ShoppingList/ShoppingList';
 import CreateListPage from '../CreateListPage/CreateListPage';
-import StoreAdminPage from '../StoreAdminPage/StoreAdminPage';
+import AdminPage from '../AdminPage/AdminPage';
 
 import './App.css';
 
@@ -75,8 +75,8 @@ class App extends Component {
             Even though it seems like they are different pages, the user is always on localhost:3000/home */}
             <ProtectedRoute
               exact
-              path="/store"
-              component={StoreAdminPage}
+              path="/admin"
+              component={AdminPage}
             />
 
             {/* This works the same as the other protected route, except that if the user is logged in,
