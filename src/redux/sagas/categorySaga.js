@@ -19,39 +19,51 @@ function* fetchCategory(action) {
 }
 
 // worker SAGA: will be fired on 'ADD_CATEGORY' actions
+// user entered a new category
 function* addCategory(action) {
   try {
-      // axios asynch call to add store on database
-      yield call(axios.post, '/api/category/user', action.payload);
-      // will need to make a call to update the list of stores
-      // yield put( { type: 'FETCH_CATEGORY' } );
+      // axios asynch call to add category on database
+      yield call(axios.post, '/api/category', action.payload);
+      // will need to make a call to update the list of category
+      yield put( { type: 'FETCH_CATEGORY' } );
   }
   catch (error) {
       console.log('error with add category post request');
   }
 }
 
-// worker Saga: will be fired on "FOUND_ITEM" actions
-// function* foundItem(action) {
-//   console.log('in foundItem', action.payload);
+// worker SAGA: will be fired on 'DELETE_CATEGORY' actions
+function* deleteCategory(action) {
+  try {
+    //axios call to remove selected category
+    yield call(axios.delete, '/api/category', {params: {id: action.payload}});
+    // will need to make a call to update the list of catgories
+    yield put( { type: 'FETCH_CATEGORY' } );
+  }
+  catch (error) {
+    console.log('error with delete request to /api/store');
+  } 
+}
+
+// worker SAGA: will be fired on 'ADD_CATEGORY_FOR_USER' actions
+// new user created .. add the default categories
+// function* addCategoryForUser(action) {
 //   try {
-//     // const config = {
-//     //   headers: { 'Content-Type': 'application/json' },
-//     //   withCredentials: true,
-//     // };
-//     // axios asynch call to add plant to server
-//     yield call(axios.put, '/api/list/found', 
-//               {id: action.payload.item.id, found: !action.payload.item.found});
-//     yield put( { type: 'FETCH_LIST', payload: action.payload.store_id } );
-//   } 
+//       // axios asynch call to add category on database
+//       yield call(axios.post, '/api/category/user', action.payload);
+//       // will need to make a call to update the list of category
+//       yield put( { type: 'FETCH_CATEGORY' } );
+//   }
 //   catch (error) {
-//     console.log('User put request failed', error);
+//       console.log('error with add category post request');
 //   }
 // }
 
 function* categorySaga() {
   yield takeLatest('FETCH_CATEGORY', fetchCategory);
   yield takeLatest('ADD_CATEGORY', addCategory);
+  yield takeLatest('DELETE_CATEGORY', deleteCategory);
+  // yield takeLatest('ADD_CATEGORY_FOR_USER', addCategoryForUser);
 }
 
 export default categorySaga;

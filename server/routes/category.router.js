@@ -4,6 +4,27 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 
 const router = express.Router();
 
+// POST ROUTER TO ADD A NEW CATEGORY
+router.post('/', rejectUnauthenticated, (req, res) => {
+  
+  const newStore = req.body;
+
+  const queryText = `INSERT INTO category 
+    ("name", "person_id")
+    VALUES ($1, $2)`;
+  const queryValues = [
+    newStore.name,
+    req.user.id,
+  ];
+
+  pool.query(queryText, queryValues)
+    .then(() => { res.sendStatus(201); })
+    .catch((err) => {
+      console.log('Error completing INSERT new category query', err);
+      res.sendStatus(500);
+    });
+});
+
 // POST ROUTER TO AUTOMATICALLY ADD BASE CATEGORIES 
 // TO CATEGORY TABLE FOR NEWLY REGISTERED USERS
 router.post('/user', rejectUnauthenticated, (req, res) => {
@@ -44,6 +65,18 @@ router.put('/', rejectUnauthenticated, (req, res) => {
         console.log('Error completing UPDATE category query', err);
         res.sendStatus(500);
       });
+});
+
+// DELETE ROUTER FOR CATEGORY
+router.delete('/', rejectUnauthenticated, (req, res) => {
+  // console.log('in delete on server', req.query.id);
+  const queryText = 'DELETE FROM category WHERE id=$1';
+  pool.query(queryText, [req.query.id])
+    .then(() => { res.sendStatus(200); })
+    .catch((err) => {
+      console.log('Error completing DELETE category query', err);
+      res.sendStatus(500);
+    });
 });
 
 module.exports = router;

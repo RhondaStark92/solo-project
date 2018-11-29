@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import styled from 'styled-components';
 import StoreAdminPage from '../StoreAdminPage/StoreAdminPage';
+import CategoryAdmin from '../CategoryAdmin/CategoryAdmin';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -49,7 +50,7 @@ class AdminPage extends React.Component {
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
               <CategoryTitle>Category Admin</CategoryTitle>
             </ExpansionPanelSummary>
-            {/* <ItemListForCategory itemsForCategory={listForCat} /> */}
+            <CategoryAdmin />
         </ExpansionPanel>
         <ExpansionPanel key='item'expanded={expanded === 'item'} onChange={this.handleChange('item')}>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
