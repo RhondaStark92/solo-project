@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import styled from 'styled-components';
 import StoreAdminPage from '../StoreAdminPage/StoreAdminPage';
 import CategoryAdmin from '../CategoryAdmin/CategoryAdmin';
+import ItemAdmin from '../ItemAdmin/ItemAdmin';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -56,7 +57,7 @@ class AdminPage extends React.Component {
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
               <CategoryTitle>Item Admin</CategoryTitle>
             </ExpansionPanelSummary>
-            {/* <ItemListForCategory itemsForCategory={listForCat} /> */}
+            <ItemAdmin />
         </ExpansionPanel>
 
         {/* <Tabs

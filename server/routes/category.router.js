@@ -7,13 +7,13 @@ const router = express.Router();
 // POST ROUTER TO ADD A NEW CATEGORY
 router.post('/', rejectUnauthenticated, (req, res) => {
   
-  const newStore = req.body;
+  const newCategory = req.body;
 
   const queryText = `INSERT INTO category 
     ("name", "person_id")
     VALUES ($1, $2)`;
   const queryValues = [
-    newStore.name,
+    newCategory.name,
     req.user.id,
   ];
 
