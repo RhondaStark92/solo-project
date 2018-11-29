@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import CategoryAdminForm from './CategoryAdminForm';
 import CategoryList from './CategoryList';
 import styled from 'styled-components';
-// import Paper from '@material-ui/core/Paper';
 
 const Wrapper = styled.section`
   // padding: 2em;
@@ -19,7 +18,7 @@ const Title = styled.h1`
 class CategoryAdminPage extends Component {
 
   componentDidMount () {
-    this.props.dispatch({type: 'FETCH_STORES'})
+    this.props.dispatch({type: 'FETCH_CATEGORY'})
   }
 
   render() {
