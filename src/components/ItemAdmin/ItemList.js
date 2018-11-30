@@ -8,13 +8,15 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { confirmAlert } from 'react-confirm-alert';
 import '../../../node_modules/react-confirm-alert/src/react-confirm-alert.css'
-import StoreCategoryOrder from './StoreCategoryOrder';
+import ItemUpdate from './ItemUpdate';
+// import { isNull } from 'util';
+// import StoreCategoryAdmin from './StoreCategoryOrder';
 
-class StoreList extends Component {
+class ItemList extends Component {
 
   handleItemClick = id => () => {
-    console.log('select store for ordering', id);
-    // <StoreCategoryOrder />
+    console.log('select item', id);
+    // <StoreCategoryAdmin />
   };
 
   // handle Delete click
@@ -27,7 +29,7 @@ class StoreList extends Component {
       buttons: [
         {
           label: 'Delete',
-          onClick: () => this.props.dispatch({ type: 'DELETE_STORE', payload: id})
+          onClick: () => this.props.dispatch({ type: 'DELETE_ITEM', payload: id})
         },
         {
           label: 'Cancel',
@@ -42,15 +44,14 @@ class StoreList extends Component {
     return (
 
       <List>
-      {this.props.store.map(store => (
-          <ListItem key={store.id} divider={true} dense={false}
-            button onClick={this.handleItemClick(store.id)} >
+      {this.props.item.map(item => (
+          <ListItem key={item.id} divider={true} dense={false}
+            button onClick={this.handleItemClick(item.id)} >
           <ListItemText>
-              {store.name} : {store.location}
+              {item.name} {item.brand_name}
           </ListItemText>
         <ListItemSecondaryAction>
-            <StoreCategoryOrder store={store} />
-            <IconButton onClick={this.handleDeleteClick(store.id)} 
+            <IconButton onClick={this.handleDeleteClick(item.id)} 
               aria-label="Delete">
               <DeleteIcon />
             </IconButton>
@@ -60,10 +61,10 @@ class StoreList extends Component {
       </List>
     );
   } // end render
-} // end StoreList class
+} // end itemList class
 
 const mapStateToProps = state => ({
-  store: state.store,
+  item: state.item,
 });
 
-export default connect(mapStateToProps)(StoreList);
+export default connect(mapStateToProps)(ItemList);
