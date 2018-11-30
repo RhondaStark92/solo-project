@@ -8,6 +8,8 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { confirmAlert } from 'react-confirm-alert';
 import '../../../node_modules/react-confirm-alert/src/react-confirm-alert.css'
+import ItemUpdate from './ItemUpdate';
+// import { isNull } from 'util';
 // import StoreCategoryAdmin from './StoreCategoryOrder';
 
 class ItemList extends Component {
@@ -46,7 +48,7 @@ class ItemList extends Component {
           <ListItem key={item.id} divider={true} dense={false}
             button onClick={this.handleItemClick(item.id)} >
           <ListItemText>
-              {item.name}
+              {item.name} {item.brand_name}
           </ListItemText>
         <ListItemSecondaryAction>
             <IconButton onClick={this.handleDeleteClick(item.id)} 

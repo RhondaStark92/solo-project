@@ -8,13 +8,13 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { confirmAlert } from 'react-confirm-alert';
 import '../../../node_modules/react-confirm-alert/src/react-confirm-alert.css'
-import StoreCategoryAdmin from './StoreCategoryOrder';
+import StoreCategoryOrder from './StoreCategoryOrder';
 
 class StoreList extends Component {
 
   handleItemClick = id => () => {
     console.log('select store for ordering', id);
-    // <StoreCategoryAdmin />
+    // <StoreCategoryOrder />
   };
 
   // handle Delete click
@@ -49,7 +49,7 @@ class StoreList extends Component {
               {store.name} : {store.location}
           </ListItemText>
         <ListItemSecondaryAction>
-            <StoreCategoryAdmin store={store} />
+            <StoreCategoryOrder store={store} />
             <IconButton onClick={this.handleDeleteClick(store.id)} 
               aria-label="Delete">
               <DeleteIcon />

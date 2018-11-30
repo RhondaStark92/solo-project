@@ -34,7 +34,7 @@ const Title = styled.h3`
 `;
 
 const emptyItemObject = {
-  category_id: 0,
+  category_id: 1,
   name: '',
   brand_name: '',
   person_id: 0,
@@ -100,8 +100,9 @@ class ItemAdminForm extends Component {
           margin="normal"
           variant="outlined"
           onChange={this.handleChange}
-        />
-        <CategorySelector handleChange={this.handleChange} />
+        /><div>
+          <CategorySelector category_id={this.state.newItem.category_id} handleChange={this.handleChange} />
+        </div>
         <div>
           <Button onClick={this.addNewItem} type='submit' value='Add New Item'>Add</Button>
         </div>
