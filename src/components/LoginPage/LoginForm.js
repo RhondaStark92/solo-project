@@ -40,7 +40,7 @@ const emptyItemObject = {
   person_id: 0,
 }
 
-class ItemAdminForm extends Component {
+class LoginForm extends Component {
 
   state = {newItem: emptyItemObject};
 
@@ -116,4 +116,4 @@ const mapStateToProps = state => ({
   item: state.item,
 });
 
-export default connect(mapStateToProps) (withStyles(styles)(ItemAdminForm));
+export default connect(mapStateToProps) (withStyles(styles)(LoginForm));

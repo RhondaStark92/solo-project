@@ -10,11 +10,6 @@ const Wrapper = styled.section`
   // margin-right: 25%;
 `;
 
-const Title = styled.h1`
-  padding: 15px;
-  text-align: center;
-`;
-
 class CategoryAdminPage extends Component {
 
   componentDidMount () {

@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import TextField from '@material-ui/core/TextField';
+import styled from 'styled-components';
+import Button from '@material-ui/core/Button';
+
+const Wrapper = styled.section`
+  text-align: center;
+`;
 
 class LoginPage extends Component {
   state = {
@@ -7,6 +14,7 @@ class LoginPage extends Component {
     password: '',
   };
 
+  
   login = (event) => {
     event.preventDefault();
 
@@ -31,7 +39,7 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <div>
+      <Wrapper>
         {this.props.errors.loginMessage && (
           <h2
             className="alert"
@@ -43,26 +51,27 @@ class LoginPage extends Component {
         <form onSubmit={this.login}>
           <h1>Login</h1>
           <div>
-            <label htmlFor="username">
-              Username:
-              <input
-                type="text"
-                name="username"
-                value={this.state.username}
-                onChange={this.handleInputChangeFor('username')}
-              />
-            </label>
+          <TextField
+          name="username"
+          id="outlined-name"
+          placeholder="User Name"
+          value={this.state.username}
+          margin="normal"
+          variant="outlined"
+          onChange={this.handleInputChangeFor('username')}
+          />
           </div>
           <div>
-            <label htmlFor="password">
-              Password:
-              <input
-                type="password"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleInputChangeFor('password')}
-              />
-            </label>
+            <TextField
+              name="password"
+              id="outlined-password"
+              placeholder="Password"
+              value={this.state.password}
+              type="password"
+              margin="normal"
+              variant="outlined"
+              onChange={this.handleInputChangeFor('password')}
+            />
           </div>
           <div>
             <input
@@ -74,15 +83,15 @@ class LoginPage extends Component {
           </div>
         </form>
         <center>
-          <button
+          <Button
             type="button"
             className="link-button"
             onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}}
           >
             Register
-          </button>
+          </Button>
         </center>
-      </div>
+      </Wrapper>
     );
   }
 }

@@ -1,18 +1,34 @@
-import React from 'react';
+import React, {Component} from 'react';
+import styled from 'styled-components';
 
-// This is one of our simplest components
-// It doesn't have local state, so it can be a function component.
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is, so it doesn't need 'connect()'
+const Wrapper = styled.section`
+  text-align: center;
+`;
 
-const AboutPage = () => (
-  <div>
-    <div>
-      <p>
-        This about page is for anyone to read!
-      </p>
-    </div>
-  </div>
-);
+const Title = styled.h1`
+  padding: 15px;
+  text-align: center;`;
 
-export default AboutPage;
+// const Selector = styled.div`
+//   text-align: center;`
+
+class AboutPage extends Component {
+
+  render() {
+    return (
+      <Wrapper>
+          <Title>Technologies Used</Title>
+          <div></div>
+              <p>React</p>
+              <p>Node</p>
+              <p>Javascript</p>
+              <p>Postgresql</p>
+              <p>Material UI</p>
+              <p>ReactSortableHOC</p>
+      </Wrapper>
+    )}
+}
+
+
+// this allows us to use <App /> in index.js
+export default (AboutPage);

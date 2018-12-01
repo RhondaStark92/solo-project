@@ -43,8 +43,8 @@ class StoreList extends Component {
 
       <List>
       {this.props.store.map(store => (
-          <ListItem key={store.id} divider={true} dense={false}
-            button onClick={this.handleItemClick(store.id)} >
+          <ListItem helperClass='sortableHelper' key={store.id} divider={true} dense={false}
+            button onClick={this.handleItemClick(store.id)}>
           <ListItemText>
               {store.name} : {store.location}
           </ListItemText>

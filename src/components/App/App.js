@@ -14,13 +14,35 @@ import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
 import AboutPage from '../AboutPage/AboutPage';
-// import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import ShoppingList from '../ShoppingList/ShoppingList';
 import CreateListPage from '../CreateListPage/CreateListPage';
 import AdminPage from '../AdminPage/AdminPage';
 
+import { createMuiTheme } from '@material-ui/core/styles';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+
 import './App.css';
+
+const theme = createMuiTheme({
+  typography: {
+    useNextVariants: true,
+  },
+  palette: {
+    primary: {
+      light: '#757ce8',
+      main: '#3f50b5',
+      dark: '#002884',
+      contrastText: '#fff',
+    },
+    secondary: {
+      light: '#ff7961',
+      main: '#f44336',
+      dark: '#ba000d',
+      contrastText: '#000',
+    },
+  },
+});
 
 class App extends Component {
   componentDidMount () {
@@ -29,6 +51,7 @@ class App extends Component {
 
   render() {
     return (
+      <MuiThemeProvider theme={theme}>
       <Router>
         <div>
           <Nav />
@@ -92,6 +115,7 @@ class App extends Component {
           <Footer />
         </div>
       </Router>
+      </MuiThemeProvider>
   )}
 }
 

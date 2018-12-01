@@ -8,9 +8,6 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { confirmAlert } from 'react-confirm-alert';
 import '../../../node_modules/react-confirm-alert/src/react-confirm-alert.css'
-import ItemUpdate from './ItemUpdate';
-// import { isNull } from 'util';
-// import StoreCategoryAdmin from './StoreCategoryOrder';
 
 class ItemList extends Component {
 

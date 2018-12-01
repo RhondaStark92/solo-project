@@ -1,4 +1,9 @@
 footer {
-    margin-top: 80px;
+    margin-top: 30px;
+    padding-bottom: 10px;
+    padding-top: 10px;
     text-align: center;
+    width: 100%;
+    color: grey;
+    /* background-color: lightgray; */
 }
