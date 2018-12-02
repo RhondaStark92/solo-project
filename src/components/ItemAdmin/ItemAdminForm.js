@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import AddCircleButton from '@material-ui/icons/AddCircle';
 import { withStyles } from '@material-ui/core/styles';
 import styled from 'styled-components';
 import CategorySelector from './CategorySelector';
@@ -25,7 +26,7 @@ const styles = theme => ({
 });
 
 const Wrapper = styled.section`
-  padding: 2em;
+  // padding: 2em;
   text-align: center;
 `;
 
@@ -82,7 +83,7 @@ class ItemAdminForm extends Component {
   render() {
     return (
       <Wrapper>
-        <Title>Add Item</Title>
+        {/* <Title>Add Item</Title> */}
         <TextField
           name="name"
           id="outlined-name"
@@ -105,7 +106,12 @@ class ItemAdminForm extends Component {
           <CategorySelector category_id={this.state.newItem.category_id} handleChange={this.handleChange} />
         </div>
         <div>
-          <Button onClick={this.addNewItem} type='submit' value='Add New Item'>Add</Button>
+          <IconButton onClick={this.addNewItem} 
+            aria-label="Add" fontSize="large">
+            <AddCircleButton />
+          </IconButton>
+ 
+          {/* <Button onClick={this.addNewItem} type='submit' value='Add New Item'>Add</Button> */}
         </div>
       </Wrapper>
     ); // end return

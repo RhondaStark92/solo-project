@@ -1,6 +1,4 @@
 import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import styled from 'styled-components';
 import StoreAdminPage from '../StoreAdminPage/StoreAdminPage';
 import CategoryAdmin from '../CategoryAdmin/CategoryAdmin';
@@ -8,20 +6,15 @@ import ItemAdmin from '../ItemAdmin/ItemAdmin';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
-const CategoryTitle = styled.h4`
-`;
+import Typography from '@material-ui/core/Typography';
 
 const Title = styled.h1`
-  padding: 15px;
   text-align: center;
 `;
 
-const styles = {
-  root: {
-    flexGrow: 1,
-  },
-};
+const Wrapper = styled.section`
+  text-align: center;
+`;
 
 class AdminPage extends React.Component {
   state = {
@@ -39,23 +32,23 @@ class AdminPage extends React.Component {
     const { expanded } = this.state;
 
     return (
-      <Fragment>
+      <Wrapper>
         <Title>Admin</Title>
         <ExpansionPanel key='store' expanded={expanded === 'store'} onChange={this.handleChange('store')}>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-              <CategoryTitle>Store Admin</CategoryTitle>
+              <Typography variant="title">Store</Typography>
             </ExpansionPanelSummary>
             <StoreAdminPage />
         </ExpansionPanel>
         <ExpansionPanel key='category'expanded={expanded === 'category'} onChange={this.handleChange('category')}>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-              <CategoryTitle>Category Admin</CategoryTitle>
+              <Typography variant="title">Category</Typography>
             </ExpansionPanelSummary>
             <CategoryAdmin />
         </ExpansionPanel>
         <ExpansionPanel key='item'expanded={expanded === 'item'} onChange={this.handleChange('item')}>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-              <CategoryTitle>Item Admin</CategoryTitle>
+              <Typography variant="title">Item</Typography>
             </ExpansionPanelSummary>
             <ItemAdmin />
         </ExpansionPanel>
@@ -74,9 +67,9 @@ class AdminPage extends React.Component {
         {this.state.value === 'store' && <TabContainer><StoreAdminPage/></TabContainer>}
         {this.state.value === 'category' && <TabContainer>Item Two</TabContainer>}
         {this.state.value === 'item' && <TabContainer>Item Three</TabContainer>} */}
-      </Fragment>
+      </Wrapper>
     );
   }
 }
 
-export default withStyles(styles)(AdminPage);
+export default (AdminPage);

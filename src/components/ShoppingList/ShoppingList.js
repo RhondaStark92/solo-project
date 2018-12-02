@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import List from '@material-ui/core/List';
 import styled from 'styled-components';
-import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab';
+import ClearButton from '@material-ui/icons/Clear';
 import ShoppingListItem from './ShoppingListItem';
 import StoreSelector from './StoreSelector';
 
@@ -14,7 +15,8 @@ const Wrapper = styled.section`
 `;
 
 const Title = styled.h1`
-  padding: 15px;
+  // padding: 15px;
+  text-transform: uppercase;
   text-align: center;`;
 
 // const Selector = styled.div`
@@ -31,6 +33,7 @@ class ShoppingList extends Component {
 
   handleClearList = (event) => {
     this.props.dispatch({type: 'CLEAR_LIST'});
+    this.props.dispatch({type: 'FETCH_LIST', payload: this.state.id});
   };
 
 
@@ -48,7 +51,7 @@ class ShoppingList extends Component {
   render() {
     return (
       <Wrapper>
-          <Title>Shopping List</Title>
+          <Title>Let's Shop!</Title>
           <div>
             <StoreSelector store_id={this.state.id} 
               handleChange={this.handleChange}/>
@@ -59,7 +62,11 @@ class ShoppingList extends Component {
             ))}
           </List>
           <div>
-          <Button variant="contained" onClick={this.handleClearList}>Clear List</Button>
+          {/* <Button variant="contained" onClick={this.handleClearList}>Clear List</Button> */}
+          <Fab  variant="primary" onClick={this.handleClearList} 
+              aria-label="Clear" fontSize="large">
+              <ClearButton />
+            </Fab>
           </div>
       </Wrapper>
     )}

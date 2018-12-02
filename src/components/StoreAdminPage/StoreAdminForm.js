@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
+import IconButton from '@material-ui/core/IconButton';
+import AddCircleButton from '@material-ui/icons/AddCircle';
 import styled from 'styled-components';
 
 const styles = theme => ({
@@ -24,7 +26,7 @@ const styles = theme => ({
 });
 
 const Wrapper = styled.section`
-  padding: 2em;
+  // padding: 2em;
   text-align: center;
 `;
 
@@ -80,7 +82,7 @@ class StoreAdminForm extends Component {
   render() {
     return (
       <Wrapper>
-        <Title>Add Store</Title>
+        {/* <Title>Add Store</Title> */}
         <TextField
           name="name"
           id="outlined-name"
@@ -100,7 +102,10 @@ class StoreAdminForm extends Component {
           onChange={this.handleChange}
         />
         <div>
-          <Button onClick={this.addNewStore} type='submit' value='Add New Store'>Add</Button>
+          <IconButton onClick={this.addNewStore} 
+              aria-label="Add" fontSize="large">
+              <AddCircleButton />
+            </IconButton>
         </div>
       </Wrapper>
     ); // end return

@@ -10,6 +10,7 @@ const Wrapper = styled.section`
 `;
 
 const Title = styled.h1`
+  text-transform: uppercase;  
   text-align: center;
 `;
 
@@ -23,7 +24,7 @@ class CreateListPage extends Component {
   render() {
     return (
       <Wrapper>
-          <Title>Create Shopping List</Title>
+          <Title>Add to Your List</Title>
             {/* <List> */}
               {this.props.category.map(cat => (
                 <CategoryList key={cat.id} category={cat}/>

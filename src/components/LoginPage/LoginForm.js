@@ -30,6 +30,7 @@ const Wrapper = styled.section`
 `;
 
 const Title = styled.h3`
+  text-transform: uppercase;
   text-align: center;
 `;
 

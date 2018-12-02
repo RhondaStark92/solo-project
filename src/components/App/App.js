@@ -27,23 +27,13 @@ import './App.css';
 const theme = createMuiTheme({
   typography: {
     useNextVariants: true,
-    fontSize: 16,
+    fontSize: 18,
     
   },
-  palette: {
-    primary: {
-      light: '#757ce8',
-      main: '#3f50b5',
-      dark: '#002884',
-      contrastText: '#fff',
-    },
-    secondary: {
-      light: '#ff7961',
-      main: '#f44336',
-      dark: '#ba000d',
-      contrastText: '#000',
-    },
-  },
+  // palette: {
+  //   primary: '#0d3636',
+  //   secondary: '#000000',
+  // },
 });
 
 class App extends Component {
@@ -82,7 +72,7 @@ class App extends Component {
             Even though it seems like they are different pages, the user is always on localhost:3000/home */}
             <ProtectedRoute
               exact
-              path="/list"
+              path="/home"
               component={ShoppingList}
             />
             {/* For protected routes, the view could show one of several things on the same route.

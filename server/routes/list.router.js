@@ -11,6 +11,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     // if no store is selected just base the query
     // off of the shopping list and ordered by the found flag
     // and category id
+    // console.log('in fetch list', req.user.id, req.query.id);
     if (req.query.id == 0) {
         sqlText = `SELECT shopping_list.*, item.name as item, item.brand_name 
         FROM "shopping_list" JOIN "item" ON shopping_list.item_id = item.id
@@ -68,7 +69,7 @@ router.put('/found', rejectUnauthenticated, (req, res) => {
 // PUT ROUTER TO UPDATE QUANTITY ON SHOPPING LIST ITEM
 router.put('/', rejectUnauthenticated, (req, res) => {
     const queryText = 'UPDATE shopping_list SET quantity=$2 WHERE id=$1';
-    console.log('update query', req.body.list_id, req.body.quantity);
+    // console.log('update query', req.body.list_id, req.body.quantity);
     pool.query(queryText, [req.body.list_id, req.body.quantity])
       .then((result) => { res.send(result.rows); })
       .catch((err) => {
@@ -79,7 +80,7 @@ router.put('/', rejectUnauthenticated, (req, res) => {
 
 // DELETE ROUTER FOR SHOPPING LIST ITEM
 router.delete('/', rejectUnauthenticated, (req, res) => {
-    console.log('in delete on server', req.query.id);
+    // console.log('in delete on server', req.query.id);
     const queryText = 'DELETE FROM shopping_list WHERE id=$1';
     pool.query(queryText, [req.query.id])
       .then(() => { res.sendStatus(200); })
@@ -91,7 +92,7 @@ router.delete('/', rejectUnauthenticated, (req, res) => {
 
 // DELETE ROUTER TO CLEAR SHOPPING LIST
 router.delete('/clear', rejectUnauthenticated, (req, res) => {
-    console.log('in delete on server', req.user.id);
+    // console.log('in delete on server', req.user.id);
     const queryText = 'DELETE FROM shopping_list WHERE person_id=$1';
     pool.query(queryText, [req.user.id])
       .then(() => { res.sendStatus(200); })

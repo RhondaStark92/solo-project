@@ -33,7 +33,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 // POST ROUTER FOR NEW STORE
 router.post('/', rejectUnauthenticated, (req, res) => {
-    console.log('user', req.user.id);
+    // console.log('user', req.user.id);
     
     const newStore = req.body;
     const queryText = `INSERT INTO store 

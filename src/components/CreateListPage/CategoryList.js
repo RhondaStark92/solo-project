@@ -5,9 +5,10 @@ import styled from 'styled-components';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Typography from '@material-ui/core/Typography';
 
-const CategoryTitle = styled.p`
-`;
+// const CategoryTitle = styled.p`
+// `;
 
 class CategoryList extends Component {
 
@@ -19,7 +20,7 @@ class CategoryList extends Component {
     return (
       <ExpansionPanel key={this.props.category.id}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <CategoryTitle>{this.props.category.name}</CategoryTitle>
+            <Typography variant='body1'>{this.props.category.name}</Typography>
           </ExpansionPanelSummary>
           <ItemListForCategory itemsForCategory={listForCat} />
       </ExpansionPanel>

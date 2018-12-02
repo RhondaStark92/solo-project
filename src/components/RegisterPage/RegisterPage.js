@@ -4,6 +4,11 @@ import TextField from '@material-ui/core/TextField';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 
+const Title = styled.h1`
+  text-transform: uppercase;  
+  text-align: center;
+`;
+
 const Wrapper = styled.section`
   text-align: center;
 `;
@@ -48,7 +53,7 @@ class RegisterPage extends Component {
           </h2>
         )}
         <form onSubmit={this.registerUser}>
-          <h1>Register User</h1>
+          <Title>Register User</Title>
           <div>
           <TextField
           name="username"

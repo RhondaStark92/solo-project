@@ -4,6 +4,11 @@ import TextField from '@material-ui/core/TextField';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 
+const Title = styled.h1`
+  text-transform: uppercase;  
+  text-align: center;
+`;
+
 const Wrapper = styled.section`
   text-align: center;
 `;
@@ -49,7 +54,7 @@ class LoginPage extends Component {
           </h2>
         )}
         <form onSubmit={this.login}>
-          <h1>Login</h1>
+          <Title>Login</Title>
           <div>
           <TextField
           name="username"
@@ -85,7 +90,9 @@ class LoginPage extends Component {
         <center>
           <Button
             type="button"
-            className="link-button"
+            // variant="contained"
+            color="primary"
+            // className="link-button"
             onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}}
           >
             Register

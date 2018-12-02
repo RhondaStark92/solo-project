@@ -23,7 +23,7 @@ function* clearList(action) {
     //axios call to remove selected item from shopping list
     yield call(axios.delete, '/api/list/clear');
     // will need to make a call to update the list of items
-    yield put( { type: 'FETCH_ITEMS_FOR_LIST' } );
+    // yield put( { type: 'FETCH_LIST' } );
   }
   catch (error) {
     console.log('error with delete request to /api/list');
