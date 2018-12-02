@@ -106,9 +106,9 @@ class ItemAdminForm extends Component {
           <CategorySelector category_id={this.state.newItem.category_id} handleChange={this.handleChange} />
         </div>
         <div>
-          <IconButton onClick={this.addNewItem} 
-            aria-label="Add" fontSize="large">
-            <AddCircleButton />
+          <IconButton color="primary" onClick={this.addNewItem} 
+            aria-label="Add">
+            <AddCircleButton fontSize="large"/>
           </IconButton>
  
           {/* <Button onClick={this.addNewItem} type='submit' value='Add New Item'>Add</Button> */}

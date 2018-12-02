@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 
 const Title = styled.h1`
   text-align: center;
+  text-transform: uppercase;
 `;
 
 const Wrapper = styled.section`

@@ -63,7 +63,7 @@ class ShoppingList extends Component {
           </List>
           <div>
           {/* <Button variant="contained" onClick={this.handleClearList}>Clear List</Button> */}
-          <Fab  variant="primary" onClick={this.handleClearList} 
+            <Fab color="primary" onClick={this.handleClearList} 
               aria-label="Clear" fontSize="large">
               <ClearButton />
             </Fab>

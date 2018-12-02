@@ -92,9 +92,9 @@ class CategoryAdminForm extends Component {
           onChange={this.handleChange}
         />
         <div>
-           <IconButton onClick={this.addNewCategory} 
-              aria-label="Add" fontSize="large">
-              <AddCircleButton />
+           <IconButton color="primary" onClick={this.addNewCategory} 
+              aria-label="Add">
+              <AddCircleButton fontSize="large"/>
             </IconButton>
  
           {/* <Button onClick={this.addNewCategory} type='submit' value='Add New Category'>Add</Button> */}

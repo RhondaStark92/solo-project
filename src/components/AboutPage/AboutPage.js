@@ -7,6 +7,7 @@ const Wrapper = styled.section`
 
 const Title = styled.h1`
   padding: 15px;
+  text-transform: uppercase;
   text-align: center;`;
 
 // const Selector = styled.div`

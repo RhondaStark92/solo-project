@@ -64,7 +64,7 @@ class ItemForCategory extends Component {
               disableRipple
             />
         <Typography variant='body1'>
-        <Badge color="secondary" badgeContent={this.props.itemForCat.quantity} invisible={!itemOnList} >              
+        <Badge color="primary" badgeContent={this.props.itemForCat.quantity} invisible={!itemOnList} >              
           <ListItemText>
               {this.props.itemForCat.item}
           </ListItemText>

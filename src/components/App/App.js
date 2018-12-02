@@ -21,14 +21,33 @@ import AdminPage from '../AdminPage/AdminPage';
 
 import { createMuiTheme } from '@material-ui/core/styles';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
-
 import './App.css';
+import { Typography } from '@material-ui/core';
+import 'typeface-roboto';
+import 'typeface-open-sans';
+
 
 const theme = createMuiTheme({
+  palette: {
+    primary: {
+      // light: will be calculated from palette.primary.main,
+      main: '#008391',
+      // dark: will be calculated from palette.primary.main,
+      // contrastText: will be calculated to contrast with palette.primary.main
+    },
+    secondary: {
+      light: '#0066ff',
+      main: '#b0bec5',
+      // dark: will be calculated from palette.secondary.main,
+      contrastText: '#ffcc00',
+    },
+    // error: will use the default color
+  },
+
   typography: {
     useNextVariants: true,
     fontSize: 18,
-    
+    fontFamily: 'Open Sans',
   },
   // palette: {
   //   primary: '#0d3636',
@@ -44,6 +63,7 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider theme={theme}>
+      <Typography>
       <Router>
         <div>
           <Nav />
@@ -107,6 +127,7 @@ class App extends Component {
           <Footer />
         </div>
       </Router>
+      </Typography>
       </MuiThemeProvider>
   )}
 }

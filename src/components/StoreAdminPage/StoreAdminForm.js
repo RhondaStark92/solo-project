@@ -7,23 +7,23 @@ import IconButton from '@material-ui/core/IconButton';
 import AddCircleButton from '@material-ui/icons/AddCircle';
 import styled from 'styled-components';
 
-const styles = theme => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  textField: {
-    marginLeft: 100,
-    marginRight: 10,
-    width: 200,
-  },
-  dense: {
-    marginTop: 19,
-  },
-  menu: {
-    width: 200,
-  },
-});
+// const styles = theme => ({
+//   container: {
+//     display: 'flex',
+//     flexWrap: 'wrap',
+//   },
+//   textField: {
+//     marginLeft: 100,
+//     marginRight: 10,
+//     width: 200,
+//   },
+//   dense: {
+//     marginTop: 19,
+//   },
+//   menu: {
+//     width: 200,
+//   },
+// });
 
 const Wrapper = styled.section`
   // padding: 2em;
@@ -102,9 +102,9 @@ class StoreAdminForm extends Component {
           onChange={this.handleChange}
         />
         <div>
-          <IconButton onClick={this.addNewStore} 
-              aria-label="Add" fontSize="large">
-              <AddCircleButton />
+          <IconButton color="primary" onClick={this.addNewStore} 
+              aria-label="Add">
+              <AddCircleButton fontSize="large"/>
             </IconButton>
         </div>
       </Wrapper>
@@ -116,4 +116,4 @@ const mapStateToProps = state => ({
   store: state.store,
 });
 
-export default connect(mapStateToProps) (withStyles(styles)(StoreAdminForm));
+export default connect(mapStateToProps) (StoreAdminForm);
