@@ -15,6 +15,22 @@ function* fetchList(action) {
   }
 }
 
+// worker SAGA: will be fired on 'DELETE_LIST_ITEM' actions
+function* clearList(action) {
+  try {
+    console.log('in clear list');
+    
+    //axios call to remove selected item from shopping list
+    yield call(axios.delete, '/api/list/clear');
+    // will need to make a call to update the list of items
+    yield put( { type: 'FETCH_ITEMS_FOR_LIST' } );
+  }
+  catch (error) {
+    console.log('error with delete request to /api/list');
+    
+  } 
+}
+
 // worker Saga: will be fired on "FOUND_ITEM" actions
 function* foundItem(action) {
   console.log('in foundItem', action.payload);
@@ -73,6 +89,7 @@ function* addItemToList(action) {
 
 function* listSaga() {
   yield takeLatest('FETCH_LIST', fetchList);
+  yield takeLatest('CLEAR_LIST', clearList);
   yield takeLatest('FOUND_ITEM', foundItem);
   yield takeLatest('DELETE_LIST_ITEM', deleteListItem);
   yield takeLatest('ADD_ITEM_TO_LIST', addItemToList);

@@ -27,6 +27,8 @@ import './App.css';
 const theme = createMuiTheme({
   typography: {
     useNextVariants: true,
+    fontSize: 16,
+    
   },
   palette: {
     primary: {

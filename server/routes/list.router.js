@@ -15,7 +15,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         sqlText = `SELECT shopping_list.*, item.name as item, item.brand_name 
         FROM "shopping_list" JOIN "item" ON shopping_list.item_id = item.id
         WHERE shopping_list.person_id = ${req.user.id}
-        ORDER BY shopping_list.found, item.category_id`
+        ORDER BY shopping_list.found, item.category_id, item`
     } else {
     // store is selected so base the query off the store
     // category and ordered by the category order for the store
@@ -24,7 +24,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         JOIN "store_category" ON item.category_id = store_category.category_id
         WHERE shopping_list.person_id = ${req.user.id}
         AND store_category.store_id = ${req.query.id}
-        ORDER BY shopping_list.found, store_category.rank`
+        ORDER BY shopping_list.found, store_category.rank, item`
     }
     
     pool.query(sqlText)
@@ -88,5 +88,18 @@ router.delete('/', rejectUnauthenticated, (req, res) => {
         res.sendStatus(500);
       });
 });
+
+// DELETE ROUTER TO CLEAR SHOPPING LIST
+router.delete('/clear', rejectUnauthenticated, (req, res) => {
+    console.log('in delete on server', req.user.id);
+    const queryText = 'DELETE FROM shopping_list WHERE person_id=$1';
+    pool.query(queryText, [req.user.id])
+      .then(() => { res.sendStatus(200); })
+      .catch((err) => {
+        console.log('Error completing DELETE all shopping_list query', err);
+        res.sendStatus(500);
+      });
+});
+
 
 module.exports = router;

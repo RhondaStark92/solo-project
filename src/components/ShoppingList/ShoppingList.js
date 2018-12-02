@@ -26,8 +26,11 @@ class ShoppingList extends Component {
 
   handleChange = (event) => {
     this.setState({id: event.target.value});
-    this.props.dispatch({type: 'FETCH_LIST', payload: event.target.value})
-    // this.getListForStore();
+    this.props.dispatch({type: 'FETCH_LIST', payload: event.target.value});
+  };
+
+  handleClearList = (event) => {
+    this.props.dispatch({type: 'CLEAR_LIST'});
   };
 
 
@@ -50,14 +53,14 @@ class ShoppingList extends Component {
             <StoreSelector store_id={this.state.id} 
               handleChange={this.handleChange}/>
           </div>
-          <div>
-          <Button>Clear List</Button>
-          </div>
           <List>
             {this.props.list.map(item => (
               <ShoppingListItem key={item.id} item={item} store_id={this.state.id} />
             ))}
           </List>
+          <div>
+          <Button variant="contained" onClick={this.handleClearList}>Clear List</Button>
+          </div>
       </Wrapper>
     )}
 }
