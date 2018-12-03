@@ -17,6 +17,11 @@ class ClearListButton extends React.Component {
     this.setState({ open: true });
   };
 
+  handleCloseClear = () => {
+    this.setState({ open: false });
+    this.props.handleClearList();
+  };
+
   handleClose = () => {
     this.setState({ open: false });
   };
@@ -46,7 +51,7 @@ class ClearListButton extends React.Component {
             <Button onClick={this.handleClose} color="primary">
               No
             </Button>
-            <Button onClick={this.handleClose} color="primary" autoFocus>
+            <Button onClick={this.handleCloseClear} color="primary" autoFocus>
               Yes
             </Button>
           </DialogActions>
