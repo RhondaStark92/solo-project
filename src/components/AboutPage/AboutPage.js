@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import ListItemText from '@material-ui/core/ListItemText';
+import Typography from '@material-ui/core/Typography';
 
 const Wrapper = styled.section`
   text-align: center;
 `;
-
-const Title = styled.h1`
-  padding: 15px;
-  text-transform: uppercase;
-  text-align: center;`;
 
 // const Selector = styled.div`
 //   text-align: center;`
@@ -18,14 +18,39 @@ class AboutPage extends Component {
   render() {
     return (
       <Wrapper>
-          <Title>Technologies Used</Title>
-          <div></div>
-              <p>React</p>
-              <p>Node</p>
-              <p>Javascript</p>
-              <p>Postgresql</p>
-              <p>Material UI</p>
-              <p>ReactSortableHOC</p>
+          <Typography variant="h4">Technologies Used</Typography>
+          <List>
+            <ListItem key='1' divider={true} dense={true}>
+              <ListItemText>
+                  JavaScript
+              </ListItemText>
+            </ListItem>
+            <ListItem key='2' divider={true} dense={true}>
+              <ListItemText>
+                  React
+              </ListItemText>
+            </ListItem>
+            <ListItem key='3' divider={true} dense={true}>
+              <ListItemText>
+                  Node
+              </ListItemText>
+            </ListItem>
+            <ListItem key='4' divider={true} dense={true}>
+              <ListItemText>
+                  Postgreql
+              </ListItemText>
+            </ListItem>
+            <ListItem key='5' divider={true} dense={true}>
+              <ListItemText>
+                  Material UI
+              </ListItemText>
+            </ListItem>
+            <ListItem key='6' divider={true} dense={true}>
+              <ListItemText>
+                  React Sortable HOC
+              </ListItemText>
+            </ListItem>
+          </List>
       </Wrapper>
     )}
 }

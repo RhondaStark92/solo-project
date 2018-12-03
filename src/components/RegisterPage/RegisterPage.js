@@ -3,11 +3,12 @@ import {connect} from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
-const Title = styled.h1`
-  text-transform: uppercase;  
-  text-align: center;
-`;
+// const Title = styled.h1`
+//   text-transform: uppercase;  
+//   text-align: center;
+// `;
 
 const Wrapper = styled.section`
   text-align: center;
@@ -53,7 +54,7 @@ class RegisterPage extends Component {
           </h2>
         )}
         <form onSubmit={this.registerUser}>
-          <Title>Register User</Title>
+          <Typography variant="h4">Register User</Typography>
           <div>
           <TextField
           name="username"

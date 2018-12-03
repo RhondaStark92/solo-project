@@ -9,6 +9,7 @@ import {
 import {connect} from 'react-redux';
 
 import Nav from '../Nav/Nav';
+// import ButtonAppBar from '../Nav/AppBar';
 import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
@@ -49,10 +50,6 @@ const theme = createMuiTheme({
     fontSize: 18,
     fontFamily: 'Open Sans',
   },
-  // palette: {
-  //   primary: '#0d3636',
-  //   secondary: '#000000',
-  // },
 });
 
 class App extends Component {
@@ -63,10 +60,11 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider theme={theme}>
-      <Typography>
+      {/* <Typography> */}
       <Router>
         <div>
           <Nav />
+          {/* <ButtonAppBar /> */}
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />
@@ -127,7 +125,7 @@ class App extends Component {
           <Footer />
         </div>
       </Router>
-      </Typography>
+      {/* </Typography> */}
       </MuiThemeProvider>
   )}
 }

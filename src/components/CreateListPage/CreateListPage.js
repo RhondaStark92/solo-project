@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import CategoryList from './CategoryList';
+import Typography from '@material-ui/core/Typography';
 import styled from 'styled-components';
 
 const Wrapper = styled.section`
@@ -9,10 +10,10 @@ const Wrapper = styled.section`
   // margin-right: 25%;
 `;
 
-const Title = styled.h1`
-  text-transform: uppercase;  
-  text-align: center;
-`;
+// const Title = styled.h1`
+//   text-transform: uppercase;  
+//   text-align: center;
+// `;
 
 class CreateListPage extends Component {
 
@@ -24,7 +25,7 @@ class CreateListPage extends Component {
   render() {
     return (
       <Wrapper>
-          <Title>Add to Your List</Title>
+          <Typography variant="h4">Add to List</Typography>
             {/* <List> */}
               {this.props.category.map(cat => (
                 <CategoryList key={cat.id} category={cat}/>

@@ -10,11 +10,11 @@ const SortableItem = SortableElement(({value}) =>
 
 const SortableList = SortableContainer(({items}) => {
     return (
-        <List>
+        <div>
         {items.map((value, index) => (
           <SortableItem key={`item-${index}`} index={index} value={value} />
         ))}
-      </List>
+      </div>
     );
   });
 

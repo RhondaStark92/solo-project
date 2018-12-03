@@ -38,13 +38,13 @@ class ShoppingListItem extends Component {
     return (
       <ListItem key={item.id} divider={true} 
                 role={undefined} button onClick={this.handleToggle(item)}>
-            <Typography>
+            {/* <Typography> */}
             <ListItemText>
             {itemText}
           </ListItemText>
-            </Typography>
+            {/* </Typography> */}
           <ListItemSecondaryAction>
-            <Checkbox primary
+            <Checkbox
               checked={item.found}
               tabIndex={-1}
               disableRipple

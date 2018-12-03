@@ -1,17 +1,26 @@
 body {
-    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
     margin: 0px;
 }
+
+h4 {
+    text-transform: uppercase;
+    text-align: center;
+    padding-top: 25px;
+    font-size: 32px !important;
+}
+
 ul {
     width: 100%;
 }
+
 li {
     list-style-type: none;
+    text-align: center !important;
 }
 
 .alert {
-    /* background-color: #350b0b; */
     margin: 50px;
+    font-family: 'Open Sans';
 }
 
 form {
@@ -36,6 +45,8 @@ input {
   min-width: 100px;
   outline:0;
   cursor: pointer;
+  font-size: 18px;
+  font-family: 'Open Sans';
 }
 
 .log-in:hover, .log-out:hover, .register:hover {

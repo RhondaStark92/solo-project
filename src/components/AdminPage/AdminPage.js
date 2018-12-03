@@ -34,22 +34,22 @@ class AdminPage extends React.Component {
 
     return (
       <Wrapper>
-        <Title>Admin</Title>
+        <Typography variant="h4">Admin</Typography>
         <ExpansionPanel key='store' expanded={expanded === 'store'} onChange={this.handleChange('store')}>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography variant="title">Store</Typography>
+              <Typography variant="h6">Store</Typography>
             </ExpansionPanelSummary>
             <StoreAdminPage />
         </ExpansionPanel>
         <ExpansionPanel key='category'expanded={expanded === 'category'} onChange={this.handleChange('category')}>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography variant="title">Category</Typography>
+              <Typography variant="h6">Category</Typography>
             </ExpansionPanelSummary>
             <CategoryAdmin />
         </ExpansionPanel>
         <ExpansionPanel key='item'expanded={expanded === 'item'} onChange={this.handleChange('item')}>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography variant="title">Item</Typography>
+              <Typography variant="h6">Item</Typography>
             </ExpansionPanelSummary>
             <ItemAdmin />
         </ExpansionPanel>

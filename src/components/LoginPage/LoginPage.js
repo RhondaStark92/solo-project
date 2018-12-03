@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 
-const Title = styled.h1`
-  text-transform: uppercase;  
-  text-align: center;
-`;
+// const Title = styled.h1`
+//   text-transform: uppercase;  
+//   text-align: center;
+// `;
 
 const Wrapper = styled.section`
   text-align: center;
@@ -54,7 +55,7 @@ class LoginPage extends Component {
           </h2>
         )}
         <form onSubmit={this.login}>
-          <Title>Login</Title>
+          <Typography variant="h4">Login</Typography>
           <div>
           <TextField
           name="username"
