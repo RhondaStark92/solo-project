@@ -1,4 +1,4 @@
-# Name of Application
+# listORDR
 
 Grocery app that digitizes the shopping list. Grocery categories are organized in stores so that when you select a particular store to shop at, the grocery list is ordered by those categories. Preloaded with categories and general grocery items. Users can add their own items, categories, and stores.
 
