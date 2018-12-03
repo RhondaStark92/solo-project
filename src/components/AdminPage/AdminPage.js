@@ -8,11 +8,6 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Typography from '@material-ui/core/Typography';
 
-const Title = styled.h1`
-  text-align: center;
-  text-transform: uppercase;
-`;
-
 const Wrapper = styled.section`
   text-align: center;
 `;
@@ -29,7 +24,6 @@ class AdminPage extends React.Component {
   };
   
   render() {
-    // const { classes } = this.props;
     const { expanded } = this.state;
 
     return (
@@ -53,21 +47,6 @@ class AdminPage extends React.Component {
             </ExpansionPanelSummary>
             <ItemAdmin />
         </ExpansionPanel>
-
-        {/* <Tabs
-          value={this.state.value}
-          onChange={this.handleChange}
-          indicatorColor="primary"
-          textColor="primary"
-          centered
-        >
-          <Tab value="store" label="Store" />
-          <Tab value="category" label="Category" />
-          <Tab value="item" label="Item" />
-        </Tabs>
-        {this.state.value === 'store' && <TabContainer><StoreAdminPage/></TabContainer>}
-        {this.state.value === 'category' && <TabContainer>Item Two</TabContainer>}
-        {this.state.value === 'item' && <TabContainer>Item Three</TabContainer>} */}
       </Wrapper>
     );
   }

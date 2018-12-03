@@ -8,13 +8,11 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { confirmAlert } from 'react-confirm-alert';
 import '../../../node_modules/react-confirm-alert/src/react-confirm-alert.css'
-// import StoreCategoryAdmin from './StoreCategoryOrder';
 
 class CategoryList extends Component {
 
   handleItemClick = id => () => {
     console.log('select category', id);
-    // <StoreCategoryAdmin />
   };
 
   // handle Delete click
@@ -44,7 +42,7 @@ class CategoryList extends Component {
       <List>
       {this.props.category.map(category => (
           <ListItem key={category.id} divider={true} dense={false}
-            button onClick={this.handleItemClick(category.id)} >
+            button >
           <ListItemText>
               {category.name}
           </ListItemText>

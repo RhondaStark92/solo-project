@@ -2,16 +2,12 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 
 const Wrapper = styled.section`
   text-align: center;
 `;
-
-// const Selector = styled.div`
-//   text-align: center;`
 
 class AboutPage extends Component {
 
@@ -54,7 +50,6 @@ class AboutPage extends Component {
       </Wrapper>
     )}
 }
-
 
 // this allows us to use <App /> in index.js
 export default (AboutPage);

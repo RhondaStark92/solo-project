@@ -4,14 +4,9 @@ import CategoryAdminForm from './CategoryAdminForm';
 import CategoryList from './CategoryList';
 import styled from 'styled-components';
 
-const Wrapper = styled.section`
-  // padding: 2em;
-  // margin-left: 25%;
-  // margin-right: 25%;
-`;
-
 class CategoryAdminPage extends Component {
 
+  // dispatch to get all categories
   componentDidMount () {
     this.props.dispatch({type: 'FETCH_CATEGORY'})
   }
@@ -19,14 +14,14 @@ class CategoryAdminPage extends Component {
   render() {
 
     return (
-      <Wrapper>
+      <div>
           <CategoryAdminForm />
           <CategoryList />
-      </Wrapper>
+      </div>
     )}
 }
 
-// Instead of taking everything from state, we just want the store info.
+// Instead of taking everything from state, we just want the category info.
 // if you wanted you could write this code like this:
 // const mapStateToProps = ({user}) => ({ user });
 const mapStateToProps = state => ({

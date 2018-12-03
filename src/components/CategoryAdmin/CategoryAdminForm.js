@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import AddCircleButton from '@material-ui/icons/AddCircle';
 import { withStyles } from '@material-ui/core/styles';
@@ -27,10 +26,6 @@ const styles = theme => ({
 
 const Wrapper = styled.section`
   // padding: 2em;
-  text-align: center;
-`;
-
-const Title = styled.h3`
   text-align: center;
 `;
 
@@ -65,12 +60,10 @@ class CategoryAdminForm extends Component {
     }
   };
 
-  // add a new store only if valid name
+  // add a new category only if valid name
   addNewCategory = event => {
       event.preventDefault();
       if (this.validCategoryData()) {
-        // console.log('category data', this.state.newCategory);
-        
         this.props.dispatch({ type: 'ADD_CATEGORY', payload: this.state.newCategory });
         this.setState({
             newCategory: emptyCategoryObject
@@ -81,7 +74,6 @@ class CategoryAdminForm extends Component {
   render() {
     return (
       <Wrapper>
-        {/* <Title>Add Category</Title> */}
         <TextField
           name="name"
           id="outlined-name"
@@ -96,9 +88,7 @@ class CategoryAdminForm extends Component {
               aria-label="Add">
               <AddCircleButton fontSize="large"/>
             </IconButton>
- 
-          {/* <Button onClick={this.addNewCategory} type='submit' value='Add New Category'>Add</Button> */}
-        </div>
+         </div>
       </Wrapper>
     ); // end return
   } // end render
