@@ -37,7 +37,7 @@ class AboutPage extends Component {
             </ListItem>
             <ListItem key='4' divider={true} dense={true}>
               <ListItemText>
-                  Postgreql
+                  PostgreSQL
               </ListItemText>
             </ListItem>
             <ListItem key='5' divider={true} dense={true}>

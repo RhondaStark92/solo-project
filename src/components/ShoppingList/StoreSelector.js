@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 
 class StoreSelector extends Component {
@@ -26,26 +25,27 @@ class StoreSelector extends Component {
 
   render(){
     return (
-      <FormControl>
-        {/* <InputLabel
-            htmlFor="outlined-age-simple"
-          >
-          Store
-          </InputLabel> */}
+      <FormControl fullWidth={true}>
         <Select fullWidth={true}
           value={this.props.store_id}
-          displayEmpty
-          variant="filled"
-          placeholder="Select Store"
+          // displayEmpty
+          // variant="filled"
+          // placeholder="Select Store"
           name="store_id"
           onChange={this.props.handleChange}
-          input={
-            <OutlinedInput
-              labelwidth="300"
-              name="age"
-            />
-          }
+          // input={
+          //   <OutlinedInput
+          //     labelwidth="300"
+          //     name="age"
+          //   />
+          // }
         >
+        <MenuItem
+          key='1a'
+          value='0'>
+          Select your Store
+        </MenuItem>
+
           {this.renderStoreOptions()}
         </Select>
       </FormControl>

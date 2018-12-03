@@ -3,7 +3,9 @@ footer {
     padding-bottom: 10px;
     padding-top: 10px;
     text-align: center;
+    text-transform: uppercase;
     width: 100%;
+    font-size: 12px;
     color: grey;
-    /* background-color: lightgray; */
+    font-family: 'Open Sans';
 }

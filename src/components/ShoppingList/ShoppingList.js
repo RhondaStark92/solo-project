@@ -35,15 +35,12 @@ class ShoppingList extends Component {
 
   getListForStore = () => {
     this.props.dispatch({type: 'FETCH_LIST', payload: this.state.id})
-    // console.log('in shopping list did mount', this.props.list);    
-    // this.props.dispatch({ type: 'FETCH_STORES'})
-    console.log('AFTER the store list', this.state.id);
   }
 
   render() {
     return (
       <Wrapper>
-          <Typography variant="h4">Let's Shop!</Typography>
+          <Typography variant="h4">Shopping List</Typography>
           <div>
             <StoreSelector store_id={this.state.id} 
               handleChange={this.handleChange}/>
