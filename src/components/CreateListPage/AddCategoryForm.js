@@ -108,7 +108,7 @@ class AddCategoryForm extends Component {
               autoFocus
               margin="dense"
               name="name"
-              label="Category"
+              // label="Category"
               value={this.state.newCategory.name}
               fullWidth
               onChange={this.handleChange}
