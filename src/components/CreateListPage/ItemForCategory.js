@@ -5,7 +5,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import Checkbox from '@material-ui/core/Checkbox';
-import RemoveShoppingCart from '@material-ui/icons/RemoveShoppingCart';
+import RemoveCircle from '@material-ui/icons/RemoveCircle';
 import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
 import { withStyles } from '@material-ui/core/styles';
@@ -73,7 +73,7 @@ class ItemForCategory extends Component {
         <ListItemSecondaryAction>
             <IconButton onClick={this.handleDeleteClick(this.props.itemForCat.list_id)} 
               aria-label="Delete">
-              <RemoveShoppingCart />
+              <RemoveCircle />
             </IconButton>
         </ListItemSecondaryAction>
       </ListItem>
