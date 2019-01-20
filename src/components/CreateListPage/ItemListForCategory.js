@@ -21,7 +21,7 @@ class ItemListForCategory extends Component {
       <ExpansionPanelDetails>
         <List>
             {this.props.itemsForCategory.map(itemForCat => (
-              <ItemForCategory itemForCat={itemForCat} />
+              <ItemForCategory key={itemForCat.id} itemForCat={itemForCat} />
             ))}
         </List>
       </ExpansionPanelDetails>
