@@ -1,14 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import ItemListForCategory from './ItemListForCategory';
-import styled from 'styled-components';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Typography from '@material-ui/core/Typography';
-
-// const CategoryTitle = styled.p`
-// `;
 
 class CategoryList extends Component {
 
@@ -27,9 +23,7 @@ class CategoryList extends Component {
     )}
 }
 
-// Instead of taking everything from state, we just want the list info.
-// if you wanted you could write this code like this:
-// const mapStateToProps = ({user}) => ({ user });
+// Instead of taking everything from state, we just want the item info.
 const mapStateToProps = state => ({
   item: state.item,
 });

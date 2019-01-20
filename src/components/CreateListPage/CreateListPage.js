@@ -1,19 +1,9 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import CategoryList from './CategoryList';
 import Typography from '@material-ui/core/Typography';
-import styled from 'styled-components';
-
-const Wrapper = styled.section`
-  // padding: 4em;
-  // margin-left: 25%;
-  // margin-right: 25%;
-`;
-
-// const Title = styled.h1`
-//   text-transform: uppercase;  
-//   text-align: center;
-// `;
+import Grid from '@material-ui/core/Grid';
+import AddCategoryForm from './AddCategoryForm';
 
 class CreateListPage extends Component {
 
@@ -24,14 +14,13 @@ class CreateListPage extends Component {
 
   render() {
     return (
-      <Wrapper>
-          <Typography variant="h4">Add to List</Typography>
-            {/* <List> */}
-              {this.props.category.map(cat => (
-                <CategoryList key={cat.id} category={cat}/>
-              ))}
-            {/* </List> */}
-      </Wrapper>
+      <div>
+          <Typography variant="h4">CATEGORIES</Typography>
+          <AddCategoryForm />
+          {this.props.category.map(cat => (
+            <CategoryList key={cat.id} category={cat}/>
+          ))}
+      </div>
     )}
 }
 
