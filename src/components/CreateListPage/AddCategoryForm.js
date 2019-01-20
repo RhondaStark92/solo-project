@@ -37,6 +37,7 @@ const emptyCategoryObject = {
 }
 
 class AddCategoryForm extends Component {
+  // const { classes } = props;
 
   state = {
     open: false,
@@ -88,7 +89,7 @@ class AddCategoryForm extends Component {
 
   render() {
     return (
-      <Grid item alignItems="center">
+      <div>
       {/* <Grid item alignItems="center"> */}
         <IconButton color="primary" onClick={this.handleClickOpen} 
           aria-label="Add">
@@ -123,7 +124,7 @@ class AddCategoryForm extends Component {
             </Button>
           </DialogActions>
         </Dialog>
-      </Grid>
+      </div>
     ); // end return
   } // end render
 } // end AdminForm class

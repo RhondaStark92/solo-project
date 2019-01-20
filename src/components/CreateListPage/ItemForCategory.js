@@ -63,13 +63,13 @@ class ItemForCategory extends Component {
               tabIndex={-1}
               disableRipple
             />
-        <Typography variant='body1'>
+        {/* <Typography variant='body1'> */}
         <Badge color="primary" badgeContent={this.props.itemForCat.quantity} invisible={!itemOnList} >              
           <ListItemText>
               {this.props.itemForCat.item}
           </ListItemText>
           </Badge>
-        </Typography>
+        {/* </Typography> */}
         <ListItemSecondaryAction>
             <IconButton onClick={this.handleDeleteClick(this.props.itemForCat.list_id)} 
               aria-label="Delete">
