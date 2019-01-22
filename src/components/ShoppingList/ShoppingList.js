@@ -24,10 +24,12 @@ class ShoppingList extends Component {
   };
 
   handleClearList = (event) => {
-    this.props.dispatch({type: 'CLEAR_LIST'});
-    this.props.dispatch({type: 'FETCH_LIST', payload: this.state.id});
+    this.props.dispatch({type: 'CLEAR_LIST', payload: {store_id: this.state.id}});
   };
 
+  handleRemoveClick = item => () => {
+    this.props.dispatch({ type: 'DELETE_LIST_ITEM', payload: {id: item, store_id: this.state.id}});
+  };
 
   componentDidMount () {
     this.getListForStore();
@@ -47,7 +49,8 @@ class ShoppingList extends Component {
           </div>
           <List>
             {this.props.list.map(item => (
-              <ShoppingListItem key={item.id} item={item} store_id={this.state.id} />
+              <ShoppingListItem key={item.id} item={item} store_id={this.state.id}
+                  handleRemoveClick={this.handleRemoveClick} />
             ))}
           </List>
           <div>
