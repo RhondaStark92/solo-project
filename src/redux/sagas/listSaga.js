@@ -77,6 +77,23 @@ function* deleteListItem(action) {
   } 
 }
 
+// worker SAGA: will be fired on 'DELETE_LIST_ITEM' actions
+function* deleteItemFromList(action) {
+  try {
+    // console.log('before delete shopping list item', action.payload)
+    //axios call to remove selected item from shopping list
+    yield call(axios.delete, '/api/list', {params: {id: action.payload.id}});
+    // will need to make a call to update the list of items
+    // yield put( { type: 'FETCH_ITEMS_FOR_LIST' } );
+    // console.log('before fetch shopping list after delete', action.payload)
+    yield put( { type: 'FETCH_ITEMS_FOR_LIST', payload: action.payload.store_id} );
+  }
+  catch (error) {
+    console.log('error with delete request to /api/list');
+    
+  } 
+}
+
 // worker SAGA: will be fired on 'ADD_ITEM_TO_LIST' actions
 function* addItemToList(action) {
   try {
@@ -95,6 +112,7 @@ function* listSaga() {
   yield takeLatest('CLEAR_LIST', clearList);
   yield takeLatest('FOUND_ITEM', foundItem);
   yield takeLatest('DELETE_LIST_ITEM', deleteListItem);
+  yield takeLatest('DELETE_ITEM_FROM_LIST', deleteItemFromList);
   yield takeLatest('ADD_ITEM_TO_LIST', addItemToList);
   yield takeLatest('UPDATE_QUANTITY', updateQuantity);
 }

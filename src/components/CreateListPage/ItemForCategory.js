@@ -47,7 +47,7 @@ class ItemForCategory extends Component {
   handleRemoveClick = item => () => {
     if (item != null) {
       // console.log('delete item', item);
-      this.props.dispatch({ type: 'DELETE_LIST_ITEM', payload: item});
+      this.props.dispatch({ type: 'DELETE_ITEM_FROM_LIST', payload: {id: item, store_id: 0}});
     }
   };
 
