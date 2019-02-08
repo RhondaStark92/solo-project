@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
-// import Typography from '@material-ui/core/Typography';
 import Checkbox from '@material-ui/core/Checkbox';
 import DeleteForever from '@material-ui/icons/DeleteForever';
 import RemoveCircle from '@material-ui/icons/RemoveCircle';
@@ -20,7 +19,6 @@ const styles = theme => ({
   ExpansionPanelDetails: {
     padding: 0,
   }
-
 });
 
 const emptyListItem = {
@@ -51,35 +49,27 @@ class ItemForCategory extends Component {
     }
   };
 
-  // handleDeleteClick = item => () => {
-  //   // if (item != null) {
-  //     console.log('delete item', item);
-  //     // this.props.dispatch({ type: 'DELETE_LIST_ITEM', payload: item});
-  //   // }
-  // };
-
   // handle Delete click
-  // handleDeleteClick = id => () => {
-  //   // confirm the deletion 
-  //   console.log('in delete click', id)
-  //   confirmAlert({
-  //     title: 'Confirm to delete',
-  //     message: 'Are you sure? This is permanent and will remove all items in the grocery list.',
-  //     buttons: [
-  //       {
-  //         label: 'Delete',
-  //         onClick: () => {
-  //           this.props.dispatch({ type: 'DELETE_ITEM', payload: id});
-  //           this.props.dispatch({type: 'FETCH_ITEMS_FOR_LIST'});
-  //         }
-  //       },
-  //       {
-  //         label: 'Cancel',
-  //         onClick: () => console.log('cancelled delete do nothing.')
-  //       }
-  //     ]
-  //   })// end confirmAlert
-  // }; // end handleClick
+  handleDeleteClick = id => () => {
+    // confirm the deletion 
+    console.log('in delete click', id)
+    confirmAlert({
+      title: 'Confirm to delete',
+      message: 'Are you sure you want to delete this item?',
+      buttons: [
+        {
+          label: 'Delete',
+          onClick: () => {
+            this.props.dispatch({ type: 'DELETE_ITEM', payload: id});
+          }
+        },
+        {
+          label: 'Cancel',
+          onClick: () => console.log('cancelled delete do nothing.')
+        }
+      ]
+    })// end confirmAlert
+  }; // end handleClick
 
   render() {
 
@@ -96,19 +86,16 @@ class ItemForCategory extends Component {
               tabIndex={-1}
               disableRipple
             />
-        {/* <Typography variant='body1'> */}
         <Badge color="primary" badgeContent={this.props.itemForCat.quantity} invisible={!itemOnList} >              
           <ListItemText>
               {this.props.itemForCat.item}
           </ListItemText>
           </Badge>
-        {/* </Typography> */}
         <ListItemSecondaryAction>
-            {/* <IconButton onClick={this.handleDeleteClick(this.props.itemForCat.list_id)} 
+            <IconButton onClick={this.handleDeleteClick(this.props.itemForCat.item_id)} 
               aria-label="Delete">
               <DeleteForever />
-            </IconButton> */}
-
+            </IconButton>
             <IconButton onClick={this.handleRemoveClick(this.props.itemForCat.list_id)} 
               aria-label="Remove">
               <RemoveCircle />

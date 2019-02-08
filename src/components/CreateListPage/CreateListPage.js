@@ -2,7 +2,6 @@ import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import CategoryList from './CategoryList';
 import Typography from '@material-ui/core/Typography';
-// import Grid from '@material-ui/core/Grid';
 import AddCategoryForm from './AddCategoryForm';
 
 class CreateListPage extends Component {
@@ -15,7 +14,7 @@ class CreateListPage extends Component {
   render() {
     return (
       <div>
-          <Typography variant="h4">CATEGORIES</Typography>
+          <Typography variant="h4">Create List</Typography>
           <AddCategoryForm />
           {this.props.category.map(cat => (
             <CategoryList key={cat.id} category={cat}/>

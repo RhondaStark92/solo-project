@@ -14,7 +14,7 @@ const Wrapper = styled.section`
 
 class AdminPage extends React.Component {
   state = {
-    expanded: null,
+    expanded: 'store',
   };
 
   handleChange = panel => (event, expanded) => {
@@ -28,14 +28,14 @@ class AdminPage extends React.Component {
 
     return (
       <Wrapper>
-        <Typography variant="h4">Admin</Typography>
+        <Typography variant="h4">Stores</Typography>
         <ExpansionPanel key='store' expanded={expanded === 'store'} onChange={this.handleChange('store')}>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography variant="h6">Store</Typography>
+              {/* <Typography variant="h6">Store</Typography> */}
             </ExpansionPanelSummary>
             <StoreAdminPage />
         </ExpansionPanel>
-        <ExpansionPanel key='category'expanded={expanded === 'category'} onChange={this.handleChange('category')}>
+        {/* <ExpansionPanel key='category'expanded={expanded === 'category'} onChange={this.handleChange('category')}>
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
               <Typography variant="h6">Category</Typography>
             </ExpansionPanelSummary>
@@ -46,7 +46,7 @@ class AdminPage extends React.Component {
               <Typography variant="h6">Item</Typography>
             </ExpansionPanelSummary>
             <ItemAdmin />
-        </ExpansionPanel>
+        </ExpansionPanel> */}
       </Wrapper>
     );
   }

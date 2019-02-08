@@ -42,7 +42,7 @@ class ShoppingList extends Component {
   render() {
     return (
       <Wrapper>
-          <Typography variant="h4">Shopping List</Typography>
+          <Typography variant="h4">Let's Shop!</Typography>
           <div>
             <StoreSelector store_id={this.state.id} 
               handleChange={this.handleChange}/>

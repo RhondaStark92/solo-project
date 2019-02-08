@@ -8,7 +8,7 @@ function* addItem(action) {
       // axios asynch call to add item on database
       yield call(axios.post, '/api/item', action.payload);
       // will need to make a call to update the list of item
-      yield put( { type: 'FETCH_ITEMS' } );
+      yield put( { type: 'FETCH_ITEMS_FOR_LIST' } );
   }
   catch (error) {
       console.log('error with add item post request');
@@ -50,7 +50,7 @@ function* deleteItem(action) {
     //axios call to remove selected category
     yield call(axios.delete, '/api/item', {params: {id: action.payload}});
     // will need to make a call to update the list of catgories
-    yield put( { type: 'FETCH_ITEMS' } );
+    yield put( { type: 'FETCH_ITEMS_FOR_LIST' } );
   }
   catch (error) {
     console.log('error with delete request to /api/item');

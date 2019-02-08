@@ -9,6 +9,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Typography from '@material-ui/core/Typography';
+import AddItemForm from './AddItemForm';
 import { confirmAlert } from 'react-confirm-alert';
 import '../../../node_modules/react-confirm-alert/src/react-confirm-alert.css'
 
@@ -62,9 +63,10 @@ class CategoryList extends Component {
             : ''
           }
           <ExpansionPanelActions>
-            <IconButton color="primary" aria-label="Add Item">
+            <AddItemForm category_name={this.props.category.name} category_id = {this.props.category.id}/>
+            {/* <IconButton color="primary" aria-label="Add Item">
               <AddCircleIcon />
-            </IconButton>
+            </IconButton> */}
             <IconButton onClick={this.handleDeleteClick(this.props.category.id)} color="primary" aria-label="Delete">
               <DeleteIcon />
             </IconButton>
