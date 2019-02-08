@@ -21,32 +21,21 @@ class ShoppingListItem extends Component {
   render() {
     let item = this.props.item;
     let itemText = '';
-    if (isNull(item.brand_name)) {
-      itemText = `${item.quantity} - ${item.item}`;
-    } else {
-      itemText = `${item.quantity} - ${item.item}`;
-    }
+    itemText = `${item.quantity} - ${item.item}`;
     if (item.found) {
-      itemText = <Typography variant='body1' style={{ textDecoration: 'line-through' }}>{itemText} {isNull(item.brand_name) ? '' : <Chip color="primary" label={item.brand_name} />}</Typography>;
+      itemText = <Typography variant='body1' style={{ textDecoration: 'line-through' }}>{itemText}
+        {isNull(item.brand_name) ? '' : <Chip color="primary" label={item.brand_name} />}</Typography>;
     } else {
-      itemText = <Typography variant='body1'>{itemText} {isNull(item.brand_name) ? '' : <Chip color="primary" label={item.brand_name} />}</Typography>;
+      itemText = <Typography variant='body1'>{itemText} {isNull(item.brand_name) ? '' : 
+        <Chip color="primary" label={item.brand_name} />}</Typography>;
     }
 
     return (
       <ListItem key={item.id} divider={true} 
                 role={undefined} button onClick={this.handleToggle(item)}>
-            {/* <Typography> */}
-
-            {/* <Badge color="primary" badgeContent={item.quantity} >              
-          <ListItemText>
-              {itemText}
-          </ListItemText>
-          </Badge> */}
-          {/* {props.user.id ? `Let's Shop!` : 'Login / Register'} */}
             <ListItemText>
             {itemText}
           </ListItemText>
-            {/* </Typography> */}
           <ListItemSecondaryAction>
             <IconButton onClick={this.props.handleRemoveClick(item.id)} 
               aria-label="Remove">
