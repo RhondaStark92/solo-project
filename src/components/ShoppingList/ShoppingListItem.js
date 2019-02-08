@@ -4,18 +4,11 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
-import RemoveCircle from '@material-ui/icons/RemoveCircle';
+import Chip from '@material-ui/core/Chip';
 import Cancel from'@material-ui/icons/Cancel';
 import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
-// import styled from 'styled-components';
 import { isNull } from 'util';
 import Typography from '@material-ui/core/Typography';
-
-
-// const FoundItem = styled.p`
-//   font-style: oblique
-// `;
 
 class ShoppingListItem extends Component {
 
@@ -25,25 +18,18 @@ class ShoppingListItem extends Component {
       this.props.dispatch({ type: 'FOUND_ITEM', payload: {item: item, store_id: this.props.store_id}})
   };
 
-  // handleRemoveClick = item => () => {
-  //   // if (item != null) {
-  //     console.log('remove item from list', item);
-  //     this.props.dispatch({ type: 'DELETE_LIST_ITEM', payload: item});
-  //   // }
-  // };
-
   render() {
     let item = this.props.item;
     let itemText = '';
     if (isNull(item.brand_name)) {
       itemText = `${item.quantity} - ${item.item}`;
     } else {
-      itemText = `${item.quantity} - ${item.item} - ${item.brand_name}`;
+      itemText = `${item.quantity} - ${item.item}`;
     }
     if (item.found) {
-      itemText = <Typography variant='body1' style={{ textDecoration: 'line-through' }}>{itemText}</Typography>;
+      itemText = <Typography variant='body1' style={{ textDecoration: 'line-through' }}>{itemText} {isNull(item.brand_name) ? '' : <Chip color="primary" label={item.brand_name} />}</Typography>;
     } else {
-      itemText = <Typography variant='body1'>{itemText}</Typography>;
+      itemText = <Typography variant='body1'>{itemText} {isNull(item.brand_name) ? '' : <Chip color="primary" label={item.brand_name} />}</Typography>;
     }
 
     return (
@@ -56,7 +42,7 @@ class ShoppingListItem extends Component {
               {itemText}
           </ListItemText>
           </Badge> */}
-
+          {/* {props.user.id ? `Let's Shop!` : 'Login / Register'} */}
             <ListItemText>
             {itemText}
           </ListItemText>

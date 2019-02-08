@@ -58,7 +58,7 @@ class CategoryList extends Component {
             <Typography variant='body1'>{this.props.category.name}</Typography>
           </ExpansionPanelSummary>
           {
-            (listForCat.length != 0) ? 
+            (listForCat.length !== 0) ? 
             <ItemListForCategory itemsForCategory={listForCat} /> 
             : ''
           }
