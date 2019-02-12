@@ -2,19 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import StoreAdminForm from './StoreAdminForm';
 import StoreList from './StoreList';
-import styled from 'styled-components';
-import Paper from '@material-ui/core/Paper';
-
-const Wrapper = styled.section`
-  // padding: 2em;
-  // margin-left: 25%;
-  // margin-right: 25%;
-`;
-
-const Title = styled.h1`
-  padding: 15px;
-  text-align: center;
-`;
 
 class StoreAdminPage extends Component {
 
@@ -25,10 +12,10 @@ class StoreAdminPage extends Component {
   render() {
 
     return (
-      <Wrapper>
-          <StoreAdminForm />
+      <div>
+          {/* <StoreAdminForm /> */}
           <StoreList />
-      </Wrapper>
+      </div>
     )}
 }
 

@@ -18,7 +18,7 @@ import AboutPage from '../AboutPage/AboutPage';
 import InfoPage from '../InfoPage/InfoPage';
 import ShoppingList from '../ShoppingList/ShoppingList';
 import CreateListPage from '../CreateListPage/CreateListPage';
-import AdminPage from '../AdminPage/AdminPage';
+// import StoreAdminPage from '../StoreAdminPage/StoreAdminPage';
 
 import { createMuiTheme } from '@material-ui/core/styles';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
@@ -26,6 +26,7 @@ import './App.css';
 import { Typography } from '@material-ui/core';
 import 'typeface-roboto';
 import 'typeface-open-sans';
+import StoreAdminPage from '../StoreAdminPage/StoreAdminPage';
 
 
 const theme = createMuiTheme({
@@ -88,11 +89,11 @@ class App extends Component {
             Visiting localhost:3000/home will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.
             Even though it seems like they are different pages, the user is always on localhost:3000/home */}
-            <ProtectedRoute
+            {/* <ProtectedRoute
               exact
               path="/home"
               component={ShoppingList}
-            />
+            /> */}
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/home will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.
@@ -108,8 +109,8 @@ class App extends Component {
             Even though it seems like they are different pages, the user is always on localhost:3000/home */}
             <ProtectedRoute
               exact
-              path="/admin"
-              component={AdminPage}
+              path="/stores"
+              component={StoreAdminPage}
             />
 
             {/* This works the same as the other protected route, except that if the user is logged in,

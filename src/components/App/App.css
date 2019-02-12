@@ -26,15 +26,6 @@ li {
     font-family: 'Open Sans';
 }
 
-form {
-    /* background-color: #dbd5d5; */
-    /* width: 30%;
-    height: 250px;
-    margin: 20px auto;
-    padding: 25px;
-    border-radius: 2px; */
-}
-
 input {
     margin: 5px;
     margin-bottom: 10px;
@@ -64,6 +55,13 @@ input {
     padding:0;
     font: inherit;
     outline:0;
-    /* border-bottom:1px solid #444;  */
     cursor: pointer;
 }
+
+.sortableHelper {
+    z-index: 9999 !important;
+    font: inherit !important;
+    font-family: 'Open Sans' !important;
+    font-size: 18px !important;
+    font-weight: 400 !important;
+ }
