@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -37,7 +37,6 @@ const emptyCategoryObject = {
 }
 
 class AddCategoryForm extends Component {
-  // const { classes } = props;
 
   state = {
     open: false,
@@ -49,7 +48,6 @@ class AddCategoryForm extends Component {
 
   componentDidMount ()
   {
-    console.log('on did mount', this.props.category.name)
     this.setState({
       ...this.state,
       newCategory: {
@@ -61,7 +59,6 @@ class AddCategoryForm extends Component {
 
   // update state from inputs
   handleChange = event => {
-      // console.log('event happened', event, this.state);
       this.setState({
         ...this.state,
         newCategory: {
@@ -141,9 +138,6 @@ class AddCategoryForm extends Component {
         >
           <DialogTitle id="form-dialog-title">{this.props.title} Category</DialogTitle>
           <DialogContent>
-            {/* <DialogContentText>
-              Enter the new category name.
-            </DialogContentText> */}
             <TextField
               autoFocus
               margin="dense"

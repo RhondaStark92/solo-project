@@ -6,12 +6,11 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
 import IconButton from '@material-ui/core/IconButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Typography from '@material-ui/core/Typography';
 import Tooltip from '@material-ui/core/Tooltip';
 import AddItemForm from './AddItemForm';
-import AddCategoryForm from './AddCategoryForm';
+import AddCategoryForm from './CategoryForm';
 import { confirmAlert } from 'react-confirm-alert';
 import '../../../node_modules/react-confirm-alert/src/react-confirm-alert.css'
 
@@ -31,7 +30,6 @@ class CategoryList extends Component {
   // handle Delete click
   handleDeleteClick = id => () => {
     // confirm the deletion 
-    console.log('in delete click', id)
     confirmAlert({
       title: 'Confirm to delete',
       message: 'Are you sure? This is permanent and will remove all items in the category.',
@@ -50,6 +48,7 @@ class CategoryList extends Component {
   
   render() {
     const { expanded } = this.state;
+    
     // Filter the items for the current category
     const listForCat = this.props.item.filter(cat => cat.category_id === this.props.category.id);
     

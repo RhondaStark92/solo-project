@@ -36,6 +36,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         });
 });
 
+// UPDATE ROUTER FOR CATEGORY
 router.put('/', rejectUnauthenticated, (req, res) => {
     const queryText = 'UPDATE category SET name=$2 WHERE id=$1';
     pool.query(queryText, [req.body.id, req.body.name])

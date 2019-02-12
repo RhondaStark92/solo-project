@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import CategoryList from './CategoryList';
 import Typography from '@material-ui/core/Typography';
-import AddCategoryForm from './AddCategoryForm';
+import AddCategoryForm from './CategoryForm';
 
 class CreateListPage extends Component {
 
