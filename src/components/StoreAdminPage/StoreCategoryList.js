@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import {SortableContainer, SortableElement} from 'react-sortable-hoc';
-import List from '@material-ui/core/List';
+// import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 
 const SortableItem = SortableElement(({value}) =>
@@ -36,7 +36,7 @@ class StoreCategoryList extends Component {
     render() {
         return (
             <Fragment>
-                <SortableList items={this.props.storeCategory} 
+                <SortableList helperClass='sortableHelper' items={this.props.storeCategory} 
                                     onSortEnd={this.onSortEnd}/>
             </Fragment>
         );
