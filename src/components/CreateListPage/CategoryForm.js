@@ -1,16 +1,16 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import AddCircleButton from '@material-ui/icons/AddCircle';
+import EditButton from '@material-ui/icons/Edit';
 import { withStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const styles = theme => ({
   container: {
@@ -33,20 +33,32 @@ const styles = theme => ({
 
 const emptyCategoryObject = {
   name: '',
-  person_id: 0,
+  id: 0,
 }
 
 class AddCategoryForm extends Component {
-  // const { classes } = props;
 
   state = {
     open: false,
-    newCategory: emptyCategoryObject
-  };
+    newCategory: {
+      name: '',
+      id: 0,
+    }
+  }
+
+  componentDidMount ()
+  {
+    this.setState({
+      ...this.state,
+      newCategory: {
+        name: this.props.category_name,
+        id: this.props.category_id,
+      }
+    });
+  }
 
   // update state from inputs
   handleChange = event => {
-      // console.log('event happened', event, this.state);
       this.setState({
         ...this.state,
         newCategory: {
@@ -87,24 +99,45 @@ class AddCategoryForm extends Component {
       }
   }
 
+  // update category name
+  updateCategory = event => {
+    event.preventDefault();
+    console.log('in update category');
+    if (this.validCategoryData()) {
+      this.props.dispatch({ type: 'UPDATE_CATEGORY', payload: this.state.newCategory });
+      this.setState({
+        open: false,
+        newCategory: emptyCategoryObject
+      });
+    }
+}  
+
   render() {
     return (
       <div>
-      {/* <Grid item alignItems="center"> */}
+      {
+        this.props.status ?
+        (<Tooltip title="New Category" placement="right" aria-label="New Category">
+          <IconButton color="primary" onClick={this.handleClickOpen} 
+            aria-label="Add">
+            <AddCircleButton fontSize="large"/>
+          </IconButton>
+        </Tooltip>)
+        :
+        (<Tooltip title="Update Category" placement="top" aria-label="Update Category">
         <IconButton color="primary" onClick={this.handleClickOpen} 
-          aria-label="Add">
-          <AddCircleButton fontSize="large"/>
+          aria-label="Update">
+          <EditButton/>
         </IconButton>
+      </Tooltip>)
+      }
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">New Category</DialogTitle>
+          <DialogTitle id="form-dialog-title">{this.props.title} Category</DialogTitle>
           <DialogContent>
-            {/* <DialogContentText>
-              Enter the new category name.
-            </DialogContentText> */}
             <TextField
               autoFocus
               margin="dense"
@@ -119,9 +152,16 @@ class AddCategoryForm extends Component {
             <Button onClick={this.handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.addNewCategory} color="primary">
-              Add Category
-            </Button>
+            {
+              this.props.status ? 
+                (<Button onClick={this.addNewCategory} color="primary">
+                  Add
+                </Button>)
+              : 
+                (<Button onClick={this.updateCategory} color="primary">
+                  Update
+              </Button>)
+            }
           </DialogActions>
         </Dialog>
       </div>

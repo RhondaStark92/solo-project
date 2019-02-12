@@ -6,10 +6,11 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
 import IconButton from '@material-ui/core/IconButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Typography from '@material-ui/core/Typography';
+import Tooltip from '@material-ui/core/Tooltip';
 import AddItemForm from './AddItemForm';
+import AddCategoryForm from './CategoryForm';
 import { confirmAlert } from 'react-confirm-alert';
 import '../../../node_modules/react-confirm-alert/src/react-confirm-alert.css'
 
@@ -29,7 +30,6 @@ class CategoryList extends Component {
   // handle Delete click
   handleDeleteClick = id => () => {
     // confirm the deletion 
-    console.log('in delete click', id)
     confirmAlert({
       title: 'Confirm to delete',
       message: 'Are you sure? This is permanent and will remove all items in the category.',
@@ -48,6 +48,7 @@ class CategoryList extends Component {
   
   render() {
     const { expanded } = this.state;
+    
     // Filter the items for the current category
     const listForCat = this.props.item.filter(cat => cat.category_id === this.props.category.id);
     
@@ -64,12 +65,12 @@ class CategoryList extends Component {
           }
           <ExpansionPanelActions>
             <AddItemForm category_name={this.props.category.name} category_id = {this.props.category.id}/>
-            {/* <IconButton color="primary" aria-label="Add Item">
-              <AddCircleIcon />
-            </IconButton> */}
-            <IconButton onClick={this.handleDeleteClick(this.props.category.id)} color="primary" aria-label="Delete">
-              <DeleteIcon />
-            </IconButton>
+            <AddCategoryForm status={false} title='Update' category_name={this.props.category.name} category_id = {this.props.category.id}/>
+            <Tooltip title="Delete Category" placement="top" aria-label="Delete Category">
+              <IconButton onClick={this.handleDeleteClick(this.props.category.id)} color="primary" aria-label="Delete">
+                <DeleteIcon />
+              </IconButton>
+            </Tooltip>
         </ExpansionPanelActions>
       </ExpansionPanel>
     )}
