@@ -45,6 +45,20 @@ function* deleteCategory(action) {
   } 
 }
 
+// worker SAGA: will be fired on 'UPDATE_CATEGORY' actions
+function* updateCategory(action) {
+  console.log('in updateCategory saga', action.payload)
+  try {
+      // axios asynch call to add category on database
+      yield call(axios.put, '/api/category', action.payload);
+      // will need to make a call to update the list of category
+      yield put( { type: 'FETCH_CATEGORY' } );
+  }
+  catch (error) {
+      console.log('error with update category post request');
+  }
+}
+
 // worker SAGA: will be fired on 'ADD_CATEGORY_FOR_USER' actions
 // new user created .. add the default categories
 // function* addCategoryForUser(action) {
@@ -63,6 +77,7 @@ function* categorySaga() {
   yield takeLatest('FETCH_CATEGORY', fetchCategory);
   yield takeLatest('ADD_CATEGORY', addCategory);
   yield takeLatest('DELETE_CATEGORY', deleteCategory);
+  yield takeLatest('UPDATE_CATEGORY', updateCategory);
   // yield takeLatest('ADD_CATEGORY_FOR_USER', addCategoryForUser);
 }
 

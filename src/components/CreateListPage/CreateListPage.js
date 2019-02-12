@@ -15,7 +15,7 @@ class CreateListPage extends Component {
     return (
       <div>
           <Typography variant="h4">Create List</Typography>
-          <AddCategoryForm />
+          <AddCategoryForm status={true} title='New' category_name='' category_id = {0} />
           {this.props.category.map(cat => (
             <CategoryList key={cat.id} category={cat}/>
           ))}

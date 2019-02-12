@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import AddCircleButton from '@material-ui/icons/AddCircle';
+import EditButton from '@material-ui/icons/Edit';
 import { withStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -32,7 +33,7 @@ const styles = theme => ({
 
 const emptyCategoryObject = {
   name: '',
-  person_id: 0,
+  id: 0,
 }
 
 class AddCategoryForm extends Component {
@@ -40,8 +41,23 @@ class AddCategoryForm extends Component {
 
   state = {
     open: false,
-    newCategory: emptyCategoryObject
-  };
+    newCategory: {
+      name: '',
+      id: 0,
+    }
+  }
+
+  componentDidMount ()
+  {
+    console.log('on did mount', this.props.category.name)
+    this.setState({
+      ...this.state,
+      newCategory: {
+        name: this.props.category_name,
+        id: this.props.category_id,
+      }
+    });
+  }
 
   // update state from inputs
   handleChange = event => {
@@ -86,22 +102,44 @@ class AddCategoryForm extends Component {
       }
   }
 
+  // update category name
+  updateCategory = event => {
+    event.preventDefault();
+    console.log('in update category');
+    if (this.validCategoryData()) {
+      this.props.dispatch({ type: 'UPDATE_CATEGORY', payload: this.state.newCategory });
+      this.setState({
+        open: false,
+        newCategory: emptyCategoryObject
+      });
+    }
+}  
+
   render() {
     return (
       <div>
-      {/* <Grid item alignItems="center"> */}
-        <Tooltip title="New Category" placement="right" aria-label="New Category">
+      {
+        this.props.status ?
+        (<Tooltip title="New Category" placement="right" aria-label="New Category">
           <IconButton color="primary" onClick={this.handleClickOpen} 
             aria-label="Add">
             <AddCircleButton fontSize="large"/>
           </IconButton>
-        </Tooltip>
+        </Tooltip>)
+        :
+        (<Tooltip title="Update Category" placement="top" aria-label="Update Category">
+        <IconButton color="primary" onClick={this.handleClickOpen} 
+          aria-label="Update">
+          <EditButton/>
+        </IconButton>
+      </Tooltip>)
+      }
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">New Category</DialogTitle>
+          <DialogTitle id="form-dialog-title">{this.props.title} Category</DialogTitle>
           <DialogContent>
             {/* <DialogContentText>
               Enter the new category name.
@@ -120,9 +158,16 @@ class AddCategoryForm extends Component {
             <Button onClick={this.handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.addNewCategory} color="primary">
-              Add Category
-            </Button>
+            {
+              this.props.status ? 
+                (<Button onClick={this.addNewCategory} color="primary">
+                  Add
+                </Button>)
+              : 
+                (<Button onClick={this.updateCategory} color="primary">
+                  Update
+              </Button>)
+            }
           </DialogActions>
         </Dialog>
       </div>
