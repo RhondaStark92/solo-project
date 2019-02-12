@@ -6,9 +6,10 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
 import IconButton from '@material-ui/core/IconButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
+import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Typography from '@material-ui/core/Typography';
+import Tooltip from '@material-ui/core/Tooltip';
 import AddItemForm from './AddItemForm';
 import { confirmAlert } from 'react-confirm-alert';
 import '../../../node_modules/react-confirm-alert/src/react-confirm-alert.css'
@@ -64,12 +65,16 @@ class CategoryList extends Component {
           }
           <ExpansionPanelActions>
             <AddItemForm category_name={this.props.category.name} category_id = {this.props.category.id}/>
-            {/* <IconButton color="primary" aria-label="Add Item">
-              <AddCircleIcon />
-            </IconButton> */}
-            <IconButton onClick={this.handleDeleteClick(this.props.category.id)} color="primary" aria-label="Delete">
-              <DeleteIcon />
-            </IconButton>
+            <Tooltip title="Edit Category" placement="top" aria-label="Edit Category">
+              <IconButton color="primary" aria-label="Edit Category">
+                <EditIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Delete Category" placement="top" aria-label="Delete Category">
+              <IconButton onClick={this.handleDeleteClick(this.props.category.id)} color="primary" aria-label="Delete">
+                <DeleteIcon />
+              </IconButton>
+            </Tooltip>
         </ExpansionPanelActions>
       </ExpansionPanel>
     )}

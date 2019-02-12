@@ -8,8 +8,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-// import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const styles = theme => ({
   container: {
@@ -94,10 +94,12 @@ class AddItemForm extends Component {
     return (
       <div>
       {/* <Grid item alignItems="center"> */}
-        <IconButton color="primary" onClick={this.handleClickOpen} 
-          aria-label="Add">
-          <AddCircleButton/>
-        </IconButton>
+        <Tooltip title="New Item" placement="top" aria-label="New Item">
+          <IconButton color="primary" onClick={this.handleClickOpen} 
+            aria-label="Add">
+            <AddCircleButton/>
+          </IconButton>
+        </Tooltip>
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}

@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import AddCircleButton from '@material-ui/icons/AddCircle';
@@ -9,8 +8,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const styles = theme => ({
   container: {
@@ -91,10 +90,12 @@ class AddCategoryForm extends Component {
     return (
       <div>
       {/* <Grid item alignItems="center"> */}
-        <IconButton color="primary" onClick={this.handleClickOpen} 
-          aria-label="Add">
-          <AddCircleButton fontSize="large"/>
-        </IconButton>
+        <Tooltip title="New Category" placement="right" aria-label="New Category">
+          <IconButton color="primary" onClick={this.handleClickOpen} 
+            aria-label="Add">
+            <AddCircleButton fontSize="large"/>
+          </IconButton>
+        </Tooltip>
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
