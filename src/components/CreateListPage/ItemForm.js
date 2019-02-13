@@ -31,6 +31,7 @@ const styles = theme => ({
 });
 
 const emptyListItem = {
+  id: 0,
   name: '',
   brand_name: '',
   category_id: 0,
@@ -38,16 +39,28 @@ const emptyListItem = {
 }
 
 class ItemForm extends Component {
-  // const { classes } = props;
 
   state = {
     open: false,
     newItem: emptyListItem,
   };
 
+  componentDidMount ()
+  {
+    this.setState({
+      ...this.state,
+      newItem: {
+        id: this.props.item_id,
+        name: this.props.item_name,
+        brand_name: this.props.brand_name,
+        category_id: this.props.category_id,
+        person_id: 0,
+      }
+    });
+  }
+
   // update state from inputs
   handleChange = event => {
-      // console.log('event happened', event, this.state);
       this.setState({
         ...this.state,
         newItem: {
@@ -81,7 +94,6 @@ class ItemForm extends Component {
   addNewItem = event => {
       event.preventDefault();
       if (this.validItemData()) {
-        // console.log('New Item: ', this.state.newItem);
         this.props.dispatch({ type: 'ADD_ITEM', payload: this.state.newItem });
         this.setState({
           open: false,
@@ -90,16 +102,45 @@ class ItemForm extends Component {
       }
   }
 
+  // update category name
+  updateItem = event => {
+    event.preventDefault();
+    console.log('in update category');
+    if (this.validItemData()) {
+      this.props.dispatch({ type: 'UPDATE_ITEM', payload: this.state.newItem });
+      this.setState({
+        open: false,
+        newItem: emptyListItem
+      });
+    }
+  } 
+
   render() {
     return (
       <div>
-      {/* <Grid item alignItems="center"> */}
-        <Tooltip title="New Item" placement="top" aria-label="New Item">
+        {/* <Tooltip title="New Item" placement="top" aria-label="New Item">
           <IconButton color="primary" onClick={this.handleClickOpen} 
             aria-label="Add">
             <AddCircleButton/>
           </IconButton>
-        </Tooltip>
+        </Tooltip> */}
+        {
+        this.props.status ?
+        (<Tooltip title="New Item" placement="top" aria-label="New Item">
+          <IconButton color="primary" onClick={this.handleClickOpen} 
+            aria-label="Add">
+            <AddCircleButton/>
+          </IconButton>
+        </Tooltip>)
+        :
+        (<Tooltip title="Update Item" placement="top" aria-label="Update Item">
+        <IconButton color="primary" onClick={this.handleClickOpen} 
+          aria-label="Update">
+          <EditButton/>
+        </IconButton>
+      </Tooltip>)
+      }
+
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}

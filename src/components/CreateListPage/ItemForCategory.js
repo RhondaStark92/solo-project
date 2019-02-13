@@ -10,6 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
 import { withStyles } from '@material-ui/core/styles';
 import { confirmAlert } from 'react-confirm-alert';
+import ItemForm from './ItemForm';
 import '../../../node_modules/react-confirm-alert/src/react-confirm-alert.css'
 
 const styles = theme => ({
@@ -39,12 +40,10 @@ class ItemForCategory extends Component {
       itemForCat.quantity += 1;
       this.props.dispatch({ type: 'UPDATE_QUANTITY', payload: itemForCat})
     }
-    // console.log('add item to list', itemForCat);
   };
 
   handleRemoveClick = item => () => {
     if (item != null) {
-      // console.log('delete item', item);
       this.props.dispatch({ type: 'DELETE_ITEM_FROM_LIST', payload: {id: item, store_id: 0}});
     }
   };
@@ -92,6 +91,7 @@ class ItemForCategory extends Component {
           </ListItemText>
           </Badge>
         <ListItemSecondaryAction>
+            <ItemForm status={false} category_name={this.props.category.name} category_id = {this.props.category.id}/>
             <IconButton onClick={this.handleDeleteClick(this.props.itemForCat.item_id)} 
               aria-label="Delete">
               <DeleteForever />

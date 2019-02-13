@@ -110,7 +110,7 @@ class CategoryForm extends Component {
         newCategory: emptyCategoryObject
       });
     }
-}  
+  }  
 
   render() {
     return (
