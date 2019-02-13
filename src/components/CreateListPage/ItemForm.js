@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import AddCircleButton from '@material-ui/icons/AddCircle';
+import EditIcon from '@material-ui/icons/Edit';
 import { withStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -117,13 +118,7 @@ class ItemForm extends Component {
 
   render() {
     return (
-      <div>
-        {/* <Tooltip title="New Item" placement="top" aria-label="New Item">
-          <IconButton color="primary" onClick={this.handleClickOpen} 
-            aria-label="Add">
-            <AddCircleButton/>
-          </IconButton>
-        </Tooltip> */}
+      <Fragment>
         {
         this.props.status ?
         (<Tooltip title="New Item" placement="top" aria-label="New Item">
@@ -136,7 +131,7 @@ class ItemForm extends Component {
         (<Tooltip title="Update Item" placement="top" aria-label="Update Item">
         <IconButton color="primary" onClick={this.handleClickOpen} 
           aria-label="Update">
-          <EditButton/>
+          <EditIcon/>
         </IconButton>
       </Tooltip>)
       }
@@ -146,11 +141,17 @@ class ItemForm extends Component {
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">New Item for {this.props.category_name}</DialogTitle>
+          {
+          this.props.status ? 
+          (
+            <DialogTitle id="form-dialog-title">New Item for {this.props.category_name}</DialogTitle>
+          ) :
+          (
+            <DialogTitle id="form-dialog-title">Update Item</DialogTitle>
+          ) 
+          }
+          {/* <DialogTitle id="form-dialog-title">New Item for {this.props.category_name}</DialogTitle> */}
           <DialogContent>
-            {/* <DialogContentText>
-              Enter the new item and brand name (if needed).
-            </DialogContentText> */}
             <TextField
               autoFocus
               margin="dense"
@@ -175,12 +176,22 @@ class ItemForm extends Component {
             <Button onClick={this.handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.addNewItem} color="primary">
+            {
+              this.props.status ? 
+                (<Button onClick={this.addNewItem} color="primary">
+                  Add
+                </Button>)
+              : 
+                (<Button onClick={this.updateItem} color="primary">
+                  Update
+              </Button>)
+            }
+            {/* <Button onClick={this.addNewItem} color="primary">
               Add Item
-            </Button>
+            </Button> */}
           </DialogActions>
         </Dialog>
-      </div>
+      </Fragment>
     ); // end return
   } // end render
 } // end AdminForm class

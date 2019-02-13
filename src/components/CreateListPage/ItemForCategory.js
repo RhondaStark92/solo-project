@@ -86,17 +86,17 @@ class ItemForCategory extends Component {
               disableRipple
             />
         <Badge color="primary" badgeContent={this.props.itemForCat.quantity} invisible={!itemOnList} >              
-          <ListItemText>
-              {this.props.itemForCat.item}
-          </ListItemText>
+          <ListItemText
+              primary={this.props.itemForCat.item} secondary={this.props.itemForCat.brand_name}
+          />
           </Badge>
         <ListItemSecondaryAction>
-            <ItemForm status={false} category_name={this.props.category.name} category_id = {this.props.category.id}/>
-            <IconButton onClick={this.handleDeleteClick(this.props.itemForCat.item_id)} 
+            <ItemForm status={false} category_name={this.props.itemForCat.name} category_id = {this.props.itemForCat.id}/>
+            <IconButton color='primary' onClick={this.handleDeleteClick(this.props.itemForCat.item_id)} 
               aria-label="Delete">
               <DeleteForever />
             </IconButton>
-            <IconButton onClick={this.handleRemoveClick(this.props.itemForCat.list_id)} 
+            <IconButton color='primary' onClick={this.handleRemoveClick(this.props.itemForCat.list_id)} 
               aria-label="Remove">
               <RemoveCircle />
             </IconButton>

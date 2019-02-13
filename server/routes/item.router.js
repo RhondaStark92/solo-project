@@ -47,7 +47,7 @@ router.get('/list', rejectUnauthenticated, (req, res) => {
     // console.log('query.id', req.query.id);
 
     pool.query(`SELECT category.id, category.name as category,
-                item.id as item_id, item.name as item, item.category_id,
+                item.id as item_id, item.name as item, item.brand_name, item.category_id,
                 shopping_list.quantity, shopping_list.id as list_id 
                 FROM item JOIN category ON item.category_id = category.id
                 FULL OUTER JOIN shopping_list ON shopping_list.item_id = item.id
