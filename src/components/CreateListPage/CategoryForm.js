@@ -36,7 +36,7 @@ const emptyCategoryObject = {
   id: 0,
 }
 
-class AddCategoryForm extends Component {
+class CategoryForm extends Component {
 
   state = {
     open: false,
@@ -173,4 +173,4 @@ const mapStateToProps = state => ({
   category: state.category,
 });
 
-export default connect(mapStateToProps) (withStyles(styles)(AddCategoryForm));
+export default connect(mapStateToProps) (withStyles(styles)(CategoryForm));

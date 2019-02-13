@@ -37,7 +37,7 @@ const emptyListItem = {
   person_id: 0,
 }
 
-class AddItemForm extends Component {
+class ItemForm extends Component {
   // const { classes } = props;
 
   state = {
@@ -148,4 +148,4 @@ const mapStateToProps = state => ({
   item: state.item,
 });
 
-export default connect(mapStateToProps) (withStyles(styles)(AddItemForm));
+export default connect(mapStateToProps) (withStyles(styles)(ItemForm));
