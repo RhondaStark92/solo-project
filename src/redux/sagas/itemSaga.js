@@ -31,12 +31,8 @@ function* updateItem(action) {
 
 // worker Saga: will be fired on "FETCH_ITEMS" actions
 function* fetchItems(action) {
-  console.log('in fetch item Saga', action.payload);
-  
   try {
     const response = yield axios.get('api/item');
-    console.log('response from item:', response);
-    
     // now that the session has given us a user object
     // with an id and username set the client-side user object to let
     // the client-side code know the user is logged in
@@ -49,7 +45,6 @@ function* fetchItems(action) {
 // worker Saga: will be fired on "FETCH_ITEMS_FOR_LIST" actions
 function* fetchItemsForList(action) {
   try {
-    console.log('fetch items for list: ', action.payload)
     // axios asynch call to retrieve items from the database
     const response = yield axios.get('api/item/list', {params: {id: action.payload}});    
     // call to move those into the redux state

@@ -6,8 +6,6 @@ const router = express.Router();
 
 // GET ROUTER TO RETRIEVE ITEMS AVAILABLE
 router.get('/', rejectUnauthenticated, (req, res) => {
-  // console.log('query.id', req.query.id);
-      
   pool.query(`SELECT * FROM item
               WHERE item.person_id = ${req.user.id}
               ORDER BY name`)
@@ -62,7 +60,6 @@ router.get('/list', rejectUnauthenticated, (req, res) => {
 
 router.put('/', rejectUnauthenticated, (req, res) => {
     const queryText = 'UPDATE item SET name=$2, brand_name=$3 WHERE id=$1';
-    console.log('update SQL', queryText, req.body);
     pool.query(queryText, [req.body.id, req.body.name, req.body.brand_name])
       .then((result) => { res.send(result.rows); })
       .catch((err) => {
@@ -73,7 +70,6 @@ router.put('/', rejectUnauthenticated, (req, res) => {
 
 // DELETE ROUTER FOR ITEM
 router.delete('/', rejectUnauthenticated, (req, res) => {
-  // console.log('in delete on server', req.query.id);
   const queryText = 'DELETE FROM item WHERE id=$1';
   pool.query(queryText, [req.query.id])
     .then(() => { res.sendStatus(200); })
