@@ -91,7 +91,9 @@ class ItemForCategory extends Component {
           />
           </Badge>
         <ListItemSecondaryAction>
-            <ItemForm status={false} category_name={this.props.itemForCat.name} category_id = {this.props.itemForCat.id}/>
+            <ItemForm status={false} category_name={this.props.itemForCat.name} 
+              item_id={this.props.itemForCat.item_id} item_name={this.props.itemForCat.item}
+              brand_name={this.props.itemForCat.brand_name} category_id = {this.props.itemForCat.id}/>
             <IconButton color='primary' onClick={this.handleDeleteClick(this.props.itemForCat.item_id)} 
               aria-label="Delete">
               <DeleteForever />

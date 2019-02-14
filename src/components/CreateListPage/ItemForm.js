@@ -106,7 +106,7 @@ class ItemForm extends Component {
   // update category name
   updateItem = event => {
     event.preventDefault();
-    console.log('in update category');
+    console.log('in update item:', this.state.newItem);
     if (this.validItemData()) {
       this.props.dispatch({ type: 'UPDATE_ITEM', payload: this.state.newItem });
       this.setState({

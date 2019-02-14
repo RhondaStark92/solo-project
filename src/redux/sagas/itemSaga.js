@@ -15,6 +15,20 @@ function* addItem(action) {
   }
 }
 
+// worker SAGA: will be fired on 'UPDATE_ITEM' actions
+function* updateItem(action) {
+  console.log('in updateItem saga', action.payload)
+  try {
+      // axios asynch call to add category on database
+      yield call(axios.put, '/api/item', action.payload);
+      // will need to make a call to update the list of category
+      yield put( { type: 'FETCH_ITEMS_FOR_LIST' } );
+  }
+  catch (error) {
+      console.log('error with update category post request');
+  }
+}
+
 // worker Saga: will be fired on "FETCH_ITEMS" actions
 function* fetchItems(action) {
   console.log('in fetch item Saga', action.payload);
@@ -35,6 +49,7 @@ function* fetchItems(action) {
 // worker Saga: will be fired on "FETCH_ITEMS_FOR_LIST" actions
 function* fetchItemsForList(action) {
   try {
+    console.log('fetch items for list: ', action.payload)
     // axios asynch call to retrieve items from the database
     const response = yield axios.get('api/item/list', {params: {id: action.payload}});    
     // call to move those into the redux state
@@ -62,6 +77,7 @@ function* itemSaga() {
   yield takeLatest('ADD_ITEM', addItem);
   yield takeLatest('FETCH_ITEMS', fetchItems);
   yield takeLatest('DELETE_ITEM', deleteItem);
+  yield takeLatest('UPDATE_ITEM', updateItem);
 }
 
 export default itemSaga;

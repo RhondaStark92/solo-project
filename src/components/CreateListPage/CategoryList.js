@@ -64,7 +64,7 @@ class CategoryList extends Component {
             : ''
           }
           <ExpansionPanelActions>
-            <ItemForm status={true} category_name={this.props.category.name} category_id = {this.props.category.id}/>
+            <ItemForm status={true} category_name={this.props.category.name} category_id={this.props.category.id}/>
             <CategoryForm status={false} title='Update' category_name={this.props.category.name} category_id = {this.props.category.id}/>
             <Tooltip title="Delete Category" placement="top" aria-label="Delete Category">
               <IconButton onClick={this.handleDeleteClick(this.props.category.id)} color="primary" aria-label="Delete">

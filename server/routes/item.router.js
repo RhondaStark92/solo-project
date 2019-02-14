@@ -61,8 +61,9 @@ router.get('/list', rejectUnauthenticated, (req, res) => {
 });
 
 router.put('/', rejectUnauthenticated, (req, res) => {
-    const queryText = 'UPDATE item SET name=$2 WHERE id=$1';
-    pool.query(queryText, [req.body.id, req.body.name])
+    const queryText = 'UPDATE item SET name=$2, brand_name=$3 WHERE id=$1';
+    console.log('update SQL', queryText, req.body);
+    pool.query(queryText, [req.body.id, req.body.name, req.body.brand_name])
       .then((result) => { res.send(result.rows); })
       .catch((err) => {
         console.log('Error completing UPDATE item query', err);
@@ -81,6 +82,5 @@ router.delete('/', rejectUnauthenticated, (req, res) => {
       res.sendStatus(500);
     });
 });
-
 
 module.exports = router;
