@@ -9,8 +9,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Typography from '@material-ui/core/Typography';
 import Tooltip from '@material-ui/core/Tooltip';
-import AddItemForm from './AddItemForm';
-import AddCategoryForm from './CategoryForm';
+import ItemForm from './ItemForm';
+import CategoryForm from './CategoryForm';
 import { confirmAlert } from 'react-confirm-alert';
 import '../../../node_modules/react-confirm-alert/src/react-confirm-alert.css'
 
@@ -64,8 +64,8 @@ class CategoryList extends Component {
             : ''
           }
           <ExpansionPanelActions>
-            <AddItemForm category_name={this.props.category.name} category_id = {this.props.category.id}/>
-            <AddCategoryForm status={false} title='Update' category_name={this.props.category.name} category_id = {this.props.category.id}/>
+            <ItemForm status={true} category_name={this.props.category.name} category_id={this.props.category.id}/>
+            <CategoryForm status={false} title='Update' category_name={this.props.category.name} category_id = {this.props.category.id}/>
             <Tooltip title="Delete Category" placement="top" aria-label="Delete Category">
               <IconButton onClick={this.handleDeleteClick(this.props.category.id)} color="primary" aria-label="Delete">
                 <DeleteIcon />

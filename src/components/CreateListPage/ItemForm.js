@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import AddCircleButton from '@material-ui/icons/AddCircle';
+import EditIcon from '@material-ui/icons/Edit';
 import { withStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -31,23 +32,36 @@ const styles = theme => ({
 });
 
 const emptyListItem = {
+  id: 0,
   name: '',
   brand_name: '',
   category_id: 0,
   person_id: 0,
 }
 
-class AddItemForm extends Component {
-  // const { classes } = props;
+class ItemForm extends Component {
 
   state = {
     open: false,
     newItem: emptyListItem,
   };
 
+  componentDidMount ()
+  {
+    this.setState({
+      ...this.state,
+      newItem: {
+        id: this.props.item_id,
+        name: this.props.item_name,
+        brand_name: this.props.brand_name,
+        category_id: this.props.category_id,
+        person_id: 0,
+      }
+    });
+  }
+
   // update state from inputs
   handleChange = event => {
-      // console.log('event happened', event, this.state);
       this.setState({
         ...this.state,
         newItem: {
@@ -81,7 +95,6 @@ class AddItemForm extends Component {
   addNewItem = event => {
       event.preventDefault();
       if (this.validItemData()) {
-        // console.log('New Item: ', this.state.newItem);
         this.props.dispatch({ type: 'ADD_ITEM', payload: this.state.newItem });
         this.setState({
           open: false,
@@ -90,26 +103,55 @@ class AddItemForm extends Component {
       }
   }
 
+  // update category name
+  updateItem = event => {
+    event.preventDefault();
+    console.log('in update item:', this.state.newItem);
+    if (this.validItemData()) {
+      this.props.dispatch({ type: 'UPDATE_ITEM', payload: this.state.newItem });
+      this.setState({
+        open: false,
+        newItem: emptyListItem
+      });
+    }
+  } 
+
   render() {
     return (
-      <div>
-      {/* <Grid item alignItems="center"> */}
-        <Tooltip title="New Item" placement="top" aria-label="New Item">
+      <Fragment>
+        {
+        this.props.status ?
+        (<Tooltip title="New Item" placement="top" aria-label="New Item">
           <IconButton color="primary" onClick={this.handleClickOpen} 
             aria-label="Add">
             <AddCircleButton/>
           </IconButton>
-        </Tooltip>
+        </Tooltip>)
+        :
+        (<Tooltip title="Update Item" placement="top" aria-label="Update Item">
+        <IconButton color="primary" onClick={this.handleClickOpen} 
+          aria-label="Update">
+          <EditIcon/>
+        </IconButton>
+      </Tooltip>)
+      }
+
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">New Item for {this.props.category_name}</DialogTitle>
+          {
+          this.props.status ? 
+          (
+            <DialogTitle id="form-dialog-title">New Item for {this.props.category_name}</DialogTitle>
+          ) :
+          (
+            <DialogTitle id="form-dialog-title">Update Item</DialogTitle>
+          ) 
+          }
+          {/* <DialogTitle id="form-dialog-title">New Item for {this.props.category_name}</DialogTitle> */}
           <DialogContent>
-            {/* <DialogContentText>
-              Enter the new item and brand name (if needed).
-            </DialogContentText> */}
             <TextField
               autoFocus
               margin="dense"
@@ -134,12 +176,22 @@ class AddItemForm extends Component {
             <Button onClick={this.handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.addNewItem} color="primary">
+            {
+              this.props.status ? 
+                (<Button onClick={this.addNewItem} color="primary">
+                  Add
+                </Button>)
+              : 
+                (<Button onClick={this.updateItem} color="primary">
+                  Update
+              </Button>)
+            }
+            {/* <Button onClick={this.addNewItem} color="primary">
               Add Item
-            </Button>
+            </Button> */}
           </DialogActions>
         </Dialog>
-      </div>
+      </Fragment>
     ); // end return
   } // end render
 } // end AdminForm class
@@ -148,4 +200,4 @@ const mapStateToProps = state => ({
   item: state.item,
 });
 
-export default connect(mapStateToProps) (withStyles(styles)(AddItemForm));
+export default connect(mapStateToProps) (withStyles(styles)(ItemForm));

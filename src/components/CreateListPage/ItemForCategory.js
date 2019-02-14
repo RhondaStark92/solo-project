@@ -10,6 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
 import { withStyles } from '@material-ui/core/styles';
 import { confirmAlert } from 'react-confirm-alert';
+import ItemForm from './ItemForm';
 import '../../../node_modules/react-confirm-alert/src/react-confirm-alert.css'
 
 const styles = theme => ({
@@ -39,12 +40,10 @@ class ItemForCategory extends Component {
       itemForCat.quantity += 1;
       this.props.dispatch({ type: 'UPDATE_QUANTITY', payload: itemForCat})
     }
-    // console.log('add item to list', itemForCat);
   };
 
   handleRemoveClick = item => () => {
     if (item != null) {
-      // console.log('delete item', item);
       this.props.dispatch({ type: 'DELETE_ITEM_FROM_LIST', payload: {id: item, store_id: 0}});
     }
   };
@@ -87,16 +86,19 @@ class ItemForCategory extends Component {
               disableRipple
             />
         <Badge color="primary" badgeContent={this.props.itemForCat.quantity} invisible={!itemOnList} >              
-          <ListItemText>
-              {this.props.itemForCat.item}
-          </ListItemText>
+          <ListItemText
+              primary={this.props.itemForCat.item} secondary={this.props.itemForCat.brand_name}
+          />
           </Badge>
         <ListItemSecondaryAction>
-            <IconButton onClick={this.handleDeleteClick(this.props.itemForCat.item_id)} 
+            <ItemForm status={false} category_name={this.props.itemForCat.name} 
+              item_id={this.props.itemForCat.item_id} item_name={this.props.itemForCat.item}
+              brand_name={this.props.itemForCat.brand_name} category_id = {this.props.itemForCat.id}/>
+            <IconButton color='primary' onClick={this.handleDeleteClick(this.props.itemForCat.item_id)} 
               aria-label="Delete">
               <DeleteForever />
             </IconButton>
-            <IconButton onClick={this.handleRemoveClick(this.props.itemForCat.list_id)} 
+            <IconButton color='primary' onClick={this.handleRemoveClick(this.props.itemForCat.list_id)} 
               aria-label="Remove">
               <RemoveCircle />
             </IconButton>
